@@ -1,5 +1,5 @@
 name: sit_eat_web
-description: A new Flutter project.
+description: TCC Project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -29,15 +29,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  get: ^4.1.4
-  get_storage: ^2.0.2
-  google_fonts: ^2.0.0
+  get: ^4.3.7
+  google_fonts: ^2.1.0
+  easy_debounce: ^2.0.0
 
   #Firebase
-  firebase_core: ^1.0.3
-  firebase_auth: ^1.0.3
-  firebase_storage: ^8.0.3
-  cloud_firestore: ^1.0.5
+  #firebase_core: ^1.4.0
+  #cloud_firestore: ^2.4.0
+  #firebase_auth: ^3.0.1
+  #firebase_storage: ^10.0.1
+  #firebase_messaging: ^10.0.4
 
 dev_dependencies:
   flutter_test:

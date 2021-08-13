@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/model/user_model.dart';
 
 class UserRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -18,7 +18,7 @@ class UserRepository {
 
       return true;
     } catch (e) {
-      print(e.code);
+      print(e);
       Get.back();
       Get.defaultDialog(
           title: "ERROR", content: Text("Usuário não encontrado."));
@@ -34,7 +34,7 @@ class UserRepository {
       user.id = id;
       return user;
     } catch (e) {
-      print(e.code);
+      print(e);
       Get.back();
       Get.defaultDialog(
           title: "ERROR", content: Text("Usuário não encontrado."));

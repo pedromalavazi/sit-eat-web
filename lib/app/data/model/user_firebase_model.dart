@@ -1,20 +1,22 @@
-// class UserFirebaseModel {
-//   String id;
-//   String name;
-//   String email;
+import 'package:firebase_auth/firebase_auth.dart';
 
-//   UserFirebaseModel({this.id, this.name, this.email});
+class UserFirebaseModel {
+  String? id;
+  String? name;
+  String? email;
 
-//   UserFirebaseModel.fromSnapshot(User currentUser)
-//       : id = currentUser.uid,
-//         name = currentUser.displayName,
-//         email = currentUser.email;
+  UserFirebaseModel({this.id, this.name, this.email});
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       "id": id,
-//       "name": name,
-//       "email": email,
-//     };
-//   }
-// }
+  UserFirebaseModel.fromSnapshot(User? currentUser)
+      : id = currentUser?.uid,
+        name = currentUser?.displayName,
+        email = currentUser?.email;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "name": name,
+      "email": email,
+    };
+  }
+}

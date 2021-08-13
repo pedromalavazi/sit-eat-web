@@ -1,44 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:sit_eat/app/data/model/user_firebase_model.dart';
-import 'package:sit_eat/app/data/model/user_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:sit_eat/app/data/services/util_service.dart';
+import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
+import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class AuthService extends GetxController {
   final UtilService _util = UtilService();
 
-  GetStorage box = GetStorage('sit_eat');
   FirebaseAuth _auth = FirebaseAuth.instance;
-  Rx<User> _firebaseUser;
-  Rx<UserModel> _user;
+  late Rx<User?> _firebaseUser;
+  late Rx<UserModel> _user;
   var userIsAuthenticated = false.obs;
 
   @override
   void onInit() {
     super.onInit();
 
-    _firebaseUser = Rx<User>(_auth.currentUser);
+    _firebaseUser = Rx<User?>(_auth.currentUser);
     _user = Rx<UserModel>(UserModel());
     _firebaseUser.bindStream(_auth.authStateChanges());
 
-    ever(_firebaseUser, (User user) {
+    ever(_firebaseUser, (User? user) {
       if (user != null) {
         userIsAuthenticated.value = true;
       } else {
         userIsAuthenticated.value = false;
       }
     });
-
-    verifyLoggedUser();
   }
 
   @override
   void onClose() {}
 
-  User get firebaseUser => _firebaseUser.value;
+  User? get firebaseUser => _firebaseUser.value;
   Rx<UserModel> get user => _user;
   static AuthService get to => Get.find<AuthService>();
 
@@ -47,35 +43,38 @@ class AuthService extends GetxController {
 
   Future<bool> login(String email, String password) async {
     try {
-      var user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      box.write("auth1", {"email": email, "pass": password});
+      var user = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
 
-      _user.value = UserModel.fromSnapshot(await _firestore.collection("users").doc(user.user.uid).get());
-      _user.value.id = user.user.uid;
+      _user.value = UserModel.fromSnapshot(
+          await _firestore.collection("users").doc(user.user?.uid).get());
+      _user.value.id = user.user?.uid;
       return true;
-    } catch (e) {
-      throwErrorMessage(e.code);
+    } catch (error) {
+      throwErrorMessage(error.toString());
       return false;
     }
   }
 
-  createUser(String email, String password, String name, String phoneNumber) async {
+  createUser(
+      String email, String password, String name, String phoneNumber) async {
     try {
       //Cria usuário do Firebase
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       // Atualizando o nome do usuário
-      await _firebaseUser.value.updateProfile(displayName: name);
-      await _firebaseUser.value.reload();
+      await _firebaseUser.value?.updateDisplayName(name);
+      await _firebaseUser.value?.reload();
       var tokenMessage = await _firebaseMessaging.getToken();
       //Cria usuário de controle do app
-      await _firestore.collection("users").doc(_firebaseUser.value.uid).set({
+      await _firestore.collection("users").doc(_firebaseUser.value?.uid).set({
         "email": email,
         "name": name,
         "phoneNumber": phoneNumber,
         "tokenMessage": tokenMessage,
       });
     } catch (e) {
-      throwErrorMessage(e.code);
+      throwErrorMessage(e.toString());
     }
   }
 
@@ -86,50 +85,39 @@ class AuthService extends GetxController {
       _util.showInformationMessage("Aviso", "E-mail enviado");
       return true;
     } catch (e) {
-      throwErrorMessage(e.code);
+      throwErrorMessage(e.toString());
       return false;
     }
   }
 
-  Future<UserFirebaseModel> updateUserName(String userName) async {
+  Future<UserFirebaseModel?> updateUserName(String userName) async {
     try {
-      await _auth.currentUser.updateProfile(displayName: userName);
-      await _auth.currentUser.reload();
+      await _auth.currentUser?.updateDisplayName(userName);
+      await _auth.currentUser?.reload();
       return UserFirebaseModel.fromSnapshot(_auth.currentUser);
     } catch (e) {
-      throwErrorMessage(e.code);
-      return UserFirebaseModel();
+      throwErrorMessage(e.toString());
+      return null;
     }
   }
 
   Future<UserFirebaseModel> updateUserPassword(String password) async {
     try {
-      await _auth.currentUser.updatePassword(password);
-      await _auth.currentUser.reload();
-      box.write("auth1", null);
-      box.write("auth1", {"email": box.read("auth1")["email"], "pass": password});
+      await _auth.currentUser?.updatePassword(password);
+      await _auth.currentUser?.reload();
       return UserFirebaseModel.fromSnapshot(_auth.currentUser);
     } catch (e) {
-      throwErrorMessage(e.code);
+      throwErrorMessage(e.toString());
       return UserFirebaseModel();
     }
   }
 
   logout() async {
     try {
-      box.write("auth1", null);
       await _auth.signOut();
     } catch (e) {
-      _util.showErrorMessage('Erro ao sair!', e.message);
+      _util.showErrorMessage('Erro ao sair!', e.toString());
     }
-  }
-
-  Future<bool> verifyLoggedUser() async {
-    if (box.hasData("auth1")) {
-      await login(box.read("auth1")["email"], box.read("auth1")["pass"]);
-      return true;
-    }
-    return false;
   }
 
   throwErrorMessage(String errorCode) {
@@ -144,7 +132,8 @@ class AuthService extends GetxController {
         _util.showErrorMessage("Erro", "Login não permitido.");
         break;
       case "invalid-password":
-        _util.showErrorMessage("Erro", "Senha fraca. É necessário seis caracteres.");
+        _util.showErrorMessage(
+            "Erro", "Senha fraca. É necessário seis caracteres.");
         break;
       case "invalid-email":
         _util.showErrorMessage("Erro", "E-mail é inválido.");
