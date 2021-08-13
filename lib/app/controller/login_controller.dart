@@ -1,33 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
+import 'package:sit_eat_web/app/data/services/util_service.dart';
+
 class LoginController extends GetxController {
   final UtilService _util = UtilService();
 
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController = TextEditingController();
+  final TextEditingController confirmPasswordTextController =
+      TextEditingController();
   final TextEditingController nameTextController = TextEditingController();
-  final TextEditingController phoneNumberTextController = TextEditingController();
+  final TextEditingController phoneNumberTextController =
+      TextEditingController();
 
   @override
   void onInit() {
-    isLogged();
     super.onInit();
   }
 
-  void isLogged() async {
-    if (await AuthService.to.verifyLoggedUser()) {
-      Get.offAllNamed(Routes.NAVIGATION);
-    }
-  }
-
   void registerUser() async {
-    _util.showLoader();
     await AuthService.to.createUser(
       emailTextController.text.trim(),
       passwordTextController.text.trim(),
       nameTextController.text,
       phoneNumberTextController.text,
     );
-    Get.toNamed(Routes.LOGIN);
+    //Get.toNamed(Routes.LOGIN);
   }
 
   void login() async {
@@ -37,7 +36,7 @@ class LoginController extends GetxController {
       passwordTextController.text.trim(),
     );
     if (logged) {
-      Get.offAllNamed(Routes.NAVIGATION);
+      //Get.offAllNamed(Routes.NAVIGATION);
     }
   }
 
