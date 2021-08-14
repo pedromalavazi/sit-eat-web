@@ -8,6 +8,7 @@ class UserModel {
   String? email;
   String? phoneNumber;
   String? tokenMessage;
+  String? restaurantId;
   LoginType? type;
   LoginStatus? status;
 
@@ -17,6 +18,7 @@ class UserModel {
     this.email,
     this.phoneNumber,
     this.tokenMessage,
+    this.restaurantId,
     this.type,
     this.status,
   });
@@ -27,6 +29,7 @@ class UserModel {
         email = currentUser["email"],
         phoneNumber = currentUser["phoneNumber"],
         tokenMessage = currentUser["tokenMessage"],
+        restaurantId = currentUser["restaurantId"],
         type = LoginType.values
             .where((type) => type.toUpper == currentUser["type"])
             .first,
