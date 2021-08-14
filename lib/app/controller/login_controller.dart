@@ -30,13 +30,13 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    _util.showLoader();
+    //_util.showLoader();
     bool logged = await AuthService.to.login(
       emailTextController.text.trim(),
       passwordTextController.text.trim(),
     );
     if (logged) {
-      //Get.offAllNamed(Routes.NAVIGATION);
+      _util.showSuccessMessage("Sucesso", "Usuário logado com sucesso!");
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
 import 'package:sit_eat_web/app/data/model/user_model.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -48,6 +49,16 @@ class AuthService extends GetxController {
 
       _user.value = UserModel.fromSnapshot(
           await _firestore.collection("users").doc(user.user?.uid).get());
+
+      if (_user.value.type != LoginType.CLIENT) {
+        resetUser();
+        _util.showErrorMessage(
+          "Usuário inválido",
+          "Usuário sem permissão para logar no aplicativo",
+        );
+        return false;
+      }
+
       _user.value.id = user.user?.uid;
       return true;
     } catch (error) {
@@ -150,5 +161,10 @@ class AuthService extends GetxController {
           "Erro desconhecido, tente novamente mais tarde ou entre em contato com nosso e-mail: appsiteat@gmail.com",
         );
     }
+  }
+
+  void resetUser() {
+    _user.value = UserModel();
+    _auth.signOut();
   }
 }
