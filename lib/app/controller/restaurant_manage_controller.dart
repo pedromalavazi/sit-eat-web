@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
-import 'package:sit_eat_web/app/data/services/restaurant_management_service.dart';
+import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 
 class RestaurantManagementController extends GetxController {
-  final RestaurantManagementService _restaurantManageService =
-      RestaurantManagementService();
+  final RestaurantService _restaurantService = RestaurantService();
 
   final TextEditingController restaurantNameTextController =
       TextEditingController();
@@ -21,7 +20,7 @@ class RestaurantManagementController extends GetxController {
   void getRestaurants() async {
     String restaurantName = restaurantNameTextController.text.trim();
 
-    listRestaurants.value = await _restaurantManageService.getToManage(
+    listRestaurants.value = await _restaurantService.getToManage(
         activeFilter.value, restaurantName);
   }
 }

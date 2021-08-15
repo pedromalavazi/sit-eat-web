@@ -7,7 +7,7 @@ class RestaurantRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Retorna restaurante pelo ID
-  Future<RestaurantModel?> getRestaurant(String id) async {
+  Future<RestaurantModel> getRestaurant(String id) async {
     try {
       DocumentSnapshot doc =
           await _firestore.collection("restaurants").doc(id).get();
@@ -17,7 +17,7 @@ class RestaurantRepository {
     } catch (e) {
       Get.defaultDialog(
           title: "ERROR", content: Text("Restaurante não encontrado."));
-      return null;
+      return RestaurantModel();
     }
   }
 
@@ -69,6 +69,30 @@ class RestaurantRepository {
       Get.defaultDialog(
           title: "ERROR", content: Text("Erro ao cadastrar restaurante."));
       return null;
+    }
+  }
+
+  Future<bool> activateRestaurant(String id) async {
+    try {
+      CollectionReference restaurants = _firestore.collection('restaurants');
+      await restaurants.doc(id).update({'active': true});
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Restaurante não encontrado."));
+      return false;
+    }
+  }
+
+  Future<bool> deactivateRestaurant(String id) async {
+    try {
+      CollectionReference restaurants = _firestore.collection('restaurants');
+      await restaurants.doc(id).update({'active': false});
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Restaurante não encontrado."));
+      return false;
     }
   }
 }
