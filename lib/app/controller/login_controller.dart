@@ -15,7 +15,6 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    //_util.showLoader();
     bool logged = await AuthService.to.login(
       emailTextController.text.trim(),
       passwordTextController.text.trim(),

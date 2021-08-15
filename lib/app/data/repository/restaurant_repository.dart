@@ -21,6 +21,34 @@ class RestaurantRepository {
     }
   }
 
+  // Retorna restaurante para controle do ADMIN
+  Future<List<RestaurantModel>> getRestaurantToManage(
+    bool? active,
+    String? name,
+  ) async {
+    List<RestaurantModel> restaurants = <RestaurantModel>[];
+    try {
+      Query<Map<String, dynamic>> query = _firestore.collection("restaurants");
+
+      if (active != null) query = query.where('active', isEqualTo: active);
+      if (name != null) query = query.where('name', isEqualTo: name);
+
+      var restaurantsDocs = await query.get();
+
+      if (restaurantsDocs.docs.isEmpty) return restaurants;
+
+      restaurantsDocs.docs.forEach((restaurantDoc) {
+        restaurants.add(RestaurantModel.fromSnapshot(restaurantDoc));
+      });
+
+      return restaurants;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Restaurante não encontrado."));
+      return restaurants;
+    }
+  }
+
   Future<String?> registerNewRestaurant(RestaurantModel newRestaurant) async {
     try {
       var reservationId = await _firestore.collection("restaurants").add(
