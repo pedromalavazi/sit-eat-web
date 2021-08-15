@@ -48,44 +48,53 @@ class AuthService extends GetxController {
           email: email, password: password);
 
       _user.value = UserModel.fromSnapshot(
-          await _firestore.collection("users").doc(user.user?.uid).get());
+        await _firestore.collection("users").doc(user.user?.uid).get(),
+      );
 
-      if (_user.value.type != LoginType.CLIENT) {
+      if (_user.value.type != LoginType.RESTAURANT) {
         resetUser();
         _util.showErrorMessage(
           "Usuário inválido",
-          "Usuário sem permissão para logar no aplicativo",
+          "Usuário sem permissão para logar no site",
         );
         return false;
       }
 
       _user.value.id = user.user?.uid;
       return true;
-    } catch (error) {
-      throwErrorMessage(error.toString());
+    } catch (e) {
+      throwErrorMessage(e);
       return false;
     }
   }
 
-  createUser(
-      String email, String password, String name, String phoneNumber) async {
+  Future<bool> createRestaurantUser(
+    String email,
+    String password,
+    String confirmPassword,
+    String name,
+    String restaurantId,
+  ) async {
     try {
       //Cria usuário do Firebase
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       // Atualizando o nome do usuário
       await _firebaseUser.value?.updateDisplayName(name);
       await _firebaseUser.value?.reload();
-      var tokenMessage = await _firebaseMessaging.getToken();
+
       //Cria usuário de controle do app
       await _firestore.collection("users").doc(_firebaseUser.value?.uid).set({
         "email": email,
         "name": name,
-        "phoneNumber": phoneNumber,
-        "tokenMessage": tokenMessage,
+        "restaurantId": restaurantId,
+        "type": LoginType.RESTAURANT.toUpper,
       });
+      return true;
     } catch (e) {
-      throwErrorMessage(e.toString());
+      throwErrorMessage(e);
+      return false;
     }
   }
 
@@ -96,7 +105,7 @@ class AuthService extends GetxController {
       _util.showInformationMessage("Aviso", "E-mail enviado");
       return true;
     } catch (e) {
-      throwErrorMessage(e.toString());
+      throwErrorMessage(e);
       return false;
     }
   }
@@ -107,7 +116,7 @@ class AuthService extends GetxController {
       await _auth.currentUser?.reload();
       return UserFirebaseModel.fromSnapshot(_auth.currentUser);
     } catch (e) {
-      throwErrorMessage(e.toString());
+      throwErrorMessage(e);
       return null;
     }
   }
@@ -118,7 +127,7 @@ class AuthService extends GetxController {
       await _auth.currentUser?.reload();
       return UserFirebaseModel.fromSnapshot(_auth.currentUser);
     } catch (e) {
-      throwErrorMessage(e.toString());
+      throwErrorMessage(e);
       return UserFirebaseModel();
     }
   }
@@ -127,12 +136,17 @@ class AuthService extends GetxController {
     try {
       await _auth.signOut();
     } catch (e) {
-      _util.showErrorMessage('Erro ao sair!', e.toString());
+      _util.showErrorMessage('Erro ao sair!', "Erro na tentativa de logout.");
     }
   }
 
-  throwErrorMessage(String errorCode) {
-    switch (errorCode) {
+  void resetUser() {
+    _user.value = UserModel();
+    _auth.signOut();
+  }
+
+  throwErrorMessage(dynamic error) {
+    switch (error.code) {
       case "user-not-found":
         _util.showErrorMessage("Erro", "Usuário não encontrado.");
         break;
@@ -161,10 +175,5 @@ class AuthService extends GetxController {
           "Erro desconhecido, tente novamente mais tarde ou entre em contato com nosso e-mail: appsiteat@gmail.com",
         );
     }
-  }
-
-  void resetUser() {
-    _user.value = UserModel();
-    _auth.signOut();
   }
 }

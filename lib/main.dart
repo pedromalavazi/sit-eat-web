@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/routes/app_pages.dart';
+import 'package:flutter/material.dart';
 import 'package:sit_eat_web/binding.dart';
-import 'package:sit_eat_web/pages/login/login_page.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 Future<void> main() async {
   await initConfigurations();

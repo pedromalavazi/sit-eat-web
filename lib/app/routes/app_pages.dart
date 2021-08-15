@@ -8,5 +8,9 @@ class AppPages {
       name: Routes.LOGIN,
       page: () => LoginPage(),
     ),
+    // GetPage(
+    //   name: Routes.REGISTER_RESTAURANT,
+    //   page: () => LoginPage(),
+    // ),
   ];
 }

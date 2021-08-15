@@ -6,8 +6,8 @@ class RestaurantModel {
   String? name;
   String? address;
   int? capacity;
-  Timestamp? openTime;
-  Timestamp? closeTime;
+  DateTime? openTime;
+  DateTime? closeTime;
   String? menu;
   bool? active;
 

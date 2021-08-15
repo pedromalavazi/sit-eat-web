@@ -6,6 +6,7 @@ class UtilService extends GetxService {
     return Get.snackbar(
       title,
       message,
+      maxWidth: 500.0,
       colorText: Colors.white,
       backgroundColor: Colors.red[400],
       snackPosition: SnackPosition.BOTTOM,
@@ -19,6 +20,7 @@ class UtilService extends GetxService {
     return Get.snackbar(
       title,
       message,
+      maxWidth: 500.0,
       colorText: Colors.white,
       backgroundColor: Colors.grey[500],
       snackPosition: SnackPosition.BOTTOM,
@@ -31,6 +33,7 @@ class UtilService extends GetxService {
     return Get.snackbar(
       title,
       message,
+      maxWidth: 500.0,
       colorText: Colors.white,
       backgroundColor: Colors.grey[500],
       snackPosition: SnackPosition.BOTTOM,
