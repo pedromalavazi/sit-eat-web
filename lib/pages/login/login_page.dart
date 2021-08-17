@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/login_controller.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class LoginPage extends GetView<LoginController> {
   final LoginController _loginController = Get.put(LoginController());
@@ -64,7 +65,10 @@ class LoginPage extends GetView<LoginController> {
                       onPressed: () {
                         _loginController.login();
                       },
-                      child: Text("Login"),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
                             (states) => Colors.red),
@@ -76,9 +80,11 @@ class LoginPage extends GetView<LoginController> {
                     width: 300.0,
                     height: 40.0,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.REGISTER_RESTAURANT);
+                      },
                       child: Text(
-                        "Cadastra-se",
+                        "Cadastrar-se",
                         style: TextStyle(color: Colors.grey),
                       ),
                     ),
