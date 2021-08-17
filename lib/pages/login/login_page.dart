@@ -20,18 +20,30 @@ class LoginPage extends GetView<LoginController> {
               key: _formKey,
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                    child: Text(
-                      "Sit & Eat",
-                      style: TextStyle(
-                        fontSize: 23.0,
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(45, 25, 0, 30),
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.asset("assets/logo-only.png"),
+                        ),
                       ),
-                    ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 5, 0, 0),
+                        child: Text(
+                          "Sit & Eat",
+                          style: TextStyle(
+                            fontSize: 23.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     width: 300.0,
                     height: 40.0,
                     child: TextField(

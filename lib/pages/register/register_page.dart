@@ -17,7 +17,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 250, horizontal: 50),
               width: 1000,
-              height: 450,
+              height: 500,
               child: Card(
                 elevation: 15.0,
                 child: Wrap(
@@ -49,6 +49,70 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                             style: TextStyle(
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 300.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .emailTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "E-mail",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 300.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .passwordTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "Senha",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 300.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .confirmPasswordTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "Confirme sua senha",
                             ),
                           ),
                         ),
