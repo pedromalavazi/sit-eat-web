@@ -25,6 +25,9 @@ class RegisterRestaurantController extends GetxController {
   final TextEditingController closeTimeTextController = TextEditingController();
   final TextEditingController menuTextController = TextEditingController();
   final TextEditingController nameTextController = TextEditingController();
+  final TextEditingController stateTextController = TextEditingController();
+  final TextEditingController cityTextController = TextEditingController();
+  final TextEditingController streetTextController = TextEditingController();
 
   @override
   void onInit() {

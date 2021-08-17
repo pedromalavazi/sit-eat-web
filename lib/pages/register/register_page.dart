@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/login_controller.dart';
+import 'package:sit_eat_web/app/controller/register_restaurant_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
-class RegisterPage extends GetView<LoginController> {
+class RegisterPage extends GetView<RegisterRestaurantController> {
+  final RegisterRestaurantController _registerRestaurantController =
+      Get.put(RegisterRestaurantController());
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -59,7 +61,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.emailTextController,
+                            controller: _registerRestaurantController
+                                .nameTextController,
                             cursorColor: Colors.black,
                             obscureText: false,
                             autofocus: true,
@@ -78,7 +81,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.passwordTextController,,
+                            controller: _registerRestaurantController
+                                .stateTextController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -91,7 +95,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.passwordTextController,,
+                            controller: _registerRestaurantController
+                                .cityTextController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -108,7 +113,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.emailTextController,
+                            controller: _registerRestaurantController
+                                .streetTextController,
                             cursorColor: Colors.black,
                             obscureText: false,
                             autofocus: true,
@@ -127,7 +133,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.passwordTextController,,
+                            controller: _registerRestaurantController
+                                .openTimeTextController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -140,7 +147,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.passwordTextController,,
+                            controller: _registerRestaurantController
+                                .closeTimeTextController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -157,7 +165,8 @@ class RegisterPage extends GetView<LoginController> {
                           width: 300.0,
                           height: 40.0,
                           child: TextField(
-                            // controller: _loginController.emailTextController,
+                            controller: _registerRestaurantController
+                                .capacityTextController,
                             cursorColor: Colors.black,
                             obscureText: false,
                             autofocus: true,
