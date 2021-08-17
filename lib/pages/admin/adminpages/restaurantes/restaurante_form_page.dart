@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sit_eat_web/pages/admin/web/web_utils.dart';
+import 'package:sit_eat_web/utils/app_model.dart';
 
 class RestauranteFormPage extends StatefulWidget {
   @override
@@ -8,10 +11,7 @@ class RestauranteFormPage extends StatefulWidget {
 enum Validar { ativo, desabilitado }
 
 class _RestauranteFormPage extends State<RestauranteFormPage> {
-  final GlobalKey<FormState> _formKey =
-      GlobalKey<FormState>(debugLabel: "restaurante_form");
-
-  Validar? _val = Validar.ativo;
+  Validar? _val = Validar.desabilitado;
   final tNome = TextEditingController();
   final tDesc = TextEditingController();
 
@@ -31,7 +31,7 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
 
   _body() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
           flex: 1,
@@ -50,7 +50,6 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
             child: Container(
               padding: EdgeInsets.all(16),
               child: Form(
-                key: this._formKey,
                 child: ListView(
                   children: <Widget>[
                     SizedBox(
@@ -109,7 +108,52 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                         ),
                       ],
                     ),
-                    TextField(),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    textField('Nome', 'Madero'), //field Nome
+                    textField('Endereço',
+                        'Rua Antonio Marques Serra, 545'), //field Endereço
+                    textField('Abertura', '19:00'), //field Abertura
+                    textField('Fechamento', '22:00'), //field Fechamento
+                    textField(
+                        'Capacidade Maxima', '20 pessoas'), //field Capacidade
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              side: BorderSide(color: Colors.black),
+                              backgroundColor: Colors.red,
+                              elevation: 15,
+                              shadowColor: Colors.red,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 25),
+                              primary: Colors.white,
+                              textStyle: TextStyle(fontSize: 15)),
+                          onPressed: () {},
+                          child: Text("Salvar"),
+                        ),
+                        SizedBox(width: 15),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              side: BorderSide(color: Colors.black),
+                              backgroundColor: Colors.white,
+                              elevation: 15,
+                              shadowColor: Colors.black,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 25),
+                              primary: Colors.black,
+                              textStyle: TextStyle(fontSize: 15)),
+                          onPressed: () {
+                            AppModel app =
+                                Provider.of<AppModel>(context, listen: false);
+                            app.pop();
+                          },
+                          child: Text("Cancelar"),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -117,6 +161,32 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
           ),
         )
       ],
+    );
+  }
+
+  Padding textField(String info, String label) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 15),
+      child: TextField(
+        textAlignVertical: TextAlignVertical.center,
+        decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+            enabled: false,
+            labelText: info,
+            labelStyle: TextStyle(
+              fontSize: fontSize(25),
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            hintText: label,
+            hintStyle: TextStyle(
+              height: 1.5,
+              color: Colors.black54,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always),
+      ),
     );
   }
 }

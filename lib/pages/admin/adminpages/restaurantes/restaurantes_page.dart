@@ -17,6 +17,8 @@ class _RestaurantesPage_State extends State<RestaurantesPage> {
     );
   }
 
+  bool veri = true;
+
   _body() {
     return GridView.builder(
       itemCount: 10, //Quantidade de Restaurante para aprovar
@@ -63,7 +65,7 @@ class _RestaurantesPage_State extends State<RestaurantesPage> {
                           style: TextStyle(fontSize: font),
                         ),
                         Text(
-                          "Dias da semana: Seg - Sex", //Dias da semana
+                          "Endereço: Rua Antonio Marques Serra", //Dias da semana
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: font),
                         ),
@@ -74,29 +76,29 @@ class _RestaurantesPage_State extends State<RestaurantesPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       //Checkbox de Validação
                       children: <Widget>[
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              elevation: 15,
-                              shadowColor: Colors.green,
-                              padding: EdgeInsets.all(16),
-                              primary: Colors.white,
-                              textStyle: TextStyle(fontSize: font)),
-                          onPressed: () {},
-                          child: Text("Ativo"),
-                        ),
-                        SizedBox(height: 15),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Colors.red,
-                              elevation: 15,
-                              shadowColor: Colors.red,
-                              padding: EdgeInsets.all(16),
-                              primary: Colors.white,
-                              textStyle: TextStyle(fontSize: font)),
-                          onPressed: null,
-                          child: Text("Inativo"),
-                        )
+                        veri
+                            ? TextButton(
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    elevation: 15,
+                                    shadowColor: Colors.green,
+                                    padding: EdgeInsets.all(16),
+                                    primary: Colors.white,
+                                    textStyle: TextStyle(fontSize: font)),
+                                onPressed: () {},
+                                child: Text("Ativo"),
+                              )
+                            : TextButton(
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    elevation: 15,
+                                    shadowColor: Colors.red,
+                                    padding: EdgeInsets.all(16),
+                                    primary: Colors.white,
+                                    textStyle: TextStyle(fontSize: font)),
+                                onPressed: null,
+                                child: Text("Inativo"),
+                              )
                       ],
                     )
                   ],
