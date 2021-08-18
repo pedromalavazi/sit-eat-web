@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sit_eat_web/pages/admin/adminpages/default_page.dart';
 import 'package:sit_eat_web/pages/admin/adminpages/restaurantes/restaurante_form_page.dart';
 import 'package:sit_eat_web/pages/admin/adminpages/restaurantes/restaurante_page.dart';
+import 'package:sit_eat_web/pages/admin/web/menuteste.dart';
 
 class PageInfo {
   String title;
@@ -18,7 +19,7 @@ class PageInfo {
 class AppModel extends ChangeNotifier {
   List<PageInfo> pages = [];
 
-  PageInfo defaultPage = PageInfo("Home", DefaultPage());
+  PageInfo defaultPage = PageInfo("Home", TestPage());
 
   AppModel() {
     pages.add(defaultPage);

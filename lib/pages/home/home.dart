@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sit_eat_web/pages/admin/web/menuteste.dart';
 import 'package:sit_eat_web/utils/constants.dart';
 import 'package:sit_eat_web/pages/admin/web/body.dart';
 import 'package:sit_eat_web/pages/admin/web/breadcrumb.dart';
@@ -57,7 +58,7 @@ class HomePage_State extends State<HomePage> {
     return Container(
       width: menuWidht,
       color: Colors.grey[300],
-      child: Menu(),
+      child: TestPage(),
     );
   }
 

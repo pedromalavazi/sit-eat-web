@@ -111,13 +111,35 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                     SizedBox(
                       height: 40,
                     ),
-                    textField('Nome', 'Madero'), //field Nome
-                    textField('Endereço',
-                        'Rua Antonio Marques Serra, 545'), //field Endereço
-                    textField('Abertura', '19:00'), //field Abertura
-                    textField('Fechamento', '22:00'), //field Fechamento
+                    textField('Nome', 'Madero'),
                     textField(
-                        'Capacidade Maxima', '20 pessoas'), //field Capacidade
+                      'Endereço',
+                      'Rua Antonio Marques Serra, 545',
+                    ),
+                    textField('Abertura', '19:00'),
+                    textField('Fechamento', '22:00'),
+                    textField('Capacidade Maxima', '20'),
+
+                    /*Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 200,
+                          child: textField('Abertura', '19:00'),
+                        ),
+                        SizedBox(
+                          width: 200,
+                          child: textField('Fechamento', '22:00'),
+                        ),
+                        SizedBox(
+                          width: 250,
+                          child: textField('Capacidade Maxima', '20'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 200,
+                    ),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
