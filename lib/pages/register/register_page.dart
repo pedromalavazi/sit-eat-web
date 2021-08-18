@@ -15,8 +15,8 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
         child: Center(
           child: Form(
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 250, horizontal: 50),
-              width: 1000,
+              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              width: 850,
               height: 500,
               child: Card(
                 elevation: 15.0,
@@ -78,13 +78,13 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 200.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
                                 .passwordTextController,
                             cursorColor: Colors.black,
-                            obscureText: false,
+                            obscureText: true,
                             autofocus: true,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -98,13 +98,13 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 200.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
                                 .confirmPasswordTextController,
                             cursorColor: Colors.black,
-                            obscureText: false,
+                            obscureText: true,
                             autofocus: true,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -142,7 +142,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 200.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -156,7 +156,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 200.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -194,7 +194,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 190.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -208,7 +208,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 190.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -226,7 +226,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                       children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
+                          width: 110.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -250,7 +250,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 15, 15, 0),
+                          margin: EdgeInsets.fromLTRB(0, 10, 15, 0),
                           width: 300.0,
                           height: 40.0,
                           child: ElevatedButton(
