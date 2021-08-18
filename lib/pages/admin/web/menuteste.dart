@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sit_eat_web/app/controller/menu_controller.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:sit_eat_web/pages/admin/adminpages/default_page.dart';
 import 'package:sit_eat_web/utils/app_model.dart';
 import 'package:sit_eat_web/utils/constants.dart';
@@ -22,8 +23,9 @@ class TestPage extends GetView<MenuController> {
               hoverColor: Colors.red[200],
               splashColor: Colors.red,
               onTap: () {
-                AppModel app = Provider.of<AppModel>(context, listen: false);
-                app.push(PageInfo('Home', DefaultPage()), replace: true);
+                //AppModel app = Provider.of<AppModel>(context, listen: false);
+                //app.push(PageInfo('Home', DefaultPage()), replace: true);
+                Get.toNamed(Routes.LOGIN);
                 //chamar pagina
               },
               child: ListTile(

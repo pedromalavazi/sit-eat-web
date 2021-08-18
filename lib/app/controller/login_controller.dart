@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final UtilService _util = UtilService();
@@ -21,6 +22,7 @@ class LoginController extends GetxController {
     );
     if (logged) {
       _util.showSuccessMessage("Sucesso", "Usuário logado com sucesso!");
+      Get.offAllNamed(Routes.HOME);
     }
   }
 

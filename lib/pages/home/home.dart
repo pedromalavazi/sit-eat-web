@@ -22,7 +22,7 @@ class HomePage_State extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          _header(),
+          // _header(),
           _body(),
         ],
       ),
@@ -47,10 +47,10 @@ class HomePage_State extends State<HomePage> {
           ? Row(
               children: <Widget>[
                 _menu(),
-                _right(),
+                //_right(),
               ],
             )
-          : _right(),
+          : _menu()(),
     );
   }
 
