@@ -32,6 +32,7 @@ dependencies:
   get: ^4.3.7
   google_fonts: ^2.1.0
   easy_debounce: ^2.0.0
+  dropdown_search: 
 
   #Firebase
   firebase_core: ^1.4.0

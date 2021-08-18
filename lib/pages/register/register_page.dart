@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/register_restaurant_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class RegisterPage extends GetView<RegisterRestaurantController> {
   final RegisterRestaurantController _registerRestaurantController =
@@ -12,10 +13,11 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        padding: EdgeInsets.all(200),
         child: Center(
           child: Form(
+            key: _formKey,
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
               width: 850,
               height: 500,
               child: Card(
@@ -142,16 +144,49 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 200.0,
+                          width: 250.0,
                           height: 40.0,
-                          child: TextField(
-                            controller: _registerRestaurantController
-                                .stateTextController,
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Estado",
-                            ),
+                          child: DropdownSearch<String>(
+                            validator: (v) =>
+                                v == null ? "required field" : null,
+                            hint: "Estado",
+                            mode: Mode.MENU,
+                            showSelectedItem: true,
+                            items: [
+                              "Acre",
+                              "Alagoas",
+                              "Amapá",
+                              "Amazonas",
+                              "Bahia",
+                              "Ceará",
+                              "Espírito Santo",
+                              "Goiás",
+                              "Maranhão",
+                              "Mato Grosso",
+                              "Mato Grosso do Sul",
+                              "Minas Gerais",
+                              "Pará",
+                              "Paraíba",
+                              "Paraná",
+                              "Pernambuco",
+                              "Piauí",
+                              "Rio de Janeiro",
+                              "Rio Grande do Norte",
+                              "Rio Grande do Sul",
+                              "Rondônia",
+                              "Roraima",
+                              "Santa Catarina",
+                              "São Paulo",
+                              "Sergipe",
+                              "Tocantins",
+                              "Distrito Federal"
+                            ],
+                            label: "Selecione o estado",
+                            showClearButton: true,
+                            onChanged: print,
+                            popupItemDisabled: (String s) => s.startsWith('I'),
+                            clearButtonSplashRadius: 20,
+                            selectedItem: "Estado",
                           ),
                         ),
                         Container(
@@ -255,6 +290,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                           height: 40.0,
                           child: ElevatedButton(
                             onPressed: () {
+                              // Get.toNamed(MyHomePage());
                               // _loginController.login();
                             },
                             child: Text(
