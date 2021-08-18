@@ -6,7 +6,7 @@ import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:sit_eat_web/pages/home/home.dart';
 import 'package:sit_eat_web/utils/app_model.dart';
 
-/*Future<void> main() async {
+Future<void> main() async {
   await initConfigurations();
   runApp(App());
 }
@@ -20,15 +20,13 @@ class App extends StatelessWidget {
       title: 'Sit & Eat',
       getPages: AppPages.routes,
       initialBinding: Binding(),
-      initialRoute: Routes.LOGIN,
+      initialRoute: Routes.HOME,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme: _theme(),
     );
   }
-}*/
-void main() {
+}
+/*void main() {
   runApp(MyApp());
 }
 
@@ -47,12 +45,11 @@ class MyApp extends StatelessWidget {
         home: HomePage(),
       ),
     );
-  }
+  }*/
 
-  ThemeData _theme() {
-    return ThemeData(
-        primarySwatch: Colors.red,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: TextTheme(bodyText2: TextStyle(fontSize: 22)));
-  }
+ThemeData _theme() {
+  return ThemeData(
+      primarySwatch: Colors.red,
+      scaffoldBackgroundColor: Colors.white,
+      textTheme: TextTheme(bodyText2: TextStyle(fontSize: 22)));
 }
