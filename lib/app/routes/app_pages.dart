@@ -6,6 +6,7 @@ import 'package:sit_eat_web/pages/admin/restaurant_approve_page.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_management_page.dart';
 import 'package:sit_eat_web/pages/home_page.dart';
 import 'package:sit_eat_web/pages/login/login_page.dart';
+import 'package:sit_eat_web/pages/register/register_page.dart';
 part './app_routes.dart';
 
 class AppPages {
@@ -28,6 +29,10 @@ class AppPages {
       name: Routes.RESTAURANT_APPROVAL,
       page: () => RestaurantApprovePage(),
       binding: RestaurantApprovalBinding(),
+    ),
+    GetPage(
+      name: Routes.REGISTER_RESTAURANT,
+      page: () => RegisterPage(),
     ),
   ];
 }

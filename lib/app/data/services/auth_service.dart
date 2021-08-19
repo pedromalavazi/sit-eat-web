@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
 import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class AuthService extends GetxController {
@@ -50,7 +51,8 @@ class AuthService extends GetxController {
         await _firestore.collection("users").doc(user.user?.uid).get(),
       );
 
-      if (_user.value.type != LoginType.RESTAURANT) {
+      if (_user.value.type == LoginType.CLIENT ||
+          !await userRestaurantIsApproved()) {
         resetUser();
         _util.showErrorMessage(
           "Usuário inválido",
@@ -137,6 +139,19 @@ class AuthService extends GetxController {
     } catch (e) {
       _util.showErrorMessage('Erro ao sair!', "Erro na tentativa de logout.");
     }
+  }
+
+  Future<bool> userRestaurantIsApproved() async {
+    if (_user.value.restaurantId.isBlank == true) return false;
+
+    var restaurantService = RestaurantService();
+    var userRestaurant =
+        await restaurantService.getById(_user.value.restaurantId!);
+
+    if (userRestaurant.active.isBlank == true || userRestaurant.active == false)
+      return false;
+
+    return true;
   }
 
   void resetUser() {
