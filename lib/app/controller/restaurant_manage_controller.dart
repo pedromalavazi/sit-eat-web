@@ -5,7 +5,7 @@ import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 
 class RestaurantManagementController extends GetxController {
   final RestaurantService _restaurantService = RestaurantService();
-
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController restaurantNameTextController =
       TextEditingController();
   Rx<bool?> activeFilter = null.obs;

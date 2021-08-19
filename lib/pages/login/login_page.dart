@@ -4,7 +4,7 @@ import 'package:sit_eat_web/app/controller/login_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class LoginPage extends GetView<LoginController> {
-  final LoginController _loginController = Get.put(LoginController());
+  final LoginController _loginController = Get.find<LoginController>();
   final _formKey = GlobalKey<FormState>();
 
   @override

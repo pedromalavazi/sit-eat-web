@@ -20,9 +20,14 @@ class App extends StatelessWidget {
       initialRoute: Routes.LOGIN,
       // initialRoute: Routes.REGISTER_RESTAURANT,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme: _theme(),
     );
   }
+}
+
+ThemeData _theme() {
+  return ThemeData(
+      primarySwatch: Colors.red,
+      scaffoldBackgroundColor: Colors.white,
+      textTheme: TextTheme(bodyText2: TextStyle(fontSize: 22)));
 }
