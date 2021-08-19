@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/register_restaurant_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
@@ -18,8 +19,8 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
           child: Form(
             key: _formKey,
             child: Container(
-              width: 850,
-              height: 500,
+              width: 950,
+              height: 520,
               child: Card(
                 elevation: 15.0,
                 child: Wrap(
@@ -80,7 +81,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 200.0,
+                          width: 273.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -100,7 +101,7 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 200.0,
+                          width: 273.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -144,54 +145,175 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 110.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .capacityTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            keyboardType: TextInputType.number,
+                            // maxLength: 3,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
+                            ],
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "Capacidade",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 205.0,
+                          height: 40.0,
+                          child: DropdownSearch<String>(
+                            hint: "Selecione o horário",
+                            mode: Mode.MENU,
+                            showSelectedItem: true,
+                            showSearchBox: true,
+                            searchBoxDecoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                hintText: "Pesquise o horário"),
+                            items: _registerRestaurantController.horary,
+                            label: "Horário de abertura",
+                            showClearButton: true,
+                            onChanged: print,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 205.0,
+                          height: 40.0,
+                          child: DropdownSearch<String>(
+                            hint: "Selecione o horário",
+                            mode: Mode.MENU,
+                            showSelectedItem: true,
+                            showSearchBox: true,
+                            searchBoxDecoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                hintText: "Pesquise o horário"),
+                            items: _registerRestaurantController.horary,
+                            label: "Horário de fechamento",
+                            showClearButton: true,
+                            onChanged: print,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 500.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .addressTextController,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Endereço",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 125.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .numberTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            keyboardType: TextInputType.number,
+                            // maxLength: 3,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
+                            ],
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "Número",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 220.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
+                                .zipCodeTextController,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: true,
+                            keyboardType: TextInputType.number,
+                            // maxLength: 3,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
+                            ],
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              labelText: "CEP",
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                           width: 250.0,
                           height: 40.0,
                           child: DropdownSearch<String>(
                             validator: (v) =>
                                 v == null ? "required field" : null,
-                            hint: "Estado",
+                            hint: "Selecione o estado",
                             mode: Mode.MENU,
                             showSelectedItem: true,
-                            items: [
-                              "Acre",
-                              "Alagoas",
-                              "Amapá",
-                              "Amazonas",
-                              "Bahia",
-                              "Ceará",
-                              "Espírito Santo",
-                              "Goiás",
-                              "Maranhão",
-                              "Mato Grosso",
-                              "Mato Grosso do Sul",
-                              "Minas Gerais",
-                              "Pará",
-                              "Paraíba",
-                              "Paraná",
-                              "Pernambuco",
-                              "Piauí",
-                              "Rio de Janeiro",
-                              "Rio Grande do Norte",
-                              "Rio Grande do Sul",
-                              "Rondônia",
-                              "Roraima",
-                              "Santa Catarina",
-                              "São Paulo",
-                              "Sergipe",
-                              "Tocantins",
-                              "Distrito Federal"
-                            ],
-                            label: "Selecione o estado",
+                            showSearchBox: true,
+                            searchBoxDecoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                hintText: "Pesquise seu estado"),
+                            items: _registerRestaurantController.states,
+                            label: "Estado",
                             showClearButton: true,
                             onChanged: print,
-                            popupItemDisabled: (String s) => s.startsWith('I'),
-                            clearButtonSplashRadius: 20,
-                            selectedItem: "Estado",
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 200.0,
+                          width: 250.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -206,92 +328,15 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 300.0,
-                          height: 40.0,
-                          child: TextField(
-                            controller: _registerRestaurantController
-                                .streetTextController,
-                            cursorColor: Colors.black,
-                            obscureText: false,
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              labelText: "Rua",
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 190.0,
-                          height: 40.0,
-                          child: TextField(
-                            controller: _registerRestaurantController
-                                .openTimeTextController,
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Horário de abertura",
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 190.0,
-                          height: 40.0,
-                          child: TextField(
-                            controller: _registerRestaurantController
-                                .closeTimeTextController,
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Horário de fechamento",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 110.0,
-                          height: 40.0,
-                          child: TextField(
-                            controller: _registerRestaurantController
-                                .capacityTextController,
-                            cursorColor: Colors.black,
-                            obscureText: false,
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              labelText: "Capacidade",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 15, 0),
-                          width: 300.0,
+                          margin: EdgeInsets.fromLTRB(25, 35, 5, 0),
+                          width: 150.0,
                           height: 40.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Get.toNamed(MyHomePage());
-                              // _loginController.login();
+                              // _registerRestaurantController.createRestaurant();
                             },
                             child: Text(
                               "Cadastrar",
@@ -304,14 +349,9 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 15, 0),
-                          width: 300.0,
+                          margin: EdgeInsets.fromLTRB(5, 35, 15, 0),
+                          width: 100.0,
                           height: 40.0,
                           child: TextButton(
                             onPressed: () {
