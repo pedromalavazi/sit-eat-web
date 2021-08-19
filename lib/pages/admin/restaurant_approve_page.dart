@@ -1,30 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sit_eat_web/pages/admin/web/web_utils.dart';
-import 'package:sit_eat_web/utils/app_model.dart';
+import 'package:sit_eat_web/utils/menu.dart';
+import 'package:sit_eat_web/utils/web_utils.dart';
 
-class RestauranteFormPage extends StatefulWidget {
-  @override
-  _RestauranteFormPage createState() => _RestauranteFormPage();
-}
-
-enum Validar { ativo, desabilitado }
-
-class _RestauranteFormPage extends State<RestauranteFormPage> {
-  Validar? _val = Validar.desabilitado;
-  final tNome = TextEditingController();
-  final tDesc = TextEditingController();
-
-  void initState() {
-    super.initState();
-
-    tNome.text = 'Madero';
-    tDesc.text = '19h - 22h';
-  }
-
+class RestaurantApprovePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Menu(
+      title: "Restaurant Approval",
       body: _body(),
     );
   }
@@ -66,18 +48,14 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Radio<Validar>(
-                          value: Validar.desabilitado,
-                          activeColor: Colors.green,
-                          groupValue: _val,
-                          onChanged: (Validar? value) {
-                            setState(
-                              () {
-                                _val = value;
-                              },
-                            );
-                          },
-                        ),
+                        // Radio<Validar>(
+                        //   value: Validar.desabilitado,
+                        //   activeColor: Colors.green,
+                        //   groupValue: _val,
+                        //   onChanged: (Validar? value) {
+
+                        //   },
+                        // ),
                         Text(
                           "Ativo",
                           style: TextStyle(
@@ -85,17 +63,13 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                             fontSize: 14,
                           ),
                         ),
-                        Radio<Validar>(
-                          value: Validar.ativo,
-                          groupValue: _val,
-                          onChanged: (Validar? value) {
-                            setState(
-                              () {
-                                _val = value;
-                              },
-                            );
-                          },
-                        ),
+                        // Radio<Validar>(
+                        //   value: Validar.ativo,
+                        //   groupValue: _val,
+                        //   onChanged: (Validar? value) {
+
+                        //   },
+                        // ),
                         Text(
                           "Desabilitado",
                           style: TextStyle(
@@ -119,27 +93,6 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                     textField('Abertura', '19:00'),
                     textField('Fechamento', '22:00'),
                     textField('Capacidade Maxima', '20'),
-
-                    /*Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 200,
-                          child: textField('Abertura', '19:00'),
-                        ),
-                        SizedBox(
-                          width: 200,
-                          child: textField('Fechamento', '22:00'),
-                        ),
-                        SizedBox(
-                          width: 250,
-                          child: textField('Capacidade Maxima', '20'),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 200,
-                    ),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
@@ -167,11 +120,7 @@ class _RestauranteFormPage extends State<RestauranteFormPage> {
                                   horizontal: 50, vertical: 25),
                               primary: Colors.black,
                               textStyle: TextStyle(fontSize: 15)),
-                          onPressed: () {
-                            AppModel app =
-                                Provider.of<AppModel>(context, listen: false);
-                            app.pop();
-                          },
+                          onPressed: () {},
                           child: Text("Cancelar"),
                         ),
                       ],

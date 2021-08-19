@@ -1,0 +1,98 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
+
+class Menu extends StatelessWidget {
+  late final Widget body;
+  late final String title;
+
+  Menu({required this.body, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      drawer: _menuAdmin(),
+      body: body,
+    );
+  }
+
+  _menuAdmin() {
+    return Container(
+      width: 250,
+      child: Drawer(
+        elevation: 10,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              child: Center(
+                child: SizedBox(
+                  width: 220,
+                  height: 200,
+                  child: Image.asset("assets/logo.png"),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.home_sharp),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Home",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(Routes.HOME);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.assignment_turned_in_outlined),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Aprovações",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(Routes.RESTAURANTS_MANAGEMENT);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

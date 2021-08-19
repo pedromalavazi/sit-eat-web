@@ -39,7 +39,6 @@ class AuthService extends GetxController {
   Rx<UserModel> get user => _user;
   static AuthService get to => Get.find<AuthService>();
 
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<bool> login(String email, String password) async {

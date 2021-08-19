@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sit_eat_web/utils/app_model.dart';
-import 'package:sit_eat_web/pages/admin/adminpages/restaurantes/restaurante_form_page.dart';
-import 'package:sit_eat_web/pages/admin/web/web_utils.dart';
+import 'package:get/get.dart';
+import 'package:sit_eat_web/app/controller/restaurant_manage_controller.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
+import 'package:sit_eat_web/utils/menu.dart';
+import 'package:sit_eat_web/utils/web_utils.dart';
 
-class RestaurantesPage extends StatefulWidget {
-  @override
-  _RestaurantesPage_State createState() => _RestaurantesPage_State();
-}
+class RestaurantManagementPage extends GetView<RestaurantManagementController> {
+  final RestaurantManagementController _restaurantManagementController =
+      Get.find<RestaurantManagementController>();
 
-class _RestaurantesPage_State extends State<RestaurantesPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Menu(
+      title: "Restaurant Management",
       body: _body(),
     );
   }
-
-  bool veri = true;
 
   _body() {
     return GridView.builder(
@@ -35,8 +33,7 @@ class _RestaurantesPage_State extends State<RestaurantesPage> {
 
             return InkWell(
               onTap: () {
-                AppModel app = Provider.of<AppModel>(context, listen: false);
-                app.push(PageInfo("Madero", RestauranteFormPage()));
+                Get.toNamed(Routes.RESTAURANT_APPROVAL);
               },
               child: Card(
                 child: Row(
@@ -76,29 +73,28 @@ class _RestaurantesPage_State extends State<RestaurantesPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       //Checkbox de Validação
                       children: <Widget>[
-                        veri
-                            ? TextButton(
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                    elevation: 15,
-                                    shadowColor: Colors.green,
-                                    padding: EdgeInsets.all(16),
-                                    primary: Colors.white,
-                                    textStyle: TextStyle(fontSize: font)),
-                                onPressed: () {},
-                                child: Text("Ativo"),
-                              )
-                            : TextButton(
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Colors.red,
-                                    elevation: 15,
-                                    shadowColor: Colors.red,
-                                    padding: EdgeInsets.all(16),
-                                    primary: Colors.white,
-                                    textStyle: TextStyle(fontSize: font)),
-                                onPressed: null,
-                                child: Text("Inativo"),
-                              )
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              elevation: 15,
+                              shadowColor: Colors.green,
+                              padding: EdgeInsets.all(16),
+                              primary: Colors.white,
+                              textStyle: TextStyle(fontSize: font)),
+                          onPressed: () {},
+                          child: Text("Ativo"),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              elevation: 15,
+                              shadowColor: Colors.red,
+                              padding: EdgeInsets.all(16),
+                              primary: Colors.white,
+                              textStyle: TextStyle(fontSize: font)),
+                          onPressed: null,
+                          child: Text("Inativo"),
+                        )
                       ],
                     )
                   ],
