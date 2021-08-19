@@ -27,11 +27,13 @@ class RegisterRestaurantController extends GetxController {
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController stateTextController = TextEditingController();
   final TextEditingController cityTextController = TextEditingController();
-  final TextEditingController streetTextController = TextEditingController();
+  final TextEditingController zipCodeTextController = TextEditingController();
+  final TextEditingController numberTextController = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
+    gerarHorarios();
   }
 
   Future<void> register() async {
@@ -68,5 +70,52 @@ class RegisterRestaurantController extends GetxController {
       userNameTextController.text.trim(),
       restaurantId,
     );
+  }
+
+  final List<String> horary = [];
+  final List<String> states = [
+    "Acre",
+    "Alagoas",
+    "Amapá",
+    "Amazonas",
+    "Bahia",
+    "Ceará",
+    "Espírito Santo",
+    "Goiás",
+    "Maranhão",
+    "Mato Grosso",
+    "Mato Grosso do Sul",
+    "Minas Gerais",
+    "Pará",
+    "Paraíba",
+    "Paraná",
+    "Pernambuco",
+    "Piauí",
+    "Rio de Janeiro",
+    "Rio Grande do Norte",
+    "Rio Grande do Sul",
+    "Rondônia",
+    "Roraima",
+    "Santa Catarina",
+    "São Paulo",
+    "Sergipe",
+    "Tocantins",
+    "Distrito Federal"
+  ];
+
+  void gerarHorarios() {
+    for (int i = 0; i < 24; i++) {
+      for (int j = 0; j < 60; j++) {
+        if (i < 10 && j < 10) {
+          horary.add("0$i:0$j\n");
+        } else if (i < 10) {
+          horary.add("0$i:$j\n");
+        } else if (j < 10) {
+          horary.add("$i:0$j\n");
+        } else {
+          horary.add("$i:$j\n");
+        }
+      }
+    }
   }
 }
