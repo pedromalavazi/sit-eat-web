@@ -23,12 +23,4 @@ class RestaurantManagementController extends GetxController {
     listRestaurants.value = await _restaurantService.getToManage(
         activeFilter.value, restaurantName);
   }
-
-  void openDrawer() {
-    scaffoldKey.currentState!.openDrawer();
-  }
-
-  void closeDrawer() {
-    scaffoldKey.currentState!.openEndDrawer();
-  }
 }
