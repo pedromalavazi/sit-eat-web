@@ -9,6 +9,7 @@ class LoginController extends GetxController {
 
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  RxBool stayLogged = false.obs;
 
   @override
   void onInit() {

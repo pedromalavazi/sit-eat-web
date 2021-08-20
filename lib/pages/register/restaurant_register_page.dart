@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/register_restaurant_controller.dart';
+import 'package:sit_eat_web/app/controller/restaurant_register_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
-class RegisterPage extends GetView<RegisterRestaurantController> {
-  final RegisterRestaurantController _registerRestaurantController =
-      Get.put(RegisterRestaurantController());
+class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
+  final RestaurantRegisterController _registerRestaurantController =
+      Get.put(RestaurantRegisterController());
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -223,6 +223,20 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
+                                .menuTextController,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Link do menu",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 370.0,
+                          height: 40.0,
+                          child: TextField(
+                            controller: _registerRestaurantController
                                 .addressTextController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -231,9 +245,13 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    Row(
+                      children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                          width: 125.0,
+                          width: 100.0,
                           height: 40.0,
                           child: TextField(
                             controller: _registerRestaurantController
@@ -283,10 +301,6 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                           width: 250.0,
@@ -326,6 +340,9 @@ class RegisterPage extends GetView<RegisterRestaurantController> {
                           ),
                         ),
                       ],
+                    ),
+                    Row(
+                      children: [],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

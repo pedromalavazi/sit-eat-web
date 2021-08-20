@@ -14,7 +14,7 @@ class LoginPage extends GetView<LoginController> {
       body: Center(
         child: Container(
           width: 400.0,
-          height: 370.0,
+          height: 420.0,
           child: Card(
             elevation: 15.0,
             child: Form(
@@ -43,64 +43,124 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                    width: 300.0,
-                    height: 40.0,
-                    child: TextField(
-                      controller: _loginController.emailTextController,
-                      obscureText: false,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Usuário',
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(45, 20, 0, 0),
+                        width: 300.0,
+                        height: 40.0,
+                        child: TextField(
+                          controller: _loginController.emailTextController,
+                          obscureText: false,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Usuário',
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 23, 0, 0),
-                    width: 300.0,
-                    height: 40.0,
-                    child: TextField(
-                      controller: _loginController.passwordTextController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Senha',
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(45, 23, 0, 0),
+                        width: 300.0,
+                        height: 40.0,
+                        child: TextField(
+                          controller: _loginController.passwordTextController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Senha',
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    width: 300.0,
-                    height: 40.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        _loginController.login();
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(fontSize: 20.0),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(32, 0, 0, 0),
+                        child: Obx(
+                          () => Switch(
+                            value: _loginController.stayLogged.value,
+                            onChanged: 0 == 1
+                                ? null
+                                : (bool value) {
+                                    _loginController.stayLogged.value = value;
+                                  },
+                          ),
+                        ),
                       ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => Colors.red),
+                      Text(
+                        'Mantenha-me conectado',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    width: 300.0,
-                    height: 40.0,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.REGISTER_RESTAURANT);
-                      },
-                      child: Text(
-                        "Cadastrar-se",
-                        style: TextStyle(color: Colors.grey),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(40, 5, 0, 0),
+                        width: 135.0,
+                        height: 20.0,
+                        child: TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTER_RESTAURANT);
+                          },
+                          child: Text(
+                            "Esqueceu a senha?",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(45, 25, 0, 0),
+                        width: 300.0,
+                        height: 40.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _loginController.login();
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.resolveWith(
+                                (states) => Colors.red),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(150, 10, 0, 0),
+                        width: 90.0,
+                        height: 20.0,
+                        child: TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTER_RESTAURANT);
+                          },
+                          child: Text(
+                            "Cadastrar-se",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

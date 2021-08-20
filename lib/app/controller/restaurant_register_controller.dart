@@ -6,7 +6,7 @@ import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
-class RegisterRestaurantController extends GetxController {
+class RestaurantRegisterController extends GetxController {
   final UtilService _util = UtilService();
   final RestaurantService _restaurantService = RestaurantService();
   final UserService _userService = UserService();
