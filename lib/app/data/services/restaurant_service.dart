@@ -68,7 +68,31 @@ class RestaurantService extends GetxService {
     if (restaurant.address == null) {
       isValid = false;
       _utilService.showInformationMessage(
-          "Dados inválidos", "Endereço do restaurante é obrigatório.");
+          "Dados inválidos", "Endereço é obrigatório.");
+    }
+
+    if (restaurant.number == null) {
+      isValid = false;
+      _utilService.showInformationMessage(
+          "Dados inválidos", "Número é obrigatório.");
+    }
+
+    if (restaurant.zipCode == null) {
+      isValid = false;
+      _utilService.showInformationMessage(
+          "Dados inválidos", "CEP é obrigatório.");
+    }
+
+    if (restaurant.state == null) {
+      isValid = false;
+      _utilService.showInformationMessage(
+          "Dados inválidos", "Estado é obrigatório.");
+    }
+
+    if (restaurant.city == null) {
+      isValid = false;
+      _utilService.showInformationMessage(
+          "Dados inválidos", "Cidade é obrigatório.");
     }
 
     if (restaurant.openTime == null) {
@@ -87,12 +111,6 @@ class RestaurantService extends GetxService {
       isValid = false;
       _utilService.showInformationMessage(
           "Dados inválidos", "A Capacidade do restaurante é obrigatório.");
-    }
-
-    if (restaurant.menu == null) {
-      isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Menu é obrigatório.");
     }
 
     if (restaurant.name == null || restaurant.name == "") {

@@ -60,6 +60,10 @@ class RestaurantRepository {
           "image": newRestaurant.image,
           "menu": newRestaurant.menu,
           "name": newRestaurant.name,
+          "number": newRestaurant.number,
+          "zipCode": newRestaurant.zipCode,
+          "state": newRestaurant.state,
+          "city": newRestaurant.city,
           "active": false,
         },
       );
