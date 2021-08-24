@@ -10,6 +10,7 @@ class RestaurantRegisterController extends GetxController {
   final UtilService _util = UtilService();
   final RestaurantService _restaurantService = RestaurantService();
   final UserService _userService = UserService();
+  RxString emailTeste = "".obs;
 
   // User Controllers
   final TextEditingController emailTextController = TextEditingController();
@@ -72,6 +73,36 @@ class RestaurantRegisterController extends GetxController {
     );
   }
 
+  String email = "";
+  String password = "";
+  String confirmPassword = "";
+  String nameRestaurant = "";
+  String capacity = "";
+  String openTime = "";
+  String closeTime = "";
+  String linkMenu = "";
+  String address = "";
+  String number = "";
+  String zipCode = "";
+  String state = "";
+  String city = "";
+
+  void registerMocked() {
+    email = emailTextController.text.trim();
+    password = passwordTextController.text.trim();
+    confirmPassword = confirmPasswordTextController.text.trim();
+    nameRestaurant = nameTextController.text.trim();
+    capacity = capacityTextController.text.trim();
+    openTime = openTimeTextController.text.trim();
+    closeTime = closeTimeTextController.text.trim();
+    linkMenu = menuTextController.text.trim();
+    address = addressTextController.text.trim();
+    number = numberTextController.text.trim();
+    zipCode = zipCodeTextController.text.trim();
+    city = cityTextController.text.trim();
+    state = stateTextController.text.trim();
+  }
+
   final List<String> horary = [];
   final List<String> states = [
     "Acre",
@@ -107,13 +138,13 @@ class RestaurantRegisterController extends GetxController {
     for (int i = 0; i < 24; i++) {
       for (int j = 0; j < 60; j++) {
         if (i < 10 && j < 10) {
-          horary.add("0$i:0$j\n");
+          horary.add("0$i:0$j");
         } else if (i < 10) {
-          horary.add("0$i:$j\n");
+          horary.add("0$i:$j");
         } else if (j < 10) {
-          horary.add("$i:0$j\n");
+          horary.add("$i:0$j");
         } else {
-          horary.add("$i:$j\n");
+          horary.add("$i:$j");
         }
       }
     }

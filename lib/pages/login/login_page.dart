@@ -113,7 +113,7 @@ class LoginPage extends GetView<LoginController> {
                             height: 20.0,
                             child: TextButton(
                               onPressed: () {
-                                Get.toNamed(Routes.REGISTER_RESTAURANT);
+                                Get.toNamed(Routes.RESTAURANT_REGISTER);
                               },
                               child: Text(
                                 "Esqueceu a senha?",
@@ -131,7 +131,8 @@ class LoginPage extends GetView<LoginController> {
                             height: 40.0,
                             child: ElevatedButton(
                               onPressed: () {
-                                _loginController.login();
+                                _loginController.loginMocked();
+                                // _loginController.login();
                               },
                               child: Text(
                                 "Login",
@@ -154,7 +155,7 @@ class LoginPage extends GetView<LoginController> {
                             height: 20.0,
                             child: TextButton(
                               onPressed: () {
-                                Get.toNamed(Routes.REGISTER_RESTAURANT);
+                                Get.toNamed(Routes.RESTAURANT_REGISTER);
                               },
                               child: Text(
                                 "Cadastrar-se",

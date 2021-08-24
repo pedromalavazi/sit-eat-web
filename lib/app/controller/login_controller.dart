@@ -16,6 +16,13 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
+  void loginMocked() {
+    if (emailTextController.text.trim() == "admin" &&
+        passwordTextController.text.trim() == "123") {
+      Get.toNamed(Routes.RESTAURANT_PROFILE);
+    }
+  }
+
   void login() async {
     bool logged = await AuthService.to.login(
       emailTextController.text.trim(),

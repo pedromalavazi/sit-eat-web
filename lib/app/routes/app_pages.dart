@@ -39,7 +39,7 @@ class AppPages {
       binding: RestaurantApprovalBinding(),
     ),
     GetPage(
-      name: Routes.REGISTER_RESTAURANT,
+      name: Routes.RESTAURANT_REGISTER,
       page: () => RestaurantRegisterPage(),
       binding: RestaurantRegisterBinding(),
     ),
