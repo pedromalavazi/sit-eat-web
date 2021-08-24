@@ -51,12 +51,14 @@ class LoginPage extends GetView<LoginController> {
                             margin: EdgeInsets.fromLTRB(45, 20, 0, 0),
                             width: 300.0,
                             height: 40.0,
-                            child: TextField(
+                            child: TextFormField(
                               controller: _loginController.emailTextController,
                               obscureText: false,
                               autofocus: true,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                // prefixIcon: Icon(Icons.ac_unit),
+                                prefixIcon: Icon(Icons.person),
                                 labelText: 'Usuário',
                               ),
                             ),
@@ -75,6 +77,7 @@ class LoginPage extends GetView<LoginController> {
                               obscureText: true,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.password),
                                 labelText: 'Senha',
                               ),
                             ),

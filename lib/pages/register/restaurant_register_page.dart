@@ -20,7 +20,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
             Form(
               key: _formKey,
               child: Container(
-                width: 950,
+                width: 990,
                 height: 520,
                 child: Card(
                   elevation: 15.0,
@@ -76,13 +76,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.email),
                                 labelText: "E-mail",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 273.0,
+                            width: 292.5,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -96,13 +97,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.password),
                                 labelText: "Senha",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 273.0,
+                            width: 292.5,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -116,6 +118,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.password),
                                 labelText: "Confirme sua senha",
                               ),
                             ),
@@ -140,13 +143,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.storefront),
                                 labelText: "Nome do restaurante",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 110.0,
+                            width: 150.0,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -166,6 +170,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.groups),
                                 labelText: "Capacidade",
                               ),
                             ),
@@ -179,13 +184,18 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               mode: Mode.MENU,
                               showSelectedItem: true,
                               showSearchBox: true,
+                              // dropdownSearchDecoration: InputDecoration(
+                              //   prefixIcon: Icon(Icons.schedule),
+                              //   border: OutlineInputBorder(),
+                              // ),
                               searchBoxDecoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  hintText: "Pesquise o horário"),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                hintText: "Pesquise o horário",
+                              ),
                               items: _restaurantRegisterController.horary,
                               label: "Horário de abertura",
                               showClearButton: true,
@@ -204,9 +214,15 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               mode: Mode.MENU,
                               showSelectedItem: true,
                               showSearchBox: true,
+                              // dropdownSearchDecoration: InputDecoration(
+                              //   prefixIcon: Icon(Icons.schedule),
+                              //   border: OutlineInputBorder(),
+                              // ),
                               searchBoxDecoration: InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                                    horizontal: 10,
+                                    vertical: 10,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   ),
@@ -234,13 +250,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.link),
                                 labelText: "Link do menu",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 370.0,
+                            width: 410.0,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -248,6 +265,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.home),
                                 labelText: "Endereço",
                               ),
                             ),
@@ -258,7 +276,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                         children: [
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 100.0,
+                            width: 125.0,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -278,13 +296,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.pin_drop),
                                 labelText: "Número",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 220.0,
+                            width: 195.0,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -304,13 +323,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                     color: Colors.black,
                                   ),
                                 ),
+                                prefixIcon: Icon(Icons.location_on),
                                 labelText: "CEP",
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 250.0,
+                            width: 270.0,
                             height: 40.0,
                             child: DropdownSearch<String>(
                               validator: (v) =>
@@ -337,7 +357,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                            width: 250.0,
+                            width: 270.0,
                             height: 40.0,
                             child: TextField(
                               controller: _restaurantRegisterController
@@ -345,6 +365,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.location_city),
                                 labelText: "Cidade",
                               ),
                             ),
