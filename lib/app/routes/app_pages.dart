@@ -7,6 +7,7 @@ import 'package:sit_eat_web/pages/admin/restaurant_management_page.dart';
 import 'package:sit_eat_web/pages/home_page.dart';
 import 'package:sit_eat_web/pages/login/login_page.dart';
 import 'package:sit_eat_web/pages/register/register_page.dart';
+import 'package:sit_eat_web/pages/restaurant/mesas/lista_mesas_page.dart';
 part './app_routes.dart';
 
 class AppPages {
@@ -34,5 +35,9 @@ class AppPages {
       name: Routes.REGISTER_RESTAURANT,
       page: () => RegisterPage(),
     ),
+    GetPage(
+      name: Routes.LISTA_MESAS,
+      page: () => ListaMesasPage(),
+    )
   ];
 }

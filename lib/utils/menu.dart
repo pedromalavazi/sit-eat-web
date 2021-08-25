@@ -6,7 +6,10 @@ class Menu extends StatelessWidget {
   late final Widget body;
   late final String title;
 
-  Menu({required this.body, required this.title});
+  Menu({
+    required this.body,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
