@@ -68,7 +68,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Get.toNamed(Routes.HOME);
+                Get.offAllNamed(Routes.HOME);
               },
             ),
             ListTile(
@@ -87,7 +87,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Get.toNamed(Routes.RESTAURANTS_MANAGEMENT);
+                Get.offAllNamed(Routes.RESTAURANTS_MANAGEMENT);
               },
             ),
           ],

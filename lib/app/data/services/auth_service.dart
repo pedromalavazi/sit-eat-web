@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
