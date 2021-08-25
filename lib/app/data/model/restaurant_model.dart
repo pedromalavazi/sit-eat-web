@@ -6,8 +6,8 @@ class RestaurantModel {
   String? name;
   String? address;
   int? capacity;
-  DateTime? openTime;
-  DateTime? closeTime;
+  Timestamp? openTime;
+  Timestamp? closeTime;
   String? menu;
   String? number;
   String? zipCode;
@@ -39,10 +39,10 @@ class RestaurantModel {
         capacity = restaurant["capacity"],
         openTime = restaurant["openTime"],
         closeTime = restaurant["closeTime"],
-        number = restaurant["number"],
-        zipCode = restaurant["zipCode"],
-        city = restaurant["city"],
-        state = restaurant["state"],
+        //number = restaurant["number"],
+        //zipCode = restaurant["zipCode"],
+        //city = restaurant["city"],
+        //state = restaurant["state"],
         menu = restaurant["menu"],
         active = restaurant["active"];
 }

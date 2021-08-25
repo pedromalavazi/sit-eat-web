@@ -28,13 +28,12 @@ class RestaurantRepository {
   ) async {
     List<RestaurantModel> restaurants = <RestaurantModel>[];
     try {
-      Query<Map<String, dynamic>> query = _firestore.collection("restaurants");
+      //Query<Map<String, dynamic>> query = _firestore.collection("restaurants");
+      // if (active != null) query = query.where('active', isEqualTo: active);
+      // if (name != null) query = query.where('name', isEqualTo: name);
+      // var restaurantsDocs = await query.get();
 
-      if (active != null) query = query.where('active', isEqualTo: active);
-      if (name != null) query = query.where('name', isEqualTo: name);
-
-      var restaurantsDocs = await query.get();
-
+      var restaurantsDocs = await _firestore.collection("restaurants").get();
       if (restaurantsDocs.docs.isEmpty) return restaurants;
 
       restaurantsDocs.docs.forEach((restaurantDoc) {
@@ -98,5 +97,24 @@ class RestaurantRepository {
           title: "ERROR", content: Text("Restaurante não encontrado."));
       return false;
     }
+  }
+
+  // Retorna restaurante para controle do ADMIN
+  Stream<List<RestaurantModel>> listenerRestaurants() {
+    return _firestore.collection('restaurants').snapshots().map((doc) {
+      if (doc.docs.length == 0) {
+        return <RestaurantModel>[];
+      }
+      return convertRestaurantsFromDB(doc);
+    });
+  }
+
+  List<RestaurantModel> convertRestaurantsFromDB(
+      QuerySnapshot restaurantsFromDB) {
+    List<RestaurantModel> restaurants = <RestaurantModel>[];
+    restaurantsFromDB.docs.forEach((restaurant) {
+      restaurants.add(RestaurantModel.fromSnapshot(restaurant));
+    });
+    return restaurants;
   }
 }

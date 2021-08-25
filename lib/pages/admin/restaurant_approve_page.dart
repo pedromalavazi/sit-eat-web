@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sit_eat_web/app/controller/restaurant_approval_controller.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
-class RestaurantApprovePage extends StatelessWidget {
+class RestaurantApprovePage extends GetView<RestaurantApprovalController> {
+  final RestaurantApprovalController _approvalController =
+      Get.find<RestaurantApprovalController>();
+
   @override
   Widget build(BuildContext context) {
     return Menu(
@@ -29,108 +34,81 @@ class RestaurantApprovePage extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Card(
-            child: Container(
-              padding: EdgeInsets.all(16),
-              child: Form(
-                child: ListView(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Tipo",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 18,
+            child: Obx(
+              () => Container(
+                padding: EdgeInsets.all(16),
+                child: Form(
+                  child: ListView(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        // Radio<Validar>(
-                        //   value: Validar.desabilitado,
-                        //   activeColor: Colors.green,
-                        //   groupValue: _val,
-                        //   onChanged: (Validar? value) {
-
-                        //   },
-                        // ),
-                        Text(
-                          "Ativo",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
+                      textField('Nome',
+                          _approvalController.restaurant.value.name ?? ""),
+                      textField(
+                        'Endereço',
+                        (_approvalController.restaurant.value.address ?? "") +
+                            (_approvalController.restaurant.value.number ?? ""),
+                      ),
+                      textField(
+                          'Abertura',
+                          _approvalController.getHour(
+                              _approvalController.restaurant.value.openTime ??
+                                  null)),
+                      textField(
+                          'Fechamento',
+                          _approvalController.getHour(
+                              _approvalController.restaurant.value.closeTime ??
+                                  null)),
+                      textField(
+                          'Capacidade Maxima',
+                          _approvalController.restaurant.value.capacity == null
+                              ? "0"
+                              : _approvalController.restaurant.value.capacity
+                                  .toString()),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                side: BorderSide(color: Colors.black),
+                                backgroundColor: Colors.red,
+                                elevation: 15,
+                                shadowColor: Colors.red,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 25),
+                                primary: Colors.white,
+                                textStyle: TextStyle(fontSize: 15)),
+                            onPressed: () {
+                              _approvalController.approve();
+                            },
+                            child: Text("Aprovar"),
                           ),
-                        ),
-                        // Radio<Validar>(
-                        //   value: Validar.ativo,
-                        //   groupValue: _val,
-                        //   onChanged: (Validar? value) {
-
-                        //   },
-                        // ),
-                        Text(
-                          "Desabilitado",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
+                          SizedBox(width: 15),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                side: BorderSide(color: Colors.black),
+                                backgroundColor: Colors.white,
+                                elevation: 15,
+                                shadowColor: Colors.black,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 25),
+                                primary: Colors.black,
+                                textStyle: TextStyle(fontSize: 15)),
+                            onPressed: () {
+                              _approvalController.disapprove();
+                            },
+                            child: Text("Desativar"),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    textField('Nome', 'Madero'),
-                    textField(
-                      'Endereço',
-                      'Rua Antonio Marques Serra, 545',
-                    ),
-                    textField('Abertura', '19:00'),
-                    textField('Fechamento', '22:00'),
-                    textField('Capacidade Maxima', '20'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              side: BorderSide(color: Colors.black),
-                              backgroundColor: Colors.red,
-                              elevation: 15,
-                              shadowColor: Colors.red,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 25),
-                              primary: Colors.white,
-                              textStyle: TextStyle(fontSize: 15)),
-                          onPressed: () {},
-                          child: Text("Salvar"),
-                        ),
-                        SizedBox(width: 15),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              side: BorderSide(color: Colors.black),
-                              backgroundColor: Colors.white,
-                              elevation: 15,
-                              shadowColor: Colors.black,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 25),
-                              primary: Colors.black,
-                              textStyle: TextStyle(fontSize: 15)),
-                          onPressed: () {},
-                          child: Text("Cancelar"),
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

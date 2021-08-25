@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
@@ -51,8 +51,9 @@ class RestaurantRegisterController extends GetxController {
       RestaurantModel(
         address: addressTextController.text,
         capacity: int.parse(capacityTextController.text.trim()),
-        openTime: convertStringToDateTime(openTimeTextController.text.trim()),
-        closeTime: convertStringToDateTime(closeTimeTextController.text.trim()),
+        openTime: convertStringToTimestamp(openTimeTextController.text.trim()),
+        closeTime:
+            convertStringToTimestamp(closeTimeTextController.text.trim()),
         image: "", // necessário desenvolvimento do serviço
         menu: menuTextController.text.trim(),
         name: nameTextController.text.trim(),
@@ -74,7 +75,8 @@ class RestaurantRegisterController extends GetxController {
     );
   }
 
-  DateTime convertStringToDateTime(String hour) {
-    return DateTime.parse("2020-01-15 " + hour + ":00");
+  Timestamp convertStringToTimestamp(String hour) {
+    var date = DateTime.parse("2020-01-15 " + hour + ":00");
+    return Timestamp.fromDate(date);
   }
 }

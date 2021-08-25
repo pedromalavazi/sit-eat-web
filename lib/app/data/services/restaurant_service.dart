@@ -25,6 +25,10 @@ class RestaurantService extends GetxService {
     );
   }
 
+  Stream<List<RestaurantModel>> listenerRestaurants() {
+    return _restaurantRepository.listenerRestaurants();
+  }
+
   Future<String?> registerNewRestaurant(RestaurantModel resturant) async {
     try {
       if (!isValidRestaurant(resturant)) {
