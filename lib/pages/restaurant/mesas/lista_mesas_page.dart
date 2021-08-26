@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
+class CadastroM extends GetxController {
+  RxBool result = false.obs;
+}
+
 class ListaMesasPage extends StatelessWidget {
-  bool ocupado = false;
+  final CadastroM cm = Get.put(CadastroM());
 
   @override
   Widget build(BuildContext context) {
     return Menu(
       title: 'Mesas',
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
+  _body(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
+          color: Colors.white,
           margin: EdgeInsets.only(top: 15),
           child: TextButton.icon(
             icon: Icon(
@@ -24,19 +30,144 @@ class ListaMesasPage extends StatelessWidget {
               size: 17,
             ),
             style: TextButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.black),
-                borderRadius: BorderRadius.circular(5),
-              ),
+              side: BorderSide(color: Colors.black),
               backgroundColor: Colors.red,
-              elevation: 2,
-              padding: EdgeInsets.all(20),
+              elevation: 15,
+              shadowColor: Colors.red,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 20,
+              ),
               primary: Colors.white,
               textStyle: TextStyle(
-                fontSize: 17,
+                fontFamily: "Soucer Code Pro",
+                fontSize: 15,
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              //showDialog(context: context, builder: (context) => dialog);
+              return cm.result.value = await Get.dialog(
+                AlertDialog(
+                  title: Text(
+                    "Cadastro de Mesa",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Source Code Pro",
+                    ),
+                  ),
+                  content: Form(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          child: TextFormField(
+                            autofocus: true,
+                            textAlignVertical: TextAlignVertical.top,
+                            keyboardType: TextInputType.number,
+                            maxLength: 2,
+                            style: TextStyle(fontFamily: "Source Code Pro"),
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              labelText: "Número da mesa:",
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: "Source Code Pro",
+                              ),
+                              prefixIcon: Icon(
+                                Icons.analytics_outlined,
+                                color: Colors.black,
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: TextFormField(
+                            textAlignVertical: TextAlignVertical.top,
+                            keyboardType: TextInputType.number,
+                            maxLength: 2,
+                            style: TextStyle(fontFamily: "Source Code Pro"),
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              labelText: "Quantidade de Pessoas:",
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: "Source Code Pro",
+                              ),
+                              prefixIcon: Icon(
+                                Icons.group_add_outlined,
+                                color: Colors.black,
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Get.back(result: false),
+                      style: TextButton.styleFrom(
+                        side: BorderSide(color: Colors.black, width: 1.5),
+                        backgroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 15,
+                        ),
+                        primary: Colors.black,
+                        textStyle: TextStyle(
+                          fontFamily: "Soucer Code Pro",
+                          fontSize: 15,
+                        ),
+                      ),
+                      child: Text(
+                        "Cancelar",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Source Code Pro",
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: TextButton.styleFrom(
+                        side: BorderSide(
+                          color: Colors.black,
+                          width: 1.5,
+                        ),
+                        backgroundColor: Colors.red,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 15,
+                        ),
+                        primary: Colors.white,
+                        textStyle: TextStyle(
+                          fontFamily: "Soucer Code Pro",
+                          fontSize: 15,
+                        ),
+                      ),
+                      onPressed: () => Get.back(result: true),
+                      child: Text(
+                        "Cadastrar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Soucer Code Pro",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
             label: Text(
               'Adicionar Mesa',
             ),
@@ -46,56 +177,77 @@ class ListaMesasPage extends StatelessWidget {
           height: 20,
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (BuildContext context, int index) {
-              // Card Mesas
-              return Card(
-                color: Colors.white,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: Icon(Icons.table_view),
-                    title: Text(
-                      "Mesa ${index + 1}",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              shape: BoxShape.rectangle,
+              border: Border.all(
+                color: Colors.black54,
+                width: 2.0,
+                style: BorderStyle.solid,
+              ),
+            ),
+            child: GridView.builder(
+              //Quantidade de Mesas
+              itemCount: 20,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 5.0,
+                crossAxisCount: 3,
+                crossAxisSpacing: 3,
+              ),
+
+              itemBuilder: (BuildContext context, int index) {
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    double font = fontSize(constraints.maxHeight * 0.15,
+                        min: 10, max: 22);
+                    // Card Mesas
+                    return InkWell(
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.black26),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: 200),
+                              child: Icon(Icons.arrow_right),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Mesa ${index + 1}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: font,
+                                    fontFamily: "Soucer Code Pro",
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Quantidade: 4 pessoas",
+                                  style: TextStyle(
+                                    fontSize: font,
+                                    color: Colors.black87,
+                                    fontFamily: "Soucer Code Pro",
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    subtitle: Text(
-                      "Quantidade: 4 pessoas",
-                      style: TextStyle(fontSize: 15, color: Colors.black87),
-                    ),
-                    trailing: ocupado
-                        ? Text(
-                            'Ocupado',
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.red,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        : Text(
-                            'Livre',
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                  ),
-                ),
-              );
-            },
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],

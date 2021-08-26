@@ -38,6 +38,6 @@ class AppPages {
     GetPage(
       name: Routes.LISTA_MESAS,
       page: () => ListaMesasPage(),
-    )
+    ),
   ];
 }

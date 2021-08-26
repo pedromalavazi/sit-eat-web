@@ -103,7 +103,9 @@ class RestaurantApprovePage extends StatelessWidget {
                               elevation: 15,
                               shadowColor: Colors.red,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 25),
+                                horizontal: 50,
+                                vertical: 25,
+                              ),
                               primary: Colors.white,
                               textStyle: TextStyle(fontSize: 15)),
                           onPressed: () {},
