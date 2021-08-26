@@ -18,8 +18,8 @@ class App extends StatelessWidget {
       getPages: AppPages.routes,
       initialBinding: Binding(),
       // initialRoute: Routes.LOGIN,
-      initialRoute: Routes.RESTAURANT_REGISTER,
-      // initialRoute: Routes.RESTAURANT_PROFILE,
+      // initialRoute: Routes.RESTAURANT_REGISTER,
+      initialRoute: Routes.RESTAURANT_PROFILE,
       debugShowCheckedModeBanner: false,
       theme: _theme(),
     );

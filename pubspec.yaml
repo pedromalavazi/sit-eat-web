@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^2.1.0
   easy_debounce: ^2.0.0
   dropdown_search: 
+  qr_flutter: ^4.0.0
 
   #Firebase
   firebase_core: ^1.4.0
