@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/pages/restaurant/mesas/widgets/mesas_card.dart';
+import 'package:sit_eat_web/pages/restaurant/tables/widgets/mesas_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
@@ -101,7 +101,7 @@ class TableListPage extends StatelessWidget {
                                 fontFamily: "Source Code Pro",
                               ),
                               prefixIcon: Icon(
-                                Icons.group_add_outlined,
+                                Icons.people_alt,
                                 color: Colors.black,
                               ),
                               focusedBorder: UnderlineInputBorder(
