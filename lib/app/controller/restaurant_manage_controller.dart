@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
@@ -12,6 +13,7 @@ class RestaurantManagementController extends GetxController {
 
   @override
   void onInit() {
+    setFilters();
     getRestaurants();
     super.onInit();
   }
@@ -28,14 +30,22 @@ class RestaurantManagementController extends GetxController {
     List<RestaurantModel> restaurants = <RestaurantModel>[];
 
     if (filterActiveIsFilled())
-      listRest.removeWhere((element) => element.active != activeFilter.value);
+      restaurants = listRest
+          .where((element) => element.active != activeFilter.value)
+          .toList();
 
     if (filterNameRestaurantIsFilled()) {
-      String restaurantFilterName = restaurantNameTextController.text.trim();
-      listRest = listRest
-          .where((rest) => rest.name!.contains(restaurantFilterName))
+      String restaurantFilterName =
+          restaurantNameTextController.text.trim().toLowerCase();
+      restaurants = listRest
+          .where(
+            (rest) => rest.name!.toLowerCase().contains(restaurantFilterName),
+          )
           .toList();
     }
+
+    if (!filterActiveIsFilled() && !filterNameRestaurantIsFilled())
+      restaurants = listRest.toList();
 
     return restaurants;
   }
@@ -57,5 +67,23 @@ class RestaurantManagementController extends GetxController {
   bool filterNameRestaurantIsFilled() {
     if (restaurantNameTextController.text.trim().isBlank != true) return true;
     return false;
+  }
+
+  void setFilters() {
+    restaurantNameTextController.addListener(() {
+      EasyDebounce.debounce('time-debounce', Duration(milliseconds: 1000),
+          () => getRestaurants());
+    });
+  }
+
+  doFilterRestaurants(List<RestaurantModel> rest) {
+    final List<RestaurantModel> teste = rest;
+    listRestaurants.value = teste
+        .where(
+          (rest) => rest.name!
+              .toLowerCase()
+              .contains(restaurantNameTextController.text.trim().toLowerCase()),
+        )
+        .toList();
   }
 }

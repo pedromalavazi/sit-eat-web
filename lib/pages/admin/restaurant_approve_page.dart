@@ -23,8 +23,8 @@ class RestaurantApprovePage extends GetView<RestaurantApprovalController> {
         Expanded(
           flex: 1,
           child: Container(
-            child: Image.network(
-                "https://4cpatiobatel.crmall.com/Api/store/image/Y2Uvc09LRXVZZzExZElBUUlXZEZiUT09"), //Logo do Restaurante
+            child: Image.network(_approvalController.restaurant.value.image ??
+                ""), //Logo do Restaurante
             padding: EdgeInsets.all(15),
           ),
         ),
