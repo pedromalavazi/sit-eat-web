@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sit_eat_web/pages/restaurant/mesas/widgets/mesas_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
@@ -199,50 +200,12 @@ class ListaMesasPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return LayoutBuilder(
                   builder: (context, constraints) {
-                    double font = fontSize(constraints.maxHeight * 0.15,
-                        min: 10, max: 22);
+                    double font =
+                        fontSize(constraints.maxHeight * 0.15, min: 9, max: 22);
                     // Card Mesas
-                    return InkWell(
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black26),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            ConstrainedBox(
-                              constraints: BoxConstraints(maxWidth: 200),
-                              child: Icon(Icons.arrow_right),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Mesa ${index + 1}",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: font,
-                                    fontFamily: "Soucer Code Pro",
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Quantidade: 4 pessoas",
-                                  style: TextStyle(
-                                    fontSize: font,
-                                    color: Colors.black87,
-                                    fontFamily: "Soucer Code Pro",
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
+                    return MesasCard(
+                      id: index,
+                      font: font,
                     );
                   },
                 );

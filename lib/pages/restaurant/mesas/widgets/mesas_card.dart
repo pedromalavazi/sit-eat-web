@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MesasCard extends StatelessWidget {
-  bool ocupado = false;
+  final int id;
+  final double font;
+  MesasCard({required this.id, required this.font});
 
   @override
   Widget build(BuildContext context) {
@@ -9,44 +11,40 @@ class MesasCard extends StatelessWidget {
       color: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.circular(2),
+        side: BorderSide(color: Colors.black26),
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(Icons.table_view),
-          trailing: ocupado
-              ? Text(
-                  'Ocupado',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.grey,
-                  ),
-                )
-              : Text(
-                  'Livre',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
+      child: Row(
+        children: <Widget>[
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 200),
+            child: Icon(Icons.arrow_right),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Mesa ${id + 1}",
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: font,
+                  fontFamily: "Soucer Code Pro",
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-          title: Text(
-            "Mesa ${1 + 1}",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(
-            "Quantidade: 4 pessoas",
-            style: TextStyle(
-              fontSize: 20 / 2,
-              color: Colors.black,
-            ),
-          ),
-        ),
+              ),
+              Text(
+                "Quantidade: 4 pessoas",
+                style: TextStyle(
+                  fontSize: font,
+                  color: Colors.black87,
+                  fontFamily: "Soucer Code Pro",
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
