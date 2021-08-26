@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class MesasCard extends StatelessWidget {
+class TableCard extends StatelessWidget {
   final int id;
   final double font;
-  MesasCard({required this.id, required this.font});
+  TableCard({required this.id, required this.font});
 
   @override
   Widget build(BuildContext context) {

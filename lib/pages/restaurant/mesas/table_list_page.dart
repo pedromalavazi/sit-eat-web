@@ -8,7 +8,7 @@ class CadastroM extends GetxController {
   RxBool result = false.obs;
 }
 
-class ListaMesasPage extends StatelessWidget {
+class TableListPage extends StatelessWidget {
   final CadastroM cm = Get.put(CadastroM());
 
   @override
@@ -203,7 +203,7 @@ class ListaMesasPage extends StatelessWidget {
                     double font =
                         fontSize(constraints.maxHeight * 0.15, min: 9, max: 22);
                     // Card Mesas
-                    return MesasCard(
+                    return TableCard(
                       id: index,
                       font: font,
                     );
