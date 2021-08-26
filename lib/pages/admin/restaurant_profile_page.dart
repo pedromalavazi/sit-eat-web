@@ -11,7 +11,6 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
   // final RestaurantProfileController _restaurantProfileController =
   //     Get.put(RestaurantProfileController());
   final _formKey = GlobalKey<FormState>();
-  int count = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -81,59 +80,80 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 900,
-            height: 500,
-            child: Card(
-              elevation: 20.0,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                        width: 300.0,
-                        height: 40.0,
-                        child: TextFormField(
-                          initialValue: _restaurantRegisterController.email,
-                          cursorColor: Colors.black,
-                          obscureText: false,
-                          autofocus: false,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 900,
+              height: 500,
+              child: Card(
+                elevation: 20.0,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 300.0,
+                          height: 40.0,
+                          child: TextFormField(
+                            initialValue: _restaurantRegisterController.email,
+                            cursorColor: Colors.black,
+                            obscureText: false,
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
                               ),
+                              prefixIcon: Icon(Icons.email),
+                              labelText: "E-mail",
                             ),
-                            prefixIcon: Icon(Icons.email),
-                            labelText: "E-mail",
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            child: Row(
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  child: QrImage(
-                    data: _restaurantRegisterController.nameRestaurant,
-                    version: QrVersions.auto,
-                    size: 200.0,
-                  ),
+            SizedBox(width: 150.0),
+            Container(
+              width: 300,
+              height: 300,
+              child: Card(
+                elevation: 20.0,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                          width: 200.0,
+                          height: 40.0,
+                          child: Text("Olá"),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+            // Container(
+            //   child: Row(
+            //     children: [
+            //       QrImage(
+            //         data: _restaurantRegisterController.nameRestaurant,
+            //         version: QrVersions.auto,
+            //         size: 200.0,
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
+        ),
       ),
       // body: Center(
       //   child: Container(
