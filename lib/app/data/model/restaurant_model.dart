@@ -6,21 +6,30 @@ class RestaurantModel {
   String? name;
   String? address;
   int? capacity;
-  DateTime? openTime;
-  DateTime? closeTime;
+  Timestamp? openTime;
+  Timestamp? closeTime;
   String? menu;
+  String? number;
+  String? zipCode;
+  String? state;
+  String? city;
   bool? active;
 
-  RestaurantModel(
-      {this.id,
-      this.image,
-      this.name,
-      this.address,
-      this.capacity,
-      this.openTime,
-      this.closeTime,
-      this.menu,
-      this.active});
+  RestaurantModel({
+    this.id,
+    this.image,
+    this.name,
+    this.address,
+    this.number,
+    this.state,
+    this.zipCode,
+    this.city,
+    this.capacity,
+    this.openTime,
+    this.closeTime,
+    this.menu,
+    this.active,
+  });
 
   RestaurantModel.fromSnapshot(DocumentSnapshot restaurant)
       : id = restaurant.id,
@@ -30,20 +39,10 @@ class RestaurantModel {
         capacity = restaurant["capacity"],
         openTime = restaurant["openTime"],
         closeTime = restaurant["closeTime"],
+        //number = restaurant["number"],
+        //zipCode = restaurant["zipCode"],
+        //city = restaurant["city"],
+        //state = restaurant["state"],
         menu = restaurant["menu"],
         active = restaurant["active"];
-
-  Map<String, dynamic> toJson() {
-    return {
-      "id": id,
-      "image": image,
-      "name": name,
-      "address": address,
-      "capacity": capacity,
-      "openTime": openTime,
-      "closeTime": closeTime,
-      "menu": menu,
-      "active": active,
-    };
-  }
 }

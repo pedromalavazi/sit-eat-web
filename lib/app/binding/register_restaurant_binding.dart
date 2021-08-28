@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/register_restaurant_controller.dart';
+import 'package:sit_eat_web/app/controller/restaurant_register_controller.dart';
 
-class RegisterRestaurantBinding implements Bindings {
+class RestaurantRegisterBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<RegisterRestaurantController>(
-        () => RegisterRestaurantController());
+    Get.lazyPut<RestaurantRegisterController>(
+        () => RestaurantRegisterController());
   }
 }
