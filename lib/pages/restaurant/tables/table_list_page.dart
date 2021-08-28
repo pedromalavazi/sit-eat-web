@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/pages/restaurant/tables/widgets/mesas_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
@@ -6,12 +7,12 @@ import 'package:sit_eat_web/utils/web_utils.dart';
 
 class RegisterTableController extends GetxController {
   //RxBool result = false.obs;
-  final TextEditingController numeroM = TextEditingController();
-  final TextEditingController quantidadeP = TextEditingController();
+  final TextEditingController tableNumberController = TextEditingController();
+  final TextEditingController capacityController = TextEditingController();
 
   register() {
-    int qtdP = int.parse(quantidadeP.text);
-    int numM = int.parse(numeroM.text);
+    int qtdP = int.parse(capacityController.text);
+    int numM = int.parse(tableNumberController.text);
 
     print(qtdP);
     print(numM);
@@ -23,6 +24,7 @@ class RegisterTableController extends GetxController {
 class TableListPage extends GetView<RegisterTableController> {
   final RegisterTableController _registerTableController =
       Get.put(RegisterTableController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class TableListPage extends GetView<RegisterTableController> {
             ),
             onPressed: () async {
               //showDialog(context: context, builder: (context) => dialog);
-              //return cm.quantidadeP.text = await Get.dialog(
+              //return _registerTableController.capacityController.value = await Get.dialog(
               await Get.dialog(
                 AlertDialog(
                   title: Text(
@@ -72,16 +74,21 @@ class TableListPage extends GetView<RegisterTableController> {
                     ),
                   ),
                   content: Form(
+                    key: _formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Container(
                           child: TextFormField(
-                            controller: _registerTableController.numeroM,
+                            controller:
+                                _registerTableController.tableNumberController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
+                            ],
                             autofocus: true,
                             textAlignVertical: TextAlignVertical.top,
-                            keyboardType: TextInputType.number,
-                            maxLength: 2,
                             style: TextStyle(fontFamily: "Source Code Pro"),
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -104,10 +111,14 @@ class TableListPage extends GetView<RegisterTableController> {
                         ),
                         Container(
                           child: TextFormField(
-                            controller: _registerTableController.quantidadeP,
-                            textAlignVertical: TextAlignVertical.top,
+                            controller:
+                                _registerTableController.capacityController,
                             keyboardType: TextInputType.number,
-                            maxLength: 2,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
+                            ],
+                            textAlignVertical: TextAlignVertical.top,
                             style: TextStyle(fontFamily: "Source Code Pro"),
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -155,7 +166,7 @@ class TableListPage extends GetView<RegisterTableController> {
                         ),
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       style: TextButton.styleFrom(
                         side: BorderSide(
                           color: Colors.black,

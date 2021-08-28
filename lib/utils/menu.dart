@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class Menu extends StatelessWidget {
@@ -30,7 +32,9 @@ class Menu extends StatelessWidget {
           ),
         ],
       ),
-      drawer: _menuAdmin(),
+      drawer: AuthService.to.user.value.type == LoginType.ADMIN
+          ? _menuAdmin()
+          : _menuRestaurant(),
       body: body,
     );
   }
