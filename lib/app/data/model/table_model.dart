@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TableModel {
   bool? busy;
   int? capacity;
   int? number;
-  String? reservationId;
+  String? reservationid;
 
   TableModel({
     this.busy,
     this.capacity,
     this.number,
-    this.reservationId,
+    this.reservationid,
   });
+
+  TableModel.fromSnapshot(DocumentSnapshot table)
+      : busy = table["busy"],
+        capacity = table["capacity"],
+        number = table["number"],
+        reservationid = table["reservationid"];
 }
