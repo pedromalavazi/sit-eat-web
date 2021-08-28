@@ -1,29 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/pages/restaurant/tables/widgets/mesas_card.dart';
+import 'package:sit_eat_web/app/controller/tables_controller.dart';
+import 'package:sit_eat_web/pages/restaurant/tables/widgets/table_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
-class RegisterTableController extends GetxController {
-  //RxBool result = false.obs;
-  final TextEditingController tableNumberController = TextEditingController();
-  final TextEditingController capacityController = TextEditingController();
-
-  register() {
-    int qtdP = int.parse(capacityController.text);
-    int numM = int.parse(tableNumberController.text);
-
-    print(qtdP);
-    print(numM);
-
-    Get.back(result: {qtdP, numM});
-  }
-}
-
-class TableListPage extends GetView<RegisterTableController> {
-  final RegisterTableController _registerTableController =
-      Get.put(RegisterTableController());
+class TablesPage extends GetView<TablesController> {
+  final TablesController _tableController = Get.find<TablesController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -80,8 +64,7 @@ class TableListPage extends GetView<RegisterTableController> {
                       children: <Widget>[
                         Container(
                           child: TextFormField(
-                            controller:
-                                _registerTableController.tableNumberController,
+                            controller: _tableController.tableNumberController,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -111,8 +94,7 @@ class TableListPage extends GetView<RegisterTableController> {
                         ),
                         Container(
                           child: TextFormField(
-                            controller:
-                                _registerTableController.capacityController,
+                            controller: _tableController.capacityController,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -183,7 +165,7 @@ class TableListPage extends GetView<RegisterTableController> {
                           fontSize: 15,
                         ),
                       ),
-                      onPressed: () => {_registerTableController.register()},
+                      onPressed: () => {_tableController.register()},
                       child: Text(
                         "Cadastrar",
                         style: TextStyle(
@@ -215,28 +197,29 @@ class TableListPage extends GetView<RegisterTableController> {
                 style: BorderStyle.solid,
               ),
             ),
-            child: GridView.builder(
-              itemCount: 50, //Quantidade de Mesas
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 5.0,
-                crossAxisCount: 3,
-                crossAxisSpacing: 3,
-              ),
+            child: Obx(() => GridView.builder(
+                  itemCount:
+                      _tableController.tables.length, //Quantidade de Mesas
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 5.0,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 3,
+                  ),
 
-              itemBuilder: (BuildContext context, int index) {
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    double font =
-                        fontSize(constraints.maxHeight * 0.15, min: 9, max: 22);
-                    // Card Mesas
-                    return TableCard(
-                      id: index,
-                      font: font,
+                  itemBuilder: (BuildContext context, int index) {
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        double font = fontSize(constraints.maxHeight * 0.15,
+                            min: 9, max: 22);
+                        // Card Mesas
+                        return TableCard(
+                          table: _tableController.tables[index],
+                          font: font,
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
+                )),
           ),
         ),
       ],

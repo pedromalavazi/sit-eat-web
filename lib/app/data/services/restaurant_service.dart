@@ -17,14 +17,6 @@ class RestaurantService extends GetxService {
     return await _restaurantRepository.getRestaurant(restaurantId);
   }
 
-  Future<List<RestaurantModel>> getToManage(
-      bool? active, String? restaurantName) async {
-    return await _restaurantRepository.getRestaurantToManage(
-      active,
-      restaurantName,
-    );
-  }
-
   Stream<List<RestaurantModel>> listenerRestaurants() {
     return _restaurantRepository.listenerRestaurants();
   }
