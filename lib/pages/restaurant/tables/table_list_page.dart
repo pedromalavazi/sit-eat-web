@@ -4,12 +4,25 @@ import 'package:sit_eat_web/pages/restaurant/tables/widgets/mesas_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 import 'package:sit_eat_web/utils/web_utils.dart';
 
-class CadastroM extends GetxController {
-  RxBool result = false.obs;
+class RegisterTableController extends GetxController {
+  //RxBool result = false.obs;
+  final TextEditingController numeroM = TextEditingController();
+  final TextEditingController quantidadeP = TextEditingController();
+
+  register() {
+    int qtdP = int.parse(quantidadeP.text);
+    int numM = int.parse(numeroM.text);
+
+    print(qtdP);
+    print(numM);
+
+    Get.back(result: {qtdP, numM});
+  }
 }
 
-class TableListPage extends StatelessWidget {
-  final CadastroM cm = Get.put(CadastroM());
+class TableListPage extends GetView<RegisterTableController> {
+  final RegisterTableController _registerTableController =
+      Get.put(RegisterTableController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +60,8 @@ class TableListPage extends StatelessWidget {
             ),
             onPressed: () async {
               //showDialog(context: context, builder: (context) => dialog);
-              return cm.result.value = await Get.dialog(
+              //return cm.quantidadeP.text = await Get.dialog(
+              await Get.dialog(
                 AlertDialog(
                   title: Text(
                     "Cadastro de Mesa",
@@ -63,6 +77,7 @@ class TableListPage extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: TextFormField(
+                            controller: _registerTableController.numeroM,
                             autofocus: true,
                             textAlignVertical: TextAlignVertical.top,
                             keyboardType: TextInputType.number,
@@ -89,6 +104,7 @@ class TableListPage extends StatelessWidget {
                         ),
                         Container(
                           child: TextFormField(
+                            controller: _registerTableController.quantidadeP,
                             textAlignVertical: TextAlignVertical.top,
                             keyboardType: TextInputType.number,
                             maxLength: 2,
@@ -117,7 +133,7 @@ class TableListPage extends StatelessWidget {
                   ),
                   actions: [
                     TextButton(
-                      onPressed: () => Get.back(result: false),
+                      onPressed: () => Get.back(),
                       style: TextButton.styleFrom(
                         side: BorderSide(color: Colors.black, width: 1.5),
                         backgroundColor: Colors.white,
@@ -156,7 +172,7 @@ class TableListPage extends StatelessWidget {
                           fontSize: 15,
                         ),
                       ),
-                      onPressed: () => Get.back(result: true),
+                      onPressed: () => {_registerTableController.register()},
                       child: Text(
                         "Cadastrar",
                         style: TextStyle(
@@ -189,8 +205,7 @@ class TableListPage extends StatelessWidget {
               ),
             ),
             child: GridView.builder(
-              //Quantidade de Mesas
-              itemCount: 20,
+              itemCount: 50, //Quantidade de Mesas
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 5.0,
                 crossAxisCount: 3,

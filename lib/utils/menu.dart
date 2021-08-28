@@ -98,4 +98,68 @@ class Menu extends StatelessWidget {
       ),
     );
   }
+
+  _menuRestaurant() {
+    return Container(
+      width: 250,
+      child: Drawer(
+        elevation: 10,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              child: Center(
+                child: SizedBox(
+                  width: 220,
+                  height: 200,
+                  child: Image.asset("assets/logo.png"),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.home_sharp),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Home",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(Routes.HOME);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.list_alt),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Mesas",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(Routes.TABLE_LIST);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
