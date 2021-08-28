@@ -139,7 +139,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Get.toNamed(Routes.HOME);
+                Get.offAllNamed(Routes.HOME);
               },
             ),
             ListTile(
@@ -158,7 +158,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Get.toNamed(Routes.TABLE_LIST);
+                Get.offAllNamed(Routes.TABLES);
               },
             ),
           ],
