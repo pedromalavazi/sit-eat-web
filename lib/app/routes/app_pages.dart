@@ -9,6 +9,7 @@ import 'package:sit_eat_web/pages/admin/restaurant_management_page.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_profile_page.dart';
 import 'package:sit_eat_web/pages/home_page.dart';
 import 'package:sit_eat_web/pages/login/login_page.dart';
+import 'package:sit_eat_web/pages/register/product/product_register_page.dart';
 import 'package:sit_eat_web/pages/register/restaurant/restaurant_register_page.dart';
 part './app_routes.dart';
 
@@ -41,6 +42,11 @@ class AppPages {
     GetPage(
       name: Routes.RESTAURANT_REGISTER,
       page: () => RestaurantRegisterPage(),
+      binding: RestaurantRegisterBinding(),
+    ),
+    GetPage(
+      name: Routes.PRODUCT_REGISTER,
+      page: () => ProductRegisterPage(),
       binding: RestaurantRegisterBinding(),
     ),
   ];

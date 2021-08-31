@@ -10,7 +10,8 @@ class RestaurantRegisterController extends GetxController {
   final UtilService _util = UtilService();
   final RestaurantService _restaurantService = RestaurantService();
   final UserService _userService = UserService();
-  RxString emailTeste = "".obs;
+  RxString valueButton = "Editar".obs;
+  RxBool editInfo = false.obs;
 
   // User Controllers
   final TextEditingController emailTextController = TextEditingController();
@@ -35,6 +36,10 @@ class RestaurantRegisterController extends GetxController {
   void onInit() {
     super.onInit();
     gerarHorarios();
+  }
+
+  void alterarForm() {
+    editInfo = true.obs;
   }
 
   Future<void> register() async {
