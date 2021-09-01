@@ -28,7 +28,6 @@ class UserModel {
         name = currentUser["name"],
         email = currentUser["email"],
         phoneNumber = currentUser["phoneNumber"],
-        tokenMessage = currentUser["tokenMessage"],
         restaurantId = currentUser["restaurantId"],
         type = LoginType.values
             .where((type) => type.toUpper == currentUser["type"])

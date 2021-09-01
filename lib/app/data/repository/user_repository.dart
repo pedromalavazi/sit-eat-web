@@ -54,4 +54,8 @@ class UserRepository {
           content: Text("Não foi possível atualizar os dados."));
     }
   }
+
+  Future delete(String? id) async {
+    await _firestore.collection("users").doc(id).delete();
+  }
 }

@@ -69,27 +69,24 @@ class AuthService extends GetxController {
   }
 
   Future<bool> createRestaurantUser(
-    String email,
+    UserModel user,
     String password,
     String confirmPassword,
-    String name,
-    String restaurantId,
   ) async {
     try {
       //Cria usuário do Firebase
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-
-      // Atualizando o nome do usuário
-      await _firebaseUser.value?.updateDisplayName(name);
+          email: user.email!, password: password);
       await _firebaseUser.value?.reload();
-
       //Cria usuário de controle do app
       await _firestore.collection("users").doc(_firebaseUser.value?.uid).set({
-        "email": email,
-        "name": name,
-        "restaurantId": restaurantId,
+        "email": user.email,
+        "name": user.name,
+        "restaurantId": user.restaurantId,
         "type": LoginType.RESTAURANT.toUpper,
+        "status": user.status,
+        "phoneNumber": user.phoneNumber,
+        "tokenMessage": user.tokenMessage,
       });
       return true;
     } catch (e) {

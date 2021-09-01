@@ -21,12 +21,17 @@ class UserService extends GetxService {
     String restaurantId,
   ) async {
     if (!isValidPasswords(password, confirmPassword)) return false;
+
+    var user = UserModel(
+      email: email,
+      name: name,
+      restaurantId: restaurantId,
+    );
+
     return await AuthService.to.createRestaurantUser(
-      email,
+      user,
       password,
       confirmPassword,
-      name,
-      restaurantId,
     );
   }
 
@@ -56,6 +61,10 @@ class UserService extends GetxService {
   Future<UserFirebaseModel?> updateUserName(String? userName) async {
     if (userName == null) return null;
     return await AuthService.to.updateUserName(userName);
+  }
+
+  Future delete(String? id) async {
+    await _userRepository.delete(id);
   }
 
   bool isValidPasswords(String password, String confirmPassword) {

@@ -10,7 +10,7 @@ class UtilService extends GetxService {
       colorText: Colors.white,
       backgroundColor: Colors.red[400],
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 4),
+      duration: Duration(seconds: 5),
       icon: Icon(Icons.error, color: Colors.white),
       shouldIconPulse: true,
     );
@@ -35,7 +35,7 @@ class UtilService extends GetxService {
       message,
       maxWidth: 500.0,
       colorText: Colors.white,
-      backgroundColor: Colors.grey[500],
+      backgroundColor: Colors.green,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 5),
       icon: Icon(Icons.done_rounded, color: Colors.white),

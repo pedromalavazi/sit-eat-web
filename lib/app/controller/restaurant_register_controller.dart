@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -41,8 +42,12 @@ class RestaurantRegisterController extends GetxController {
     bool registerSuccess = await createUser(restaurantId!);
 
     if (registerSuccess) {
-      _util.showSuccessMessage("Sucesso!", "Registro feito com sucesso!");
       Get.back();
+      _util.showSuccessMessage("Sucesso!", "Registro feito com sucesso!");
+    } else {
+      rollback(restaurantId);
+      Get.back();
+      _util.showErrorMessage("Falha!", "Falha no cadastro, tente novamente.");
     }
   }
 
@@ -78,5 +83,11 @@ class RestaurantRegisterController extends GetxController {
   Timestamp convertStringToTimestamp(String hour) {
     var date = DateTime.parse("2020-01-15 " + hour + ":00");
     return Timestamp.fromDate(date);
+  }
+
+  void rollback(String restaurantId) async {
+    await _restaurantService.delete(restaurantId);
+    await _userService.delete(AuthService.to.user.value.id);
+    await AuthService.to.firebaseUser?.delete();
   }
 }

@@ -28,7 +28,10 @@ class Menu extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () {},
+            onPressed: () {
+              AuthService.to.logout();
+              Get.offAllNamed(Routes.LOGIN);
+            },
           ),
         ],
       ),

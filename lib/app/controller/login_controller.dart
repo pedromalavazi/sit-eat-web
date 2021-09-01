@@ -21,7 +21,6 @@ class LoginController extends GetxController {
       passwordTextController.text.trim(),
     );
     if (logged) {
-      _util.showSuccessMessage("Sucesso", "Usuário logado com sucesso!");
       Get.offAllNamed(Routes.HOME);
     }
   }
