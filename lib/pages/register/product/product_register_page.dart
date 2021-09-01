@@ -84,7 +84,7 @@ class ProductRegisterPage extends GetView<ProductRegisterController> {
                 key: _formKey,
                 child: Container(
                   width: 500.0,
-                  height: 350.0,
+                  height: 320.0,
                   child: Card(
                     elevation: 15.0,
                     child: ListView(
@@ -97,9 +97,9 @@ class ProductRegisterPage extends GetView<ProductRegisterController> {
                               width: 265.0,
                               height: 40.0,
                               child: TextFormField(
-                                validator: (value) {
+                                validator: (String? value) {
                                   if (value == null || value.isEmpty) {
-                                    return "Preencha o campo!";
+                                    return "Preencha este campo";
                                   }
                                   return null;
                                 },
@@ -108,7 +108,7 @@ class ProductRegisterPage extends GetView<ProductRegisterController> {
                                 cursorColor: Colors.black,
                                 obscureText: false,
                                 autofocus: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.black,
@@ -181,6 +181,7 @@ class ProductRegisterPage extends GetView<ProductRegisterController> {
                               width: 440.0,
                               height: 90.0,
                               child: TextFormField(
+                                maxLines: 150,
                                 maxLength: 500,
                                 controller: _productRegisterController
                                     .descriptionTextController,
@@ -199,18 +200,21 @@ class ProductRegisterPage extends GetView<ProductRegisterController> {
                         Row(
                           children: [
                             Container(
-                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 150.0,
-                                height: 40.0,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    _formKey.currentState?.validate();
-                                  },
-                                  child: Text(
-                                    "Cadastrar produto",
-                                    style: TextStyle(fontSize: 15.0),
-                                  ),
-                                )),
+                              margin: EdgeInsets.fromLTRB(25, 10, 0, 0),
+                              width: 150.0,
+                              height: 40.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    // Process data.
+                                  }
+                                },
+                                child: Text(
+                                  "Cadastrar produto",
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],

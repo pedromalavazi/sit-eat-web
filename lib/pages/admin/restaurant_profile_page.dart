@@ -2,13 +2,13 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/restaurant_register_controller.dart';
+import 'package:sit_eat_web/app/controller/restaurant_profile_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class ProfilePage extends GetView<RestaurantRegisterController> {
-  final RestaurantRegisterController _restaurantRegisterController =
-      Get.put(RestaurantRegisterController());
+class ProfilePage extends GetView<RestaurantProfileController> {
+  final RestaurantProfileController _restaurantRegisterController =
+      Get.find<RestaurantProfileController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -25,9 +25,10 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountEmail: Text(_restaurantRegisterController.email),
+                accountEmail: Text(("Email")),
                 accountName: Text("Bem vindo " +
-                    _restaurantRegisterController.nameRestaurant),
+                    (_restaurantRegisterController.restaurant.value.name ??
+                        "")),
                 currentAccountPicture: CircleAvatar(
                   child: Text("Empresa"),
                 ),
@@ -95,40 +96,38 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                              width: 300.0,
-                              height: 40.0,
-                              child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.email,
-                                cursorColor: Colors.black,
-                                obscureText: false,
-                                autofocus: true,
-                                enabled:
-                                    _restaurantRegisterController.editInfo.value
-                                        ? true
-                                        : false,
-                                // enabled: _restaurantRegisterController
-                                //     .editInfo.value,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
+                            Obx(() => Container(
+                                  margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  child: TextFormField(
+                                    initialValue: "",
+                                    cursorColor: Colors.black,
+                                    obscureText: false,
+                                    autofocus: true,
+                                    // enabled:
+                                    // _restaurantRegisterController.editInfo.value
+                                    //     ? true
+                                    //     : false,
+                                    enabled: _restaurantRegisterController
+                                        .editInfo.value,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      prefixIcon: Icon(Icons.email),
+                                      labelText: "E-mail",
                                     ),
                                   ),
-                                  prefixIcon: Icon(Icons.email),
-                                  labelText: "E-mail",
-                                ),
-                              ),
-                            ),
+                                )),
                             Container(
                               margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                               width: 292.5,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.password,
+                                initialValue: "",
                                 cursorColor: Colors.black,
                                 obscureText: true,
                                 autofocus: true,
@@ -150,8 +149,7 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 292.5,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue: _restaurantRegisterController
-                                    .confirmPassword,
+                                initialValue: "",
                                 cursorColor: Colors.black,
                                 obscureText: true,
                                 autofocus: true,
@@ -177,8 +175,9 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 300.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue: _restaurantRegisterController
-                                    .nameRestaurant,
+                                initialValue: (_restaurantRegisterController
+                                        .restaurant.value.name ??
+                                    ""),
                                 cursorColor: Colors.black,
                                 obscureText: false,
                                 autofocus: true,
@@ -200,8 +199,13 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 150.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.capacity,
+                                initialValue: (_restaurantRegisterController
+                                            .restaurant.value.capacity ==
+                                        null
+                                    ? ""
+                                    : _restaurantRegisterController
+                                        .restaurant.value.capacity
+                                        .toString()),
                                 cursorColor: Colors.black,
                                 obscureText: false,
                                 autofocus: true,
@@ -226,67 +230,58 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                             ),
                             Container(
                               margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                              width: 205.0,
+                              width: 150.0,
                               height: 40.0,
-                              child: DropdownSearch<String>(
-                                hint: "Selecione o horário",
-                                mode: Mode.MENU,
-                                showSelectedItem: true,
-                                showSearchBox: true,
+                              child: TextFormField(
+                                initialValue: (""),
+                                cursorColor: Colors.black,
+                                obscureText: false,
+                                autofocus: true,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
-                                // dropdownSearchDecoration: InputDecoration(
-                                //   prefixIcon: Icon(Icons.schedule),
-                                //   border: OutlineInputBorder(),
-                                // ),
-                                searchBoxDecoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                                keyboardType: TextInputType.number,
+                                // maxLength: 3,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]')),
+                                ],
+                                decoration: InputDecoration(
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                  hintText: "Pesquise o horário",
+                                  prefixIcon: Icon(Icons.groups),
+                                  labelText: "Horário de abertura",
                                 ),
-                                items: _restaurantRegisterController.horary,
-                                label: _restaurantRegisterController.openTime,
-                                showClearButton: true,
-                                onChanged: (value) =>
-                                    _restaurantRegisterController
-                                        .openTimeTextController
-                                        .text = value.toString(),
                               ),
                             ),
                             Container(
                               margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                              width: 205.0,
+                              width: 150.0,
                               height: 40.0,
-                              child: DropdownSearch<String>(
-                                hint: "Selecione o horário",
-                                mode: Mode.MENU,
-                                showSelectedItem: true,
-                                showSearchBox: true,
+                              child: TextFormField(
+                                initialValue: (""),
+                                cursorColor: Colors.black,
+                                obscureText: false,
+                                autofocus: true,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
-                                // dropdownSearchDecoration: InputDecoration(
-                                //   prefixIcon: Icon(Icons.schedule),
-                                //   border: OutlineInputBorder(),
-                                // ),
-                                searchBoxDecoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 10,
+                                keyboardType: TextInputType.number,
+                                // maxLength: 3,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]')),
+                                ],
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    hintText: "Pesquise o horário"),
-                                items: _restaurantRegisterController.horary,
-                                label: _restaurantRegisterController.closeTime,
-                                showClearButton: true,
-                                onChanged: (value) =>
-                                    _restaurantRegisterController
-                                        .closeTimeTextController
-                                        .text = value.toString(),
+                                  ),
+                                  prefixIcon: Icon(Icons.groups),
+                                  labelText: "Horário de fechamento",
+                                ),
                               ),
                             ),
                           ],
@@ -298,8 +293,9 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 500.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.linkMenu,
+                                initialValue: _restaurantRegisterController
+                                        .restaurant.value.menu ??
+                                    "",
                                 cursorColor: Colors.black,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
@@ -315,8 +311,9 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 410.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.address,
+                                initialValue: _restaurantRegisterController
+                                        .restaurant.value.address ??
+                                    "",
                                 cursorColor: Colors.black,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
@@ -336,8 +333,7 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 125.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.number,
+                                initialValue: "",
                                 cursorColor: Colors.black,
                                 obscureText: false,
                                 autofocus: true,
@@ -345,10 +341,6 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                                     .editInfo.value,
                                 keyboardType: TextInputType.number,
                                 // maxLength: 3,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[0-9]')),
-                                ],
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -365,8 +357,7 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 195.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.zipCode,
+                                initialValue: "",
                                 cursorColor: Colors.black,
                                 obscureText: false,
                                 autofocus: true,
@@ -374,10 +365,6 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                                     .editInfo.value,
                                 keyboardType: TextInputType.number,
                                 // maxLength: 3,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[0-9]')),
-                                ],
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -393,29 +380,16 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                               width: 270.0,
                               height: 40.0,
-                              child: DropdownSearch<String>(
-                                validator: (v) =>
-                                    v == null ? "required field" : null,
-                                hint: "Selecione o estado",
-                                mode: Mode.MENU,
-                                showSelectedItem: true,
-                                showSearchBox: true,
+                              child: TextFormField(
+                                initialValue: "",
+                                cursorColor: Colors.black,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
-                                searchBoxDecoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    hintText: "Pesquise seu estado"),
-                                items: _restaurantRegisterController.states,
-                                label: _restaurantRegisterController.state,
-                                showClearButton: true,
-                                onChanged: (value) =>
-                                    _restaurantRegisterController
-                                        .stateTextController
-                                        .text = value.toString(),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.home),
+                                  labelText: "Estado",
+                                ),
                               ),
                             ),
                             Container(
@@ -423,8 +397,7 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               width: 270.0,
                               height: 40.0,
                               child: TextFormField(
-                                initialValue:
-                                    _restaurantRegisterController.city,
+                                initialValue: "",
                                 cursorColor: Colors.black,
                                 enabled: _restaurantRegisterController
                                     .editInfo.value,
@@ -446,8 +419,7 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                               height: 40.0,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // _restaurantRegisterController.editInfo =
-                                  //     false.obs;
+                                  _restaurantRegisterController.editForm();
                                   // _restaurantRegisterController
                                   //     .registerMocked();
                                   // Get.toNamed(Routes.LOGIN);
@@ -497,7 +469,9 @@ class ProfilePage extends GetView<RestaurantRegisterController> {
                             "QRCODE - RESERVA:",
                           ),
                           QrImage(
-                            data: _restaurantRegisterController.nameRestaurant,
+                            data: _restaurantRegisterController
+                                    .restaurant.value.name ??
+                                "",
                             version: QrVersions.auto,
                             size: 200.0,
                           ),
