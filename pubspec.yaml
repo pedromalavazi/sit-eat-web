@@ -32,7 +32,7 @@ dependencies:
   get: ^4.3.7
   google_fonts: ^2.1.0
   easy_debounce: ^2.0.1
-  dropdown_search: 
+  qr_flutter: ^4.0.0
   date_time_picker: ^2.1.0
 
   #Firebase

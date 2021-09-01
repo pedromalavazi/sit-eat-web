@@ -6,5 +6,7 @@ abstract class Routes {
   static const HOME = '/home';
   static const RESTAURANTS_MANAGEMENT = '/restaurant-management';
   static const RESTAURANT_APPROVAL = '/restaurant-approval';
+  static const RESTAURANT_PROFILE = '/restaurant-profile';
+  static const PRODUCT_REGISTER = '/product-register';
   static const TABLES = '/tables';
 }
