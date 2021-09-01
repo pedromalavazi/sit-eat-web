@@ -20,7 +20,7 @@ class RestaurantProfileController extends GetxController {
   }
 
   void saveForm() {
-    editInfo.value = true;
+    editInfo.value = false;
   }
 
   void getRestaurant() async {

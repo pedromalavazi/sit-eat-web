@@ -68,6 +68,7 @@ class LoginPage extends GetView<LoginController> {
                             decoration: InputDecoration(
                               isDense: true,
                               border: OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.person),
                               labelText: 'Usuário',
                             ),
                           ),
@@ -81,6 +82,7 @@ class LoginPage extends GetView<LoginController> {
                             decoration: InputDecoration(
                               isDense: true,
                               border: OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.password),
                               labelText: 'Senha',
                             ),
                           ),
