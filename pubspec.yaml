@@ -31,16 +31,23 @@ dependencies:
 
   get: ^4.3.7
   google_fonts: ^2.1.0
-  easy_debounce: ^2.0.0
-  dropdown_search: 
+  easy_debounce: ^2.0.1
   qr_flutter: ^4.0.0
+  date_time_picker: ^2.1.0
 
   #Firebase
   firebase_core: ^1.4.0
   cloud_firestore: ^2.4.0
   firebase_auth: ^3.0.1
-  firebase_storage: ^10.0.1
+  firebase_storage: ^8.0.0
   firebase_messaging: ^10.0.4
+
+  #Image
+  # sqflite: ^2.0.0+4
+  # path: ^1.8.0
+  # path_provider: ^2.0.2
+  # firebase_image: ^1.0.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -59,9 +66,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
     - assets/logo.png
     - assets/logo-only.png
+    - assets/background-restaurante.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

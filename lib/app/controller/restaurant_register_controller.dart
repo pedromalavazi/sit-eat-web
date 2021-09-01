@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
@@ -18,7 +18,6 @@ class RestaurantRegisterController extends GetxController {
   final TextEditingController passwordTextController = TextEditingController();
   final TextEditingController confirmPasswordTextController =
       TextEditingController();
-  final TextEditingController userNameTextController = TextEditingController();
 
   // Restaurant Controllers
   final TextEditingController addressTextController = TextEditingController();
@@ -35,7 +34,6 @@ class RestaurantRegisterController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    gerarHorarios();
   }
 
   void alterarForm() {
@@ -50,7 +48,7 @@ class RestaurantRegisterController extends GetxController {
 
     if (registerSuccess) {
       _util.showSuccessMessage("Sucesso!", "Registro feito com sucesso!");
-      Get.offAllNamed(Routes.LOGIN);
+      Get.back();
     }
   }
 
@@ -59,11 +57,16 @@ class RestaurantRegisterController extends GetxController {
       RestaurantModel(
         address: addressTextController.text,
         capacity: int.parse(capacityTextController.text.trim()),
-        openTime: DateTime.parse(openTimeTextController.text.trim()),
-        closeTime: DateTime.parse(closeTimeTextController.text.trim()),
+        openTime: convertStringToTimestamp(openTimeTextController.text.trim()),
+        closeTime:
+            convertStringToTimestamp(closeTimeTextController.text.trim()),
         image: "", // necessário desenvolvimento do serviço
         menu: menuTextController.text.trim(),
         name: nameTextController.text.trim(),
+        city: cityTextController.text,
+        number: numberTextController.text,
+        state: stateTextController.text,
+        zipCode: zipCodeTextController.text,
       ),
     );
   }
@@ -73,85 +76,13 @@ class RestaurantRegisterController extends GetxController {
       emailTextController.text.trim(),
       passwordTextController.text.trim(),
       confirmPasswordTextController.text.trim(),
-      userNameTextController.text.trim(),
+      nameTextController.text.trim(),
       restaurantId,
     );
   }
 
-  String email = "";
-  String password = "";
-  String confirmPassword = "";
-  String nameRestaurant = "";
-  String capacity = "";
-  String openTime = "";
-  String closeTime = "";
-  String linkMenu = "";
-  String address = "";
-  String number = "";
-  String zipCode = "";
-  String state = "";
-  String city = "";
-
-  void registerMocked() {
-    email = emailTextController.text.trim();
-    password = passwordTextController.text.trim();
-    confirmPassword = confirmPasswordTextController.text.trim();
-    nameRestaurant = nameTextController.text.trim();
-    capacity = capacityTextController.text.trim();
-    openTime = openTimeTextController.text.trim();
-    closeTime = closeTimeTextController.text.trim();
-    linkMenu = menuTextController.text.trim();
-    address = addressTextController.text.trim();
-    number = numberTextController.text.trim();
-    zipCode = zipCodeTextController.text.trim();
-    city = cityTextController.text.trim();
-    state = stateTextController.text.trim();
-  }
-
-  final List<String> horary = [];
-  final List<String> states = [
-    "Acre",
-    "Alagoas",
-    "Amapá",
-    "Amazonas",
-    "Bahia",
-    "Ceará",
-    "Espírito Santo",
-    "Goiás",
-    "Maranhão",
-    "Mato Grosso",
-    "Mato Grosso do Sul",
-    "Minas Gerais",
-    "Pará",
-    "Paraíba",
-    "Paraná",
-    "Pernambuco",
-    "Piauí",
-    "Rio de Janeiro",
-    "Rio Grande do Norte",
-    "Rio Grande do Sul",
-    "Rondônia",
-    "Roraima",
-    "Santa Catarina",
-    "São Paulo",
-    "Sergipe",
-    "Tocantins",
-    "Distrito Federal"
-  ];
-
-  void gerarHorarios() {
-    for (int i = 0; i < 24; i++) {
-      for (int j = 0; j < 60; j++) {
-        if (i < 10 && j < 10) {
-          horary.add("0$i:0$j");
-        } else if (i < 10) {
-          horary.add("0$i:$j");
-        } else if (j < 10) {
-          horary.add("$i:0$j");
-        } else {
-          horary.add("$i:$j");
-        }
-      }
-    }
+  Timestamp convertStringToTimestamp(String hour) {
+    var date = DateTime.parse("2020-01-15 " + hour + ":00");
+    return Timestamp.fromDate(date);
   }
 }

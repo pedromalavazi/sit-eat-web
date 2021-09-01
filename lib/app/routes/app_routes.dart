@@ -8,4 +8,5 @@ abstract class Routes {
   static const RESTAURANT_APPROVAL = '/restaurant-approval';
   static const RESTAURANT_PROFILE = '/restaurant-profile';
   static const PRODUCT_REGISTER = '/product-register';
+  static const TABLES = '/tables';
 }
