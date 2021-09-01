@@ -9,10 +9,18 @@ class LoginController extends GetxController {
 
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  RxBool stayLogged = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  void loginMocked() {
+    if (emailTextController.text.trim() == "admin" &&
+        passwordTextController.text.trim() == "123") {
+      Get.toNamed(Routes.RESTAURANT_PROFILE);
+    }
   }
 
   void login() async {

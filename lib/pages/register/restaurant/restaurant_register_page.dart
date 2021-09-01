@@ -27,7 +27,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
               child: Form(
                 key: _formKey,
                 child: Container(
-                  width: 950,
+                  width: 990,
                   child: Card(
                     elevation: 15.0,
                     child: Container(
@@ -76,13 +76,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.email),
                                     labelText: "E-mail",
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 273.0,
+                                width: 292.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -97,13 +98,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.password),
                                     labelText: "Senha",
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 273.0,
+                                width: 292.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -118,6 +120,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.password),
                                     labelText: "Confirme sua senha",
                                   ),
                                 ),
@@ -143,13 +146,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.storefront),
                                     labelText: "Nome do restaurante",
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 110.0,
+                                width: 150.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -158,11 +162,6 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: false,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: OutlineInputBorder(
@@ -170,6 +169,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.groups),
                                     labelText: "Capacidade",
                                   ),
                                 ),
@@ -190,7 +190,8 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    labelText: "Abertura (HH:MI)",
+                                    prefixIcon: Icon(Icons.schedule),
+                                    labelText: "Abertura (H:M)",
                                   ),
                                 ),
                               ),
@@ -210,7 +211,8 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    labelText: "Fechamento (HH:MI)",
+                                    prefixIcon: Icon(Icons.schedule),
+                                    labelText: "Fechamento(H:M)",
                                   ),
                                 ),
                               ),
@@ -224,16 +226,38 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
+                                      .menuTextController,
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.streetAddress,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.link),
+                                    labelText: "Link do menu",
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                                width: 410.0,
+                                height: 42.0,
+                                child: TextField(
+                                  controller: _registerRestaurantController
                                       .addressTextController,
                                   cursorColor: Colors.black,
                                   keyboardType: TextInputType.streetAddress,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.home),
                                     labelText: "Endereço",
                                   ),
                                 ),
                               ),
+                            ],
+                          ),
+                          Row(
+                            children: [
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 125.0,
@@ -245,11 +269,6 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: false,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: OutlineInputBorder(
@@ -257,13 +276,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.pin_drop),
                                     labelText: "Número",
                                   ),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 220.0,
+                                width: 195.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -272,11 +292,6 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: false,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: OutlineInputBorder(
@@ -284,17 +299,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.location_on),
                                     labelText: "CEP",
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 250.0,
+                                width: 270.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -308,37 +320,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    prefixIcon: Icon(Icons.home),
                                     labelText: "Estado",
                                   ),
                                 ),
                               ),
-                              // Container(
-                              //   margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                              //   width: 250.0,
-                              //   height: 40.0,
-                              //   child: DropdownSearch<String>(
-                              //     validator: (v) =>
-                              //         v == null ? "required field" : null,
-                              //     hint: "Selecione o estado",
-                              //     mode: Mode.MENU,
-                              //     showSelectedItem: true,
-                              //     showSearchBox: true,
-                              //     searchBoxDecoration: InputDecoration(
-                              //         contentPadding: EdgeInsets.symmetric(
-                              //             horizontal: 10, vertical: 10),
-                              //         border: OutlineInputBorder(
-                              //           borderRadius: BorderRadius.circular(5),
-                              //         ),
-                              //         hintText: "Pesquise seu estado"),
-                              //     items: _registerRestaurantController.states,
-                              //     label: "Estado",
-                              //     showClearButton: true,
-                              //     onChanged: print,
-                              //   ),
-                              // ),
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
-                                width: 250.0,
+                                width: 270.0,
                                 height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
@@ -347,6 +336,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   decoration: InputDecoration(
                                     isDense: true,
                                     border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.location_city),
                                     labelText: "Cidade",
                                   ),
                                 ),
