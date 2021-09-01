@@ -60,12 +60,13 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         Container(
                           width: 300.0,
-                          height: 40.0,
+                          height: 42.0,
                           child: TextField(
                             controller: _loginController.emailTextController,
                             obscureText: false,
                             autofocus: true,
                             decoration: InputDecoration(
+                              isDense: true,
                               border: OutlineInputBorder(),
                               labelText: 'Usuário',
                             ),
@@ -73,11 +74,12 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         Container(
                           width: 300.0,
-                          height: 40.0,
+                          height: 42.0,
                           child: TextField(
                             controller: _loginController.passwordTextController,
                             obscureText: true,
                             decoration: InputDecoration(
+                              isDense: true,
                               border: OutlineInputBorder(),
                               labelText: 'Senha',
                             ),

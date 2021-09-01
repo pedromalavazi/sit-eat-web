@@ -62,7 +62,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 300.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .emailTextController,
@@ -70,6 +70,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: false,
                                   autofocus: true,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -82,7 +83,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 273.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .passwordTextController,
@@ -90,6 +91,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: true,
                                   autofocus: true,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -102,7 +104,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 273.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .confirmPasswordTextController,
@@ -110,6 +112,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: true,
                                   autofocus: true,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -126,7 +129,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 300.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .nameTextController,
@@ -134,6 +137,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                   obscureText: false,
                                   autofocus: true,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -146,7 +150,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 110.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .capacityTextController,
@@ -160,6 +164,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         RegExp('[0-9]')),
                                   ],
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -172,13 +177,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 205.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .openTimeTextController,
                                   cursorColor: Colors.black,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -191,13 +197,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 205.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .closeTimeTextController,
                                   cursorColor: Colors.black,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -214,13 +221,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 500.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .addressTextController,
                                   cursorColor: Colors.black,
                                   keyboardType: TextInputType.streetAddress,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(),
                                     labelText: "Endereço",
                                   ),
@@ -229,7 +237,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 125.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .numberTextController,
@@ -243,6 +251,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         RegExp('[0-9]')),
                                   ],
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -255,7 +264,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 220.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .zipCodeTextController,
@@ -269,6 +278,7 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                                         RegExp('[0-9]')),
                                   ],
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -285,13 +295,14 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 250.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .stateTextController,
                                   cursorColor: Colors.black,
                                   keyboardType: TextInputType.streetAddress,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
@@ -328,12 +339,13 @@ class RestaurantRegisterPage extends GetView<RestaurantRegisterController> {
                               Container(
                                 margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                 width: 250.0,
-                                height: 40.0,
+                                height: 42.0,
                                 child: TextField(
                                   controller: _registerRestaurantController
                                       .cityTextController,
                                   cursorColor: Colors.black,
                                   decoration: InputDecoration(
+                                    isDense: true,
                                     border: OutlineInputBorder(),
                                     labelText: "Cidade",
                                   ),
