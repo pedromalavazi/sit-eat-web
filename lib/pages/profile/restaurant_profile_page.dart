@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sit_eat_web/app/controller/restaurant_profile_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:sit_eat_web/utils/menu.dart';
 
 class ProfilePage extends GetView<RestaurantProfileController> {
   final RestaurantProfileController _restaurantRegisterController =
@@ -13,73 +13,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.black87,
-      appBar: AppBar(
-        title: Text("Minha conta"),
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.black87,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountEmail: Text(("Email")),
-                accountName: Text("Bem vindo " +
-                    (_restaurantRegisterController.restaurant.value.name ??
-                        "")),
-                currentAccountPicture: CircleAvatar(
-                  child: Text("Empresa"),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Minha conta",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.RESTAURANT_PROFILE);
-                  // Navigator.pop(context);
-                  //Navegar para outra página
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.shopping_basket,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Cadastrar produto",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.PRODUCT_REGISTER);
-                  //Navegar para outra página
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Favoritos",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  //Navegar para outra página
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+    return Menu(
+      title: "Perfil",
       body: Obx(
         () => Container(
           child: Row(
