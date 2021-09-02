@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
-import 'package:sit_eat_web/app/data/services/util_service.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
-  final UtilService _util = UtilService();
-
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   RxBool stayLogged = false.obs;
