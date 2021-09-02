@@ -73,12 +73,4 @@ class TableRepository {
       return false;
     }
   }
-
-  List<TableModel> convertTablesFromDB(QuerySnapshot tablesFromDB) {
-    List<TableModel> tables = <TableModel>[];
-    tablesFromDB.docs.forEach((restaurant) {
-      tables.add(TableModel.fromSnapshot(restaurant));
-    });
-    return tables;
-  }
 }
