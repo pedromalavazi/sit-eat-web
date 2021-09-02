@@ -109,6 +109,10 @@ class RestaurantRepository {
     });
   }
 
+  Future delete(String restaurantId) async {
+    await _firestore.collection('restaurants').doc(restaurantId).delete();
+  }
+
   List<RestaurantModel> convertRestaurantsFromDB(
       QuerySnapshot restaurantsFromDB) {
     List<RestaurantModel> restaurants = <RestaurantModel>[];

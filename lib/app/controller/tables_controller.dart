@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
-import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class TablesController extends GetxController {
   final TableService _tableService = TableService();
-  final UtilService _util = UtilService();
 
   final TextEditingController tableNumberController = TextEditingController();
   final TextEditingController capacityController = TextEditingController();

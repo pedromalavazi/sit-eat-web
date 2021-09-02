@@ -28,7 +28,10 @@ class Menu extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () {},
+            onPressed: () {
+              AuthService.to.logout();
+              Get.offAllNamed(Routes.LOGIN);
+            },
           ),
         ],
       ),
@@ -145,7 +148,26 @@ class Menu extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.list_alt),
+                  Icon(Icons.lunch_dining),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Produtos",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.offAllNamed(Routes.PRODUCTS);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.chair_alt),
                   Container(
                     width: 10,
                   ),
@@ -159,6 +181,25 @@ class Menu extends StatelessWidget {
               ),
               onTap: () {
                 Get.offAllNamed(Routes.TABLES);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.list_alt),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Perfil",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.offAllNamed(Routes.RESTAURANT_PROFILE);
               },
             ),
           ],

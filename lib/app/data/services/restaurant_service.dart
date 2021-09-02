@@ -49,6 +49,10 @@ class RestaurantService extends GetxService {
     return await _restaurantRepository.deactivateRestaurant(restaurantId);
   }
 
+  Future delete(String restaurantId) async {
+    await _restaurantRepository.delete(restaurantId);
+  }
+
   bool isValidId(String id) {
     if (id.isBlank == true) {
       _utilService.showInformationMessage(

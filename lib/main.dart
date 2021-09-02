@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       title: 'Sit & Eat',
       getPages: AppPages.routes,
       initialBinding: Binding(),
-      initialRoute: Routes.RESTAURANT_REGISTER,
+      initialRoute: Routes.PRODUCTS,
       debugShowCheckedModeBanner: false,
       theme: _theme(),
     );
