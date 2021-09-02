@@ -48,6 +48,7 @@ class ProductsPage extends GetView<ProductsController> {
                       onPressed: () {
                         Get.dialog(
                           AlertDialog(
+                            backgroundColor: Colors.red,
                             content: Form(
                               key: _formKey,
                               child: Container(
@@ -187,7 +188,8 @@ class ProductsPage extends GetView<ProductsController> {
                                               onPressed: () {
                                                 if (_formKey.currentState!
                                                     .validate()) {
-                                                  // Process data.
+                                                  _productRegisterController
+                                                      .register();
                                                 }
                                               },
                                               child: Text(
