@@ -26,7 +26,8 @@ class App extends StatelessWidget {
 
 ThemeData _theme() {
   return ThemeData(
-      primarySwatch: Colors.red,
-      scaffoldBackgroundColor: Colors.white,
-      textTheme: TextTheme(bodyText2: TextStyle(fontSize: 22)));
+    primarySwatch: Colors.red,
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: TextTheme(bodyText2: TextStyle(fontSize: 22)),
+  );
 }
