@@ -9,7 +9,7 @@ class UserService extends GetxService {
   final UserRepository _userRepository = UserRepository();
   final UtilService _utilService = UtilService();
 
-  Future<UserModel> get(String id) {
+  Future<UserWebModel> get(String id) {
     return _userRepository.getUser(id);
   }
 
@@ -22,7 +22,7 @@ class UserService extends GetxService {
   ) async {
     if (!isValidPasswords(password, confirmPassword)) return false;
 
-    var user = UserModel(
+    var user = UserWebModel(
       email: email,
       name: name,
       restaurantId: restaurantId,
@@ -36,7 +36,7 @@ class UserService extends GetxService {
   }
 
   Future<void> updateUser(
-    UserModel user,
+    UserWebModel user,
     String password,
     String confirmPassword,
   ) async {

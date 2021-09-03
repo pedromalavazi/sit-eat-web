@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
@@ -12,7 +13,7 @@ class AuthService extends GetxController {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   late Rx<User?> _firebaseUser;
-  late Rx<UserModel> _user;
+  late Rx<UserWebModel> _user;
   var userIsAuthenticated = false.obs;
 
   @override
@@ -20,7 +21,7 @@ class AuthService extends GetxController {
     super.onInit();
 
     _firebaseUser = Rx<User?>(_auth.currentUser);
-    _user = Rx<UserModel>(UserModel());
+    _user = Rx<UserWebModel>(UserWebModel());
     _firebaseUser.bindStream(_auth.authStateChanges());
 
     ever(_firebaseUser, (User? user) {
@@ -36,7 +37,7 @@ class AuthService extends GetxController {
   void onClose() {}
 
   User? get firebaseUser => _firebaseUser.value;
-  Rx<UserModel> get user => _user;
+  Rx<UserWebModel> get user => _user;
   static AuthService get to => Get.find<AuthService>();
 
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -46,12 +47,11 @@ class AuthService extends GetxController {
       var user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      _user.value = UserModel.fromSnapshot(
-        await _firestore.collection("users").doc(user.user?.uid).get(),
+      _user.value = UserWebModel.fromSnapshot(
+        await _firestore.collection("usersWeb").doc(user.user?.uid).get(),
       );
 
-      if (_user.value.type == LoginType.CLIENT ||
-          !await userRestaurantIsApproved()) {
+      if (!await userRestaurantIsApproved()) {
         resetUser();
         _util.showErrorMessage(
           "Usuário inválido",
@@ -63,30 +63,30 @@ class AuthService extends GetxController {
       _user.value.id = user.user?.uid;
       return true;
     } catch (e) {
-      throwErrorMessage(e);
+      _util.showErrorMessage(
+        "Usuário inválido",
+        "Usuário não encontrado",
+      );
       return false;
     }
   }
 
   Future<bool> createRestaurantUser(
-    UserModel user,
+    UserWebModel user,
     String password,
     String confirmPassword,
   ) async {
     try {
       //Cria usuário do Firebase
-      await _auth.createUserWithEmailAndPassword(
+      var newUser = await _auth.createUserWithEmailAndPassword(
           email: user.email!, password: password);
       await _firebaseUser.value?.reload();
       //Cria usuário de controle do app
-      await _firestore.collection("users").doc(_firebaseUser.value?.uid).set({
+      await _firestore.collection("usersWeb").doc(newUser.user?.uid).set({
         "email": user.email,
         "name": user.name,
         "restaurantId": user.restaurantId,
         "type": LoginType.RESTAURANT.toUpper,
-        "status": user.status,
-        "phoneNumber": user.phoneNumber,
-        "tokenMessage": user.tokenMessage,
       });
       return true;
     } catch (e) {
@@ -151,7 +151,7 @@ class AuthService extends GetxController {
   }
 
   void resetUser() {
-    _user.value = UserModel();
+    _user.value = UserWebModel();
     _auth.signOut();
   }
 
@@ -185,5 +185,21 @@ class AuthService extends GetxController {
           "Erro desconhecido, tente novamente mais tarde ou entre em contato com nosso e-mail: appsiteat@gmail.com",
         );
     }
+  }
+
+  Future<bool> getUser() async {
+    // Initialize Firebase
+    await Firebase.initializeApp();
+
+    final User? user = _auth.currentUser;
+
+    if (user != null) {
+      _user.value = UserWebModel.fromSnapshot(
+        await _firestore.collection("usersWeb").doc(user.uid).get(),
+      );
+      _user.value.id = user.uid;
+      return true;
+    }
+    return false;
   }
 }

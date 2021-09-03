@@ -7,13 +7,11 @@ class UserRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Cria usuáio
-  Future<bool> createUser(
-      String id, String email, String name, String phoneNumber) async {
+  Future<bool> createUser(String id, String email, String name) async {
     try {
-      await _firestore.collection("users").doc(id).set({
+      await _firestore.collection("usersWeb").doc(id).set({
         "email": email,
         "name": name,
-        "phoneNumber": phoneNumber,
       });
 
       return true;
@@ -27,10 +25,11 @@ class UserRepository {
   }
 
   // Consulta usuáio
-  Future<UserModel> getUser(String id) async {
+  Future<UserWebModel> getUser(String id) async {
     try {
-      DocumentSnapshot doc = await _firestore.collection("users").doc(id).get();
-      UserModel user = UserModel.fromSnapshot(doc);
+      DocumentSnapshot doc =
+          await _firestore.collection("usersWeb").doc(id).get();
+      UserWebModel user = UserWebModel.fromSnapshot(doc);
       user.id = id;
       return user;
     } catch (e) {
@@ -38,15 +37,14 @@ class UserRepository {
       Get.back();
       Get.defaultDialog(
           title: "ERROR", content: Text("Usuário não encontrado."));
-      return UserModel();
+      return UserWebModel();
     }
   }
 
-  Future<void> updateUser(UserModel user) async {
+  Future<void> updateUser(UserWebModel user) async {
     try {
-      await _firestore.collection("users").doc(user.id).update({
+      await _firestore.collection("usersWeb").doc(user.id).update({
         "name": user.name,
-        "phoneNumber": user.phoneNumber,
       });
     } catch (e) {
       Get.defaultDialog(
@@ -56,6 +54,6 @@ class UserRepository {
   }
 
   Future delete(String? id) async {
-    await _firestore.collection("users").doc(id).delete();
+    await _firestore.collection("usersWeb").doc(id).delete();
   }
 }

@@ -9,14 +9,16 @@ class LoginController extends GetxController {
   RxBool stayLogged = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
+    bool isLogged = await AuthService.to.getUser();
+    if (isLogged) Get.offAllNamed(Routes.HOME);
     super.onInit();
   }
 
   void loginMocked() {
     if (emailTextController.text.trim() == "admin" &&
         passwordTextController.text.trim() == "123") {
-      Get.toNamed(Routes.RESTAURANT_PROFILE);
+      Get.offAllNamed(Routes.RESTAURANT_PROFILE);
     }
   }
 
