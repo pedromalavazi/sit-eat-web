@@ -48,6 +48,7 @@ class ProductRepository {
           "image": " ",
           "price": newProduct.price,
           "description": newProduct.description,
+          "measure": newProduct.measure,
           "restaurantId": restaurantId,
         },
       );

@@ -29,9 +29,7 @@ class ProductService extends GetxService {
 
   Future<String?> register(ProductModel product) async {
     try {
-      if (!isValidProduct(product)) {
-        return null;
-      }
+      if (!isValidProduct(product)) return null;
 
       return await _productRepository.register(
           product, AuthService.to.user.value.restaurantId!);

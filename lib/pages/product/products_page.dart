@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -53,7 +54,7 @@ class ProductsPage extends GetView<ProductsController> {
                               key: _formKey,
                               child: Container(
                                 width: 500.0,
-                                height: 320.0,
+                                height: 400.0,
                                 child: Card(
                                   elevation: 15.0,
                                   child: ListView(
@@ -99,6 +100,14 @@ class ProductsPage extends GetView<ProductsController> {
                                             width: 150.0,
                                             height: 40.0,
                                             child: TextFormField(
+                                              inputFormatters: [
+                                                TextInputMask(
+                                                  mask: '\ !9+,99',
+                                                  placeholder: '0',
+                                                  maxPlaceHolders: 3,
+                                                  reverse: true,
+                                                ),
+                                              ],
                                               controller:
                                                   _productRegisterController
                                                       .priceTextController,
@@ -116,6 +125,34 @@ class ProductsPage extends GetView<ProductsController> {
                                                 prefixIcon:
                                                     Icon(Icons.attach_money),
                                                 labelText: "Preço",
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                25, 25, 0, 0),
+                                            width: 440.0,
+                                            height: 40.0,
+                                            child: TextFormField(
+                                              controller:
+                                                  _productRegisterController
+                                                      .measureTextController,
+                                              cursorColor: Colors.black,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                prefixIcon: Icon(Icons.link),
+                                                labelText: "Medida",
                                               ),
                                             ),
                                           ),

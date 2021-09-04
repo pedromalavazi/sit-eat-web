@@ -7,6 +7,7 @@ class ProductModel {
   String? name;
   double? price;
   String? description;
+  String? measure;
 
   ProductModel({
     this.id,
@@ -15,6 +16,7 @@ class ProductModel {
     this.name,
     this.price,
     this.description,
+    this.measure,
   });
 
   ProductModel.fromSnapshot(DocumentSnapshot product)
@@ -23,6 +25,7 @@ class ProductModel {
         image = product["image"],
         name = product["name"],
         price = double.parse(product["price"]),
+        measure = product["measure"],
         description = product["description"];
 
   Map<String, dynamic> toJson() {
@@ -32,6 +35,7 @@ class ProductModel {
       "image": image,
       "name": name,
       "price": price,
+      "measure": measure,
       "description": description,
     };
   }
