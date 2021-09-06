@@ -62,9 +62,10 @@ class RestaurantRegisterController extends GetxController {
       RestaurantModel(
         address: addressTextController.text,
         capacity: int.parse(capacityTextController.text.trim()),
-        openTime: convertStringToTimestamp(openTimeTextController.text.trim()),
+        openTime:
+            _util.convertStringToTimestamp(openTimeTextController.text.trim()),
         closeTime:
-            convertStringToTimestamp(closeTimeTextController.text.trim()),
+            _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
         image: "", // necessário desenvolvimento do serviço
         menu: menuTextController.text.trim(),
         name: nameTextController.text.trim(),
@@ -84,11 +85,6 @@ class RestaurantRegisterController extends GetxController {
       nameTextController.text.trim(),
       restaurantId,
     );
-  }
-
-  Timestamp convertStringToTimestamp(String hour) {
-    var date = DateTime.parse("2020-01-15 " + hour + ":00");
-    return Timestamp.fromDate(date);
   }
 
   void rollback(String restaurantId) async {

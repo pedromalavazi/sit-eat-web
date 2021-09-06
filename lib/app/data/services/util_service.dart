@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class UtilService extends GetxService {
   showErrorMessage(String title, String message) {
@@ -53,5 +55,14 @@ class UtilService extends GetxService {
       ),
       barrierDismissible: false,
     );
+  }
+
+  Timestamp convertStringToTimestamp(String hour) {
+    var date = DateTime.parse("2020-01-15 " + hour + ":00");
+    return Timestamp.fromDate(date);
+  }
+
+  String convertTimeStampToString(Timestamp timestamp) {
+    return DateFormat.Hm().format(timestamp.toDate());
   }
 }

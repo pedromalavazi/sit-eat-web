@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sit_eat_web/app/controller/restaurant_profile_controller.dart';
-import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
@@ -37,7 +37,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 300.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .emailTetController,
                                   cursorColor: Colors.black,
                                   obscureText: false,
                                   enabled: false,
@@ -57,7 +58,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 292.5,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .passwordTextController,
                                   cursorColor: Colors.black,
                                   obscureText: true,
                                   enabled: _restaurantRegisterController
@@ -78,7 +80,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 292.5,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .confirmPasswordTextController,
                                   cursorColor: Colors.black,
                                   obscureText: true,
                                   enabled: _restaurantRegisterController
@@ -103,9 +106,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 300.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: (_restaurantRegisterController
-                                          .restaurant.value.name ??
-                                      ""),
+                                  controller: _restaurantRegisterController
+                                      .nameTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
@@ -125,22 +127,12 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 150.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: (_restaurantRegisterController
-                                              .restaurant.value.capacity ==
-                                          null
-                                      ? ""
-                                      : _restaurantRegisterController
-                                          .restaurant.value.capacity
-                                          .toString()),
+                                  controller: _restaurantRegisterController
+                                      .capacityTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -157,16 +149,12 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 205.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: (""),
+                                  controller: _restaurantRegisterController
+                                      .openTimeTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -183,16 +171,12 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 205.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: (""),
+                                  controller: _restaurantRegisterController
+                                      .closeTimeTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -213,9 +197,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 500.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: _restaurantRegisterController
-                                          .restaurant.value.menu ??
-                                      "",
+                                  controller: _restaurantRegisterController
+                                      .menuTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
@@ -231,9 +214,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 410.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: _restaurantRegisterController
-                                          .restaurant.value.address ??
-                                      "",
+                                  controller: _restaurantRegisterController
+                                      .addressTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
@@ -253,12 +235,12 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 125.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .numberTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -275,14 +257,12 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 195.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .zipCodeTextController,
                                   cursorColor: Colors.black,
-                                  obscureText: false,
-                                  autofocus: true,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
                                   keyboardType: TextInputType.number,
-                                  // maxLength: 3,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -299,7 +279,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 270.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .stateTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
@@ -315,7 +296,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 width: 270.0,
                                 height: 40.0,
                                 child: TextFormField(
-                                  initialValue: "",
+                                  controller: _restaurantRegisterController
+                                      .cityTextController,
                                   cursorColor: Colors.black,
                                   enabled: _restaurantRegisterController
                                       .editInfo.value,
@@ -337,15 +319,21 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 height: 40.0,
                                 child:
                                     _restaurantRegisterController.editInfo.value
-                                        ? ElevatedButton(
-                                            onPressed: () {
-                                              _restaurantRegisterController
-                                                  .saveForm();
-                                            },
+                                        ? RoundedLoadingButton(
                                             child: Text(
                                               "Salvar",
                                               style: TextStyle(fontSize: 20.0),
                                             ),
+                                            color: Colors.red,
+                                            successColor: Colors.green,
+                                            controller:
+                                                _restaurantRegisterController
+                                                    .saveButtonController,
+                                            onPressed: () =>
+                                                _restaurantRegisterController
+                                                    .saveForm(),
+                                            valueColor: Colors.black,
+                                            borderRadius: 5,
                                           )
                                         : ElevatedButton(
                                             onPressed: () {
@@ -357,20 +345,6 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                               style: TextStyle(fontSize: 20.0),
                                             ),
                                           ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(5, 35, 15, 0),
-                                width: 100.0,
-                                height: 40.0,
-                                child: TextButton(
-                                  onPressed: () {
-                                    Get.toNamed(Routes.LOGIN);
-                                  },
-                                  child: Text(
-                                    "Voltar",
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -392,23 +366,16 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "QRCODE - RESERVA:",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                              ),
-                            ),
                             QrImage(
-                              data: _restaurantRegisterController
-                                      .restaurant.value.name ??
-                                  "",
+                              //TODO: ajustar quando serviço de QR Code estiver pronto
+                              data: "",
                               version: QrVersions.auto,
                               size: 200.0,
                             ),
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text(
-                                "Imprimir",
+                              child: Icon(
+                                Icons.print,
                               ),
                             ),
                           ],

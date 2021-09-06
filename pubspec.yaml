@@ -34,6 +34,7 @@ dependencies:
   easy_debounce: ^2.0.1
   qr_flutter: ^4.0.0
   date_time_picker: ^2.1.0
+  easy_mask: ^2.0.1
 
   #Firebase
   firebase_core: ^1.4.0
@@ -41,6 +42,9 @@ dependencies:
   firebase_auth: ^3.0.1
   firebase_storage: ^8.0.0
   firebase_messaging: ^10.0.4
+
+  #loading
+  rounded_loading_button: ^2.0.5
 
   #Image
   # sqflite: ^2.0.0+4

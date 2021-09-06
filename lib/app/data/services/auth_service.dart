@@ -118,14 +118,14 @@ class AuthService extends GetxController {
     }
   }
 
-  Future<UserFirebaseModel> updateUserPassword(String password) async {
+  Future<bool> updateUserPassword(String password) async {
     try {
       await _auth.currentUser?.updatePassword(password);
       await _auth.currentUser?.reload();
-      return UserFirebaseModel.fromSnapshot(_auth.currentUser);
+      return true;
     } catch (e) {
       throwErrorMessage(e);
-      return UserFirebaseModel();
+      return false;
     }
   }
 
@@ -178,6 +178,10 @@ class AuthService extends GetxController {
         break;
       case "invalid-credential":
         _util.showErrorMessage("Erro", "Email inválido.");
+        break;
+      case "requires-recent-login":
+        _util.showErrorMessage(
+            "Erro", "É necessário relogar para poder atualizar a senha.");
         break;
       default:
         _util.showErrorMessage(
