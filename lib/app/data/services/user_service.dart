@@ -49,13 +49,13 @@ class UserService extends GetxService {
     }
   }
 
-  Future<void> updateUserPassword(
+  Future<bool> updateUserPassword(
     String password,
     String confirmPassword,
   ) async {
-    if (!isValidPasswords(password, confirmPassword)) return;
+    if (!isValidPasswords(password, confirmPassword)) return false;
 
-    await AuthService.to.updateUserPassword(password);
+    return AuthService.to.updateUserPassword(password);
   }
 
   Future<UserFirebaseModel?> updateUserName(String? userName) async {
@@ -79,7 +79,7 @@ class UserService extends GetxService {
     }
 
     if (!isValidPass)
-      _utilService.showInformationMessage(
+      _utilService.showErrorMessage(
           "Dados inválidos", "A senha e a confirmação de senha não conferem.");
 
     return isValidPass;

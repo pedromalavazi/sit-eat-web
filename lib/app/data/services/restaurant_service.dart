@@ -22,17 +22,18 @@ class RestaurantService extends GetxService {
   }
 
   Future<String?> registerNewRestaurant(RestaurantModel resturant) async {
-    try {
-      if (!isValidRestaurant(resturant)) {
-        return null;
-      }
+    if (!isValidRestaurant(resturant)) return null;
 
-      // inserir imagem firestore e salvar o link no banco
+    // inserir imagem firestore e salvar o link no banco
 
-      return await _restaurantRepository.registerNewRestaurant(resturant);
-    } catch (e) {
-      return null;
-    }
+    return await _restaurantRepository.registerNewRestaurant(resturant);
+  }
+
+  Future<bool> update(RestaurantModel restaurantUpdate) async {
+    if (!isValidId(restaurantUpdate.id)) return false;
+    if (!isValidRestaurant(restaurantUpdate)) return false;
+    await _restaurantRepository.update(restaurantUpdate);
+    return true;
   }
 
   Future<bool> activateRestaurant(String restaurantId) async {
@@ -53,7 +54,7 @@ class RestaurantService extends GetxService {
     await _restaurantRepository.delete(restaurantId);
   }
 
-  bool isValidId(String id) {
+  bool isValidId(String? id) {
     if (id.isBlank == true) {
       _utilService.showInformationMessage(
           "Dados inválidos", "Id do restaurante inválido.");

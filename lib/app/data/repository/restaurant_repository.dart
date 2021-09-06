@@ -4,13 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 
 class RestaurantRepository {
+  static const String TABLE = 'restaurants';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Retorna restaurante pelo ID
   Future<RestaurantModel> getRestaurant(String id) async {
     try {
-      DocumentSnapshot doc =
-          await _firestore.collection("restaurants").doc(id).get();
+      DocumentSnapshot doc = await _firestore.collection(TABLE).doc(id).get();
       RestaurantModel restaurant = RestaurantModel.fromSnapshot(doc);
       restaurant.id = id;
       return restaurant;
@@ -28,12 +28,12 @@ class RestaurantRepository {
   ) async {
     List<RestaurantModel> restaurants = <RestaurantModel>[];
     try {
-      //Query<Map<String, dynamic>> query = _firestore.collection("restaurants");
+      //Query<Map<String, dynamic>> query = _firestore.collection(TABLE);
       // if (active != null) query = query.where('active', isEqualTo: active);
       // if (name != null) query = query.where('name', isEqualTo: name);
       // var restaurantsDocs = await query.get();
 
-      var restaurantsDocs = await _firestore.collection("restaurants").get();
+      var restaurantsDocs = await _firestore.collection(TABLE).get();
       if (restaurantsDocs.docs.isEmpty) return restaurants;
 
       restaurantsDocs.docs.forEach((restaurantDoc) {
@@ -50,7 +50,7 @@ class RestaurantRepository {
 
   Future<String?> registerNewRestaurant(RestaurantModel newRestaurant) async {
     try {
-      var reservationId = await _firestore.collection("restaurants").add(
+      var reservationId = await _firestore.collection(TABLE).add(
         {
           "address": newRestaurant.address,
           "capacity": newRestaurant.capacity,
@@ -72,6 +72,29 @@ class RestaurantRepository {
       Get.defaultDialog(
           title: "ERROR", content: Text("Erro ao cadastrar restaurante."));
       return null;
+    }
+  }
+
+  Future<bool> update(RestaurantModel restaurantUpdate) async {
+    try {
+      await _firestore.collection(TABLE).doc(restaurantUpdate.id).update({
+        "address": restaurantUpdate.address,
+        "capacity": restaurantUpdate.capacity,
+        "city": restaurantUpdate.city,
+        "closeTime": restaurantUpdate.closeTime,
+        "openTime": restaurantUpdate.openTime,
+        // "image": restaurantUpdate.image,
+        "menu": restaurantUpdate.menu,
+        "name": restaurantUpdate.name,
+        "number": restaurantUpdate.number,
+        "zipCode": restaurantUpdate.zipCode,
+        "state": restaurantUpdate.state,
+      });
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Erro ao atualizar o restaurante."));
+      return false;
     }
   }
 
