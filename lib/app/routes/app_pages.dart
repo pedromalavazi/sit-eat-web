@@ -5,6 +5,7 @@ import 'package:sit_eat_web/app/binding/restaurant_approval_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_manage_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_profile_binding.dart';
 import 'package:sit_eat_web/app/binding/tables_binding.dart';
+import 'package:sit_eat_web/pages/admin/log_page.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_approve_page.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_management_page.dart';
 import 'package:sit_eat_web/pages/product/products_page.dart';
@@ -55,6 +56,10 @@ class AppPages {
       name: Routes.TABLES,
       page: () => TablesPage(),
       binding: TablesBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGS,
+      page: () => LogsPage(),
     )
   ];
 }
