@@ -50,7 +50,7 @@ class RestaurantRepository {
 
   Future<String?> registerNewRestaurant(RestaurantModel newRestaurant) async {
     try {
-      var reservationId = await _firestore.collection(TABLE).add(
+      var restaurant = await _firestore.collection(TABLE).add(
         {
           "address": newRestaurant.address,
           "capacity": newRestaurant.capacity,
@@ -67,11 +67,26 @@ class RestaurantRepository {
         },
       );
 
-      return reservationId.id;
+      return restaurant.id;
     } catch (e) {
       Get.defaultDialog(
           title: "ERROR", content: Text("Erro ao cadastrar restaurante."));
       return null;
+    }
+  }
+
+  Future<bool> updateQrCode(String restaurantId, String qrCode) async {
+    try {
+      await _firestore.collection(TABLE).doc(restaurantId).update(
+        {
+          "qrCode": qrCode,
+        },
+      );
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Erro ao atualizar o restaurante."));
+      return false;
     }
   }
 

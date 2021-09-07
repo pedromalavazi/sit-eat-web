@@ -6,7 +6,6 @@ import 'package:sit_eat_web/app/data/model/table_model.dart';
 class TableRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Retorna restaurante pelo ID
   Future<TableModel> getTable(String tableId, String restaurantId) async {
     try {
       DocumentSnapshot doc = await _firestore
@@ -57,6 +56,25 @@ class TableRepository {
       Get.defaultDialog(
           title: "ERROR", content: Text("Erro ao cadastrar mesa."));
       return null;
+    }
+  }
+
+  Future<bool> updateQrCode(
+      String restaurantId, String tableId, String qrCode) async {
+    try {
+      await _firestore
+          .collection("restaurants/$restaurantId/tables")
+          .doc(tableId)
+          .update(
+        {
+          "qrCode": qrCode,
+        },
+      );
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Erro ao atualizar a mesa."));
+      return false;
     }
   }
 
