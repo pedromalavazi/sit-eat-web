@@ -206,4 +206,10 @@ class AuthService extends GetxController {
     }
     return false;
   }
+
+  deleteUser(String email, String password) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+    await _firebaseUser.value?.delete();
+  }
 }

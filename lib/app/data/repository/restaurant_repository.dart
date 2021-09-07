@@ -4,7 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 
 class RestaurantRepository {
-  static const String TABLE = 'restaurants';
+  // ignore: non_constant_identifier_names
+  final String TABLE = 'restaurants';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Retorna restaurante pelo ID
@@ -63,6 +64,7 @@ class RestaurantRepository {
           "zipCode": newRestaurant.zipCode,
           "state": newRestaurant.state,
           "city": newRestaurant.city,
+          "qrCode": "",
           "active": false,
         },
       );
@@ -115,7 +117,7 @@ class RestaurantRepository {
 
   Future<bool> activateRestaurant(String id) async {
     try {
-      CollectionReference restaurants = _firestore.collection('restaurants');
+      CollectionReference restaurants = _firestore.collection(TABLE);
       await restaurants.doc(id).update({'active': true});
       return true;
     } catch (e) {
@@ -127,7 +129,7 @@ class RestaurantRepository {
 
   Future<bool> deactivateRestaurant(String id) async {
     try {
-      CollectionReference restaurants = _firestore.collection('restaurants');
+      CollectionReference restaurants = _firestore.collection(TABLE);
       await restaurants.doc(id).update({'active': false});
       return true;
     } catch (e) {
@@ -139,7 +141,7 @@ class RestaurantRepository {
 
   // Retorna restaurante para controle do ADMIN
   Stream<List<RestaurantModel>> listenerRestaurants() {
-    return _firestore.collection('restaurants').snapshots().map((doc) {
+    return _firestore.collection(TABLE).snapshots().map((doc) {
       if (doc.docs.length == 0) {
         return <RestaurantModel>[];
       }
@@ -148,7 +150,7 @@ class RestaurantRepository {
   }
 
   Future delete(String restaurantId) async {
-    await _firestore.collection('restaurants').doc(restaurantId).delete();
+    await _firestore.collection(TABLE).doc(restaurantId).delete();
   }
 
   List<RestaurantModel> convertRestaurantsFromDB(
