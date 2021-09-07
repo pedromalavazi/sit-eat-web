@@ -89,6 +89,9 @@ class RestaurantRegisterController extends GetxController {
   void rollback(String restaurantId) async {
     await _restaurantService.delete(restaurantId);
     await _userService.delete(AuthService.to.user.value.id);
-    await AuthService.to.firebaseUser?.delete();
+    await AuthService.to.deleteUser(
+      emailTextController.text.trim(),
+      passwordTextController.text.trim(),
+    );
   }
 }
