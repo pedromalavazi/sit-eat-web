@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -35,7 +34,6 @@ class RestaurantProfileController extends GetxController {
   final TextEditingController cityTextController = TextEditingController();
 
   RestaurantModel restaurant = RestaurantModel();
-  RxString valueButton = "Editar".obs;
   RxBool editInfo = false.obs;
 
   @override

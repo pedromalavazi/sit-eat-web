@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RestaurantModel {
   String? id;
+  String? qrCode;
   String? image;
   String? name;
   String? address;
@@ -17,6 +18,7 @@ class RestaurantModel {
 
   RestaurantModel({
     this.id,
+    this.qrCode,
     this.image,
     this.name,
     this.address,
@@ -33,6 +35,7 @@ class RestaurantModel {
 
   RestaurantModel.fromSnapshot(DocumentSnapshot restaurant)
       : id = restaurant.id,
+        qrCode = restaurant["qrCode"],
         image = restaurant["image"],
         name = restaurant["name"],
         address = restaurant["address"],
