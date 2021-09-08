@@ -202,6 +202,25 @@ class Menu extends StatelessWidget {
                 Get.offAllNamed(Routes.RESTAURANT_PROFILE);
               },
             ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.dashboard),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Dashboard",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.offAllNamed(Routes.DASHBOARD);
+              },
+            ),
           ],
         ),
       ),

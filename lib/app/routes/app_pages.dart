@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/binding/dashboard_binding.dart';
 import 'package:sit_eat_web/app/binding/login_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_register_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_approval_binding.dart';
@@ -7,6 +8,7 @@ import 'package:sit_eat_web/app/binding/restaurant_profile_binding.dart';
 import 'package:sit_eat_web/app/binding/tables_binding.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_approve_page.dart';
 import 'package:sit_eat_web/pages/admin/restaurant_management_page.dart';
+import 'package:sit_eat_web/pages/dashboard/dashboard_page.dart';
 import 'package:sit_eat_web/pages/product/products_page.dart';
 import 'package:sit_eat_web/pages/home_page.dart';
 import 'package:sit_eat_web/pages/login/login_page.dart';
@@ -55,6 +57,11 @@ class AppPages {
       name: Routes.TABLES,
       page: () => TablesPage(),
       binding: TablesBinding(),
+    ),
+    GetPage(
+      name: Routes.DASHBOARD,
+      page: () => DashboardPage(),
+      binding: DashboardBinding(),
     )
   ];
 }
