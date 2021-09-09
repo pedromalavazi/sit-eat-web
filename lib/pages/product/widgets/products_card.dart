@@ -10,12 +10,14 @@ class ProductCard extends StatelessWidget {
   final String name;
   final String description;
   final double price;
+  final String measure;
 
   ProductCard({
     this.name = 'Big Mac',
     this.description =
         'Dois hambúrgueres, alface, queijo e molho especial, cebola e picles num pão com gergelim.',
     this.price = 23.40,
+    this.measure = '250g',
   });
 
   @override
@@ -26,17 +28,42 @@ class ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       leading: Icon(Icons.lunch_dining),
-      title: Text(
-        name,
-        style: TextStyle(fontSize: 20),
+      title: RichText(
+        text: TextSpan(
+          text: name,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: "Soucer Code Pro",
+          ),
+          children: <TextSpan>[
+            TextSpan(
+              text: ' $measure',
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontFamily: "Soucer Code Pro",
+                fontStyle: FontStyle.italic,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
       ),
       subtitle: Text(
         description,
-        style: TextStyle(fontSize: 15),
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: "Soucer Code Pro",
+          color: Colors.black87,
+        ),
       ),
       trailing: Text(
         'R\$ ' + price.toStringAsFixed(2),
-        style: TextStyle(fontSize: 17),
+        style: TextStyle(
+            fontSize: 17,
+            fontFamily: "Soucer Code Pro",
+            color: Colors.black,
+            fontWeight: FontWeight.bold),
       ),
     );
   }

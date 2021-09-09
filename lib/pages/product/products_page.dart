@@ -256,7 +256,7 @@ class ProductsPage extends GetView<ProductsController> {
             Expanded(
               child: Container(
                 child: ListView.builder(
-                  itemCount: 22,
+                  itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
