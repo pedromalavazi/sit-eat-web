@@ -11,44 +11,50 @@ class DashboardPage extends GetView<DashboardController> {
     return Menu(
       title: "Dashboard",
       body: Wrap(
-        // spacing: 20,
+        // spacing: 30,
         children: List.generate(
           10,
           (index) => Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
               width: 200,
-              height: 200,
-              child: InkWell(
-                onTap: () {},
-                child: Card(
-                  elevation: 15.0,
+              height: 170,
+              child: Card(
+                elevation: 15.0,
+                child: InkWell(
+                  onTap: () {},
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Text(
                               "Número da mesa",
-                              style: TextStyle(fontSize: 10.0),
+                              style: TextStyle(fontSize: 20.0),
                             ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          Text(
-                            "Nome do usuário da mesa",
-                            style: TextStyle(fontSize: 10.0),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              "Rafael Rodrigues Vitor",
+                              style: TextStyle(fontSize: 15.0),
+                            ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.group),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.group),
+                          ),
                           Text(
-                            "23",
+                            "04",
                             style: TextStyle(fontSize: 20.0),
                           ),
                         ],
