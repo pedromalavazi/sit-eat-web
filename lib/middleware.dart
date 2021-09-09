@@ -7,9 +7,11 @@ import 'package:sit_eat_web/app/routes/app_pages.dart';
 class GlobalMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
-    return AuthService.to.userIsAuthenticated.value || route == '/login'
+    return AuthService.to.userIsAuthenticated.value ||
+            route == Routes.LOGIN ||
+            route == Routes.RESTAURANT_REGISTER
         ? null
-        : RouteSettings(name: '/login');
+        : RouteSettings(name: Routes.LOGIN);
   }
 
   @override

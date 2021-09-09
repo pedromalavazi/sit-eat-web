@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  final RoundedLoadingButtonController loginButtonController =
+      RoundedLoadingButtonController();
   RxBool stayLogged = false.obs;
 
   @override
@@ -15,21 +20,14 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  void loginMocked() {
-    if (emailTextController.text.trim() == "admin" &&
-        passwordTextController.text.trim() == "123") {
-      Get.offAllNamed(Routes.RESTAURANT_PROFILE);
-    }
-  }
-
   void login() async {
+    loginButtonController.start();
     bool logged = await AuthService.to.login(
       emailTextController.text.trim(),
       passwordTextController.text.trim(),
     );
-    if (logged) {
-      Get.offAllNamed(Routes.HOME);
-    }
+    loginButtonController.stop();
+    doLogin(logged);
   }
 
   void resetPassword() async {
@@ -38,6 +36,20 @@ class LoginController extends GetxController {
     );
     if (!userExist) {
       emailTextController.text = "";
+    }
+  }
+
+  void doLogin(bool success) {
+    if (success) {
+      loginButtonController.success();
+      Timer(Duration(seconds: 1), () {
+        Get.offAllNamed(Routes.HOME);
+      });
+    } else {
+      loginButtonController.error();
+      Timer(Duration(seconds: 1), () {
+        loginButtonController.reset();
+      });
     }
   }
 }
