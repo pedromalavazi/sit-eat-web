@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/dashboard_controller.dart';
+import 'package:sit_eat_web/app/routes/app_pages.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class DashboardPage extends GetView<DashboardController> {
@@ -22,7 +23,9 @@ class DashboardPage extends GetView<DashboardController> {
               child: Card(
                 elevation: 15.0,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.ORDERTABLE);
+                  },
                   child: Column(
                     children: [
                       Row(
