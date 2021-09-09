@@ -19,6 +19,7 @@ class App extends StatelessWidget {
       initialBinding: Binding(),
       initialRoute: Routes.LOGIN,
       debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.fade,
       theme: _theme(),
     );
   }

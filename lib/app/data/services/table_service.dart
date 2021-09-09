@@ -2,10 +2,12 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/repository/table_repository.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
+import 'package:sit_eat_web/app/data/services/qr_code_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class TableService extends GetxService {
   TableRepository _tableRepository = TableRepository();
+  QrCodeService _qrCodeService = QrCodeService();
   UtilService _utilService = UtilService();
 
   Future<TableModel> getById(String tableId) async {
@@ -32,11 +34,24 @@ class TableService extends GetxService {
         return null;
       }
 
-      return await _tableRepository.register(
-          table, AuthService.to.user.value.restaurantId!);
+      String restaurantId = AuthService.to.user.value.restaurantId!;
+
+      String? tableId = await _tableRepository.register(table, restaurantId);
+
+      if (tableId != null) {
+        table.id = tableId;
+        await generateQrCode(restaurantId, table);
+      }
+
+      return tableId;
     } catch (e) {
       return null;
     }
+  }
+
+  Future<void> generateQrCode(String restaurantId, TableModel table) async {
+    var qrCode = await _qrCodeService.generateTableQR(restaurantId, table);
+    await _tableRepository.updateQrCode(restaurantId, table.id!, qrCode);
   }
 
   Future<bool> delete(String? tableId) async {

@@ -1,17 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
+import 'package:flutter/material.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
-import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
+import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
+import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 
 class RestaurantRegisterController extends GetxController {
   final UtilService _util = UtilService();
   final RestaurantService _restaurantService = RestaurantService();
   final UserService _userService = UserService();
-  RxString valueButton = "Editar".obs;
+
   RxBool editInfo = false.obs;
 
   // User Controllers
@@ -90,6 +89,9 @@ class RestaurantRegisterController extends GetxController {
   void rollback(String restaurantId) async {
     await _restaurantService.delete(restaurantId);
     await _userService.delete(AuthService.to.user.value.id);
-    await AuthService.to.firebaseUser?.delete();
+    await AuthService.to.deleteUser(
+      emailTextController.text.trim(),
+      passwordTextController.text.trim(),
+    );
   }
 }

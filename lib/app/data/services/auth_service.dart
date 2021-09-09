@@ -196,7 +196,7 @@ class AuthService extends GetxController {
     await Firebase.initializeApp();
 
     final User? user = _auth.currentUser;
-
+    _firebaseUser.value = user;
     if (user != null) {
       _user.value = UserWebModel.fromSnapshot(
         await _firestore.collection("usersWeb").doc(user.uid).get(),
@@ -205,5 +205,10 @@ class AuthService extends GetxController {
       return true;
     }
     return false;
+  }
+
+  deleteUser(String email, String password) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+    await _firebaseUser.value?.delete();
   }
 }

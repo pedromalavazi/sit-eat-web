@@ -6,6 +6,7 @@ class TableModel {
   int? capacity;
   int? number;
   String? reservationid;
+  String? qrCode;
 
   TableModel({
     this.id,
@@ -13,6 +14,7 @@ class TableModel {
     this.capacity,
     this.number,
     this.reservationid,
+    this.qrCode,
   });
 
   TableModel.fromSnapshot(DocumentSnapshot table)
@@ -20,5 +22,6 @@ class TableModel {
         busy = table["busy"],
         capacity = table["capacity"],
         number = table["number"],
-        reservationid = table["reservationid"];
+        reservationid = table["reservationid"],
+        qrCode = table["qrCode"];
 }

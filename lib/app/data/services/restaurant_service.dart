@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
+import 'package:sit_eat_web/app/data/services/qr_code_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class RestaurantService extends GetxService {
   RestaurantRepository _restaurantRepository = RestaurantRepository();
+  QrCodeService _qrCodeService = QrCodeService();
   UtilService _utilService = UtilService();
 
   Future<RestaurantModel> getById(String restaurantId) async {
@@ -26,7 +28,15 @@ class RestaurantService extends GetxService {
 
     // inserir imagem firestore e salvar o link no banco
 
-    return await _restaurantRepository.registerNewRestaurant(resturant);
+    var restaurantId =
+        await _restaurantRepository.registerNewRestaurant(resturant);
+
+    if (restaurantId != null) {
+      resturant.id = restaurantId;
+      await generateQrCode(resturant);
+    }
+
+    return restaurantId;
   }
 
   Future<bool> update(RestaurantModel restaurantUpdate) async {
@@ -52,6 +62,11 @@ class RestaurantService extends GetxService {
 
   Future delete(String restaurantId) async {
     await _restaurantRepository.delete(restaurantId);
+  }
+
+  Future<void> generateQrCode(RestaurantModel restaurant) async {
+    var qrCode = await _qrCodeService.generateRestaurantQR(restaurant);
+    await _restaurantRepository.updateQrCode(restaurant.id!, qrCode);
   }
 
   bool isValidId(String? id) {
