@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/products_controller.dart';
 import 'package:sit_eat_web/pages/product/widgets/products_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
-import 'package:sit_eat_web/utils/web_utils.dart';
 
 class ProductsPage extends GetView<ProductsController> {
   final ProductsController _productRegisterController =
@@ -258,25 +255,12 @@ class ProductsPage extends GetView<ProductsController> {
             ),
             Expanded(
               child: Container(
-                child: GridView.builder(
-                  itemCount: 5,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 5.0,
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 3,
-                  ),
+                child: ListView.builder(
+                  itemCount: 22,
                   itemBuilder: (BuildContext context, int index) {
-                    return LayoutBuilder(
-                      builder: (context, constraints) {
-                        double font = fontSize(
-                          constraints.maxHeight * 0.15,
-                          min: 9,
-                          max: 22,
-                        );
-                        return ProductCard(
-                          font: font,
-                        );
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ProductCard(),
                     );
                   },
                 ),
