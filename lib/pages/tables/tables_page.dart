@@ -204,29 +204,31 @@ class TablesPage extends GetView<TablesController> {
               //     style: BorderStyle.solid,
               //   ),
               // ),
-              child: Obx(() => GridView.builder(
-                    itemCount:
-                        _tableController.tables.length, //Quantidade de Mesas
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 5.0,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 3,
-                    ),
+              child: Obx(
+                () => GridView.builder(
+                  itemCount:
+                      _tableController.tables.length, //Quantidade de Mesas
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 5.0,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 3,
+                  ),
 
-                    itemBuilder: (BuildContext context, int index) {
-                      return LayoutBuilder(
-                        builder: (context, constraints) {
-                          double font = fontSize(constraints.maxHeight * 0.15,
-                              min: 9, max: 22);
-                          // Card Mesas
-                          return TableCard(
-                            table: _tableController.tables[index],
-                            font: font,
-                          );
-                        },
-                      );
-                    },
-                  )),
+                  itemBuilder: (BuildContext context, int index) {
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        double font = fontSize(constraints.maxHeight * 0.15,
+                            min: 9, max: 22);
+                        // Card Mesas
+                        return TableCard(
+                          table: _tableController.tables[index],
+                          font: font,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],
