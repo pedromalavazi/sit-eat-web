@@ -100,6 +100,25 @@ class Menu extends StatelessWidget {
                 Get.offAllNamed(Routes.RESTAURANTS_MANAGEMENT);
               },
             ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.developer_board),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Logs",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.offAllNamed(Routes.LOGS);
+              },
+            ),
           ],
         ),
       ),
