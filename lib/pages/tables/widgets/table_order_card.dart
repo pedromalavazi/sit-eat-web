@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/dashboard_controller.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
+import 'package:sit_eat_web/pages/tables/widgets/orders.dart';
 
 class TableOrderCard extends StatelessWidget {
   final DashboardController _dashboardController =
@@ -32,20 +33,37 @@ class TableOrderCard extends StatelessWidget {
                   content: Container(
                     width: 500,
                     height: 500,
-                    child: ListView(
+                    child: Column(
                       children: [
-                        PaginatedDataTable(
-                          columns: [
-                            DataColumn(label: Text('Produto')),
-                            DataColumn(label: Text('Quantidade')),
-                            DataColumn(label: Text('Preço')),
-                            DataColumn(label: Text('Status')),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("Produto"),
+                            Text("Quantidade"),
+                            Text("Preço"),
+                            Text("Status"),
                           ],
-                          source: _DataSource(context),
                         ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text("Confirmar pedido"),
+                        Wrap(
+                          children: List.generate(
+                            _dashboardController.tables.length,
+                            (index) => Order(
+                                order: _dashboardController.tables[index]),
+                          ),
+
+                          // PaginatedDataTable(
+                          //   columns: [
+                          //     DataColumn(label: Text('Produto')),
+                          //     DataColumn(label: Text('Quantidade')),
+                          //     DataColumn(label: Text('Preço')),
+                          //     DataColumn(label: Text('Status')),
+                          //   ],
+                          //   source: _DataSource(context),
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () {},
+                          //   child: Text("Confirmar pedido"),
+                          // ),
                         ),
                       ],
                     ),
@@ -117,10 +135,7 @@ class _Row {
 class _DataSource extends DataTableSource {
   _DataSource(this.context) {
     _rows = <_Row>[
-      _Row('Cell A1', 'CellB1', 5.8, 1),
-      _Row('Cell A2', 'CellB2', 3.4, 2),
-      _Row('Cell A3', 'CellB3', 5.2, 3),
-      _Row('Cell A4', 'CellB4', 2.9, 4),
+      _Row("s", 'CellB1', 5.8, 1),
     ];
   }
 
