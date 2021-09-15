@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/binding/home_binding.dart';
 import 'package:sit_eat_web/app/binding/login_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_register_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_approval_binding.dart';
@@ -28,6 +29,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomePage(),
+      binding: HomeBinding(),
       middlewares: [GlobalMiddleware()],
     ),
     GetPage(
