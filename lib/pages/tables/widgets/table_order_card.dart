@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/dashboard_controller.dart';
+import 'package:sit_eat_web/app/data/model/order_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/pages/tables/widgets/orders.dart';
 
-class TableOrderCard extends StatelessWidget {
+class TableOrderCard extends GetView<DashboardController> {
   final DashboardController _dashboardController =
       Get.find<DashboardController>();
 
   final TableModel table;
   TableOrderCard({required this.table});
+  List<OrderModel> orders = [];
+
   // final double font;
   // TableOrderCard({required this.table, required this.font});
 
   @override
   Widget build(BuildContext context) {
+    // final columns = ["id", "orderTime", "productId", "quantity", "total"];
+    // final columns = ["Number", "Capacity", "Busy"];
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -33,40 +38,50 @@ class TableOrderCard extends StatelessWidget {
                   content: Container(
                     width: 500,
                     height: 500,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("Produto"),
-                            Text("Quantidade"),
-                            Text("Preço"),
-                            Text("Status"),
-                          ],
-                        ),
-                        Wrap(
-                          children: List.generate(
-                            _dashboardController.tables.length,
-                            (index) => Order(
-                                order: _dashboardController.tables[index]),
-                          ),
+                    child:
+                        // DataTable(
+                        //   columns: getColumns(columns),
+                        //   rows: getRows(teste),
+                        // ),
 
-                          // PaginatedDataTable(
-                          //   columns: [
-                          //     DataColumn(label: Text('Produto')),
-                          //     DataColumn(label: Text('Quantidade')),
-                          //     DataColumn(label: Text('Preço')),
-                          //     DataColumn(label: Text('Status')),
-                          //   ],
-                          //   source: _DataSource(context),
-                          // ),
-                          // ElevatedButton(
-                          //   onPressed: () {},
-                          //   child: Text("Confirmar pedido"),
-                          // ),
+                        // Wrap(
+                        //   children: List.generate(
+                        //     _dashboardController.tables.length,
+                        //     (index) =>
+                        //         Order(order: _dashboardController.tables[index]),
+                        //   ),
+                        // ),
+                        ListView(
+                      children: [
+                        PaginatedDataTable(
+                          columns: [
+                            DataColumn(label: Text('Produto')),
+                            DataColumn(label: Text('Quantidade')),
+                            DataColumn(label: Text('Preço')),
+                            DataColumn(label: Text('Status')),
+                          ],
+                          source: _DataSource(context, table),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text("Confirmar pedido"),
                         ),
                       ],
                     ),
+
+                    // Column(
+                    //   children: [)
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+                    //     Text("Produto"),
+                    //     Text("Quantidade"),
+                    //     Text("Preço"),
+                    //     Text("Status"),
+                    //   ],
+                    // ),
+                    // ],
+                    // ),
                   ),
                 ),
               );
@@ -114,6 +129,28 @@ class TableOrderCard extends StatelessWidget {
       ),
     );
   }
+
+  List<DataColumn> getColumns(List<String> columns) => columns
+      .map((String column) => DataColumn(
+            label: Text(column),
+          ))
+      .toList();
+  List<DataRow> getRows(List<TableModel> teste) => teste
+      .map((TableModel tableModel) => DataRow(cells: [
+            DataCell(Text(tableModel.number.toString())),
+            DataCell(Text(tableModel.capacity.toString())),
+            DataCell(Text(tableModel.busy.toString()))
+          ]))
+      .toList();
+  // List<DataRow> getRows(List<OrderModel> orders) => orders
+  //     .map((OrderModel orderTable) => DataRow(cells: [
+  //           DataCell(Text(orderTable.id.toString())),
+  //           DataCell(Text(orderTable.orderTime.toString())),
+  //           DataCell(Text(orderTable.productId.toString())),
+  //           DataCell(Text(orderTable.quantity.toString())),
+  //           DataCell(Text(orderTable.total.toString())),
+  //         ]))
+  //     .toList();
 }
 
 class _Row {
@@ -133,9 +170,13 @@ class _Row {
 }
 
 class _DataSource extends DataTableSource {
-  _DataSource(this.context) {
+  final DashboardController _dashboardController =
+      Get.find<DashboardController>();
+  final TableModel table;
+
+  _DataSource(this.context, this.table) {
     _rows = <_Row>[
-      _Row("s", 'CellB1', 5.8, 1),
+      _Row("Produto", 'CellB1', 5.8, 1),
     ];
   }
 

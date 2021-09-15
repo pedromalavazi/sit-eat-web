@@ -8,8 +8,8 @@ class Order extends StatelessWidget {
   final DashboardController _dashboardController =
       Get.find<DashboardController>();
 
-  final TableModel order;
-  Order({required this.order});
+  // final TableModel order;
+  // Order({required this.order});
 
   // final OrderModel order;
 
@@ -17,32 +17,40 @@ class Order extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // ListView(
-        //   children: [
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //       children: [
-        //         Text("Produto"),
-        //         Text("Quantidade"),
-        //         Text("Preço"),
-        //         Text("Status"),
-        //       ],
-        //     ),
-        ListTile(
-      title: Text("Produto ${order.number}"),
-      trailing: Container(
-        width: 10,
-        child: Row(
-          children: [
-            Text("Qtd ${order.capacity}"),
-            Text("Preço ${order.reservationid}"),
-            Text("Status ${order.busy}")
-          ],
-        ),
-      ),
-      // ),
-      // ],
-    );
+    return Container();
+    // Row(
+    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //   children: [
+    //     Text("${order.capacity}"),
+    //     Text("${order.number}"),
+    //     Text("${order.capacity}"),
+    //     Text("${order.busy}"),
+    //   ],
+    // ListView(
+    //   children: [
+    //     Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //       children: [
+    //         Text("Produto"),
+    //         Text("Quantidade"),
+    //         Text("Preço"),
+    //         Text("Status"),
+    //       ],
+    //     ),
+    //   ListTile(
+    // title: Text("Produto ${order.number}"),
+    // trailing: Container(
+    //   width: 10,
+    //   child: Row(
+    //     children: [
+    //       Text("Qtd ${order.capacity}"),
+    //       Text("Preço ${order.reservationid}"),
+    //       Text("Status ${order.busy}")
+    //     ],
+    //   ),
+    // ),
+    // ),
+    // ],
+    // );
   }
 }
