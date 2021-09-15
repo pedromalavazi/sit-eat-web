@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sit_eat_web/app/controller/login_controller.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
@@ -94,19 +95,19 @@ class LoginPage extends GetView<LoginController> {
                               Container(
                                 width: 300.0,
                                 height: 40.0,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    _loginController.login();
-                                  },
+                                child: RoundedLoadingButton(
                                   child: Text(
-                                    "Login",
+                                    "Entrar",
                                     style: TextStyle(fontSize: 20.0),
                                   ),
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.resolveWith(
-                                            (states) => Colors.red),
-                                  ),
+                                  color: Colors.red,
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  controller:
+                                      _loginController.loginButtonController,
+                                  onPressed: () => _loginController.login(),
+                                  valueColor: Colors.black,
+                                  borderRadius: 5,
                                 ),
                               ),
                               Container(

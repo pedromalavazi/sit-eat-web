@@ -10,5 +10,6 @@ abstract class Routes {
   static const PRODUCTS = '/products';
   static const TABLES = '/tables';
   static const DASHBOARD = '/dashboard';
-  static const ORDERTABLE = '/ordertable';
+  static const ORDER_TABLE = '/order-table';
+  static const LOGS = '/logs';
 }
