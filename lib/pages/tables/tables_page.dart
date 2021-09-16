@@ -209,7 +209,7 @@ class TablesPage extends GetView<TablesController> {
                   itemCount:
                       _tableController.tables.length, //Quantidade de Mesas
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 5.0,
+                    childAspectRatio: 5,
                     crossAxisCount: 3,
                     crossAxisSpacing: 3,
                   ),
