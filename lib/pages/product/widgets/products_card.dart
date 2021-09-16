@@ -22,48 +22,38 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      leading: Icon(Icons.lunch_dining),
-      title: RichText(
-        text: TextSpan(
-          text: name,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: "Soucer Code Pro",
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        width: 450,
+        height: 150,
+        child: Card(
+          color: Colors.lightBlue[300],
+          elevation: 15.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-          children: <TextSpan>[
-            TextSpan(
-              text: ' $measure',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontFamily: "Soucer Code Pro",
-                fontStyle: FontStyle.italic,
-                fontSize: 12,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListTile(
+                title: Text(
+                  name,
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                subtitle: Text(
+                  description,
+                  style: TextStyle(fontSize: 16),
+                ),
+                leading: Icon(
+                  Icons.restaurant_menu,
+                  color: Colors.black,
+                ),
+                trailing: Text("R\$" + price.toStringAsFixed(2)),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      subtitle: Text(
-        description,
-        style: TextStyle(
-          fontSize: 15,
-          fontFamily: "Soucer Code Pro",
-          color: Colors.black87,
-        ),
-      ),
-      trailing: Text(
-        'R\$ ' + price.toStringAsFixed(2),
-        style: TextStyle(
-            fontSize: 17,
-            fontFamily: "Soucer Code Pro",
-            color: Colors.black,
-            fontWeight: FontWeight.bold),
       ),
     );
   }
