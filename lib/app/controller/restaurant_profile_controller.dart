@@ -18,7 +18,7 @@ class RestaurantProfileController extends GetxController {
   final RoundedLoadingButtonController editButtonController =
       RoundedLoadingButtonController();
 
-  final TextEditingController emailTetController = TextEditingController();
+  final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   final TextEditingController confirmPasswordTextController =
       TextEditingController();
@@ -122,7 +122,7 @@ class RestaurantProfileController extends GetxController {
   }
 
   void loadFields() {
-    emailTetController.text = AuthService.to.user.value.email ?? "";
+    emailTextController.text = AuthService.to.user.value.email ?? "";
     nameTextController.text = restaurant.name ?? "";
     capacityTextController.text = restaurant.capacity.toString();
     openTimeTextController.text = restaurant.openTime != null

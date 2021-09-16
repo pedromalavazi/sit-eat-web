@@ -38,7 +38,7 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                 height: 40.0,
                                 child: TextFormField(
                                   controller: _restaurantRegisterController
-                                      .emailTetController,
+                                      .emailTextController,
                                   cursorColor: Colors.black,
                                   obscureText: false,
                                   enabled: false,
