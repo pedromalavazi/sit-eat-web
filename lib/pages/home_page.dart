@@ -11,13 +11,7 @@ class HomePage extends StatelessWidget {
     return Menu(
       title: "Home",
       body: Center(
-        child: Obx(
-          () => Container(
-            child: _homeController.image.value != ""
-                ? Image.network(_homeController.image.value)
-                : Container(),
-          ),
-        ),
+        child: Container(),
       ),
     );
   }

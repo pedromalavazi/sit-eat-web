@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LogCard extends StatelessWidget {
-  final String Date;
-  final String Type;
-  final String User;
-  final String Description;
+  final String date;
+  final String type;
+  final String user;
+  final String description;
   LogCard(
-      {required this.Date,
-      required this.Type,
-      required this.User,
-      required this.Description});
+      {required this.date,
+      required this.type,
+      required this.user,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class LogCard extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: Type,
+                    text: type,
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                     ),
@@ -51,7 +51,7 @@ class LogCard extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: Date,
+                    text: date,
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                     ),
@@ -68,7 +68,7 @@ class LogCard extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: User,
+                    text: user,
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                     ),
@@ -86,7 +86,7 @@ class LogCard extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: Description,
+                    text: description,
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                     ),

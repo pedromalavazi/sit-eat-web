@@ -25,7 +25,7 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                 children: [
                   Container(
                     width: 990,
-                    height: 370,
+                    height: 440,
                     child: Card(
                       elevation: 15.0,
                       child: ListView(
@@ -311,6 +311,55 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                             ],
                           ),
                           Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                                width: 500.0,
+                                height: 40.0,
+                                child: TextFormField(
+                                  controller: _restaurantRegisterController
+                                      .imageTextController,
+                                  cursorColor: Colors.black,
+                                  enabled: _restaurantRegisterController
+                                      .editInfo.value,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.image),
+                                    labelText: "Imagem",
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
+                                width: 60.0,
+                                height: 40.0,
+                                child: ElevatedButton(
+                                  style: _restaurantRegisterController
+                                          .editInfo.value
+                                      ? ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.resolveWith(
+                                                  (states) => Colors.red),
+                                        )
+                                      : ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.resolveWith(
+                                                  (states) => Colors.grey),
+                                        ),
+                                  onPressed: () {
+                                    if (_restaurantRegisterController
+                                        .editInfo.value) {
+                                      _restaurantRegisterController.pickImage();
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.image_search,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
@@ -332,7 +381,6 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                                             onPressed: () =>
                                                 _restaurantRegisterController
                                                     .saveForm(),
-                                            valueColor: Colors.black,
                                             borderRadius: 5,
                                           )
                                         : ElevatedButton(
