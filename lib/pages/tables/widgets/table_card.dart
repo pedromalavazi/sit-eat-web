@@ -7,60 +7,56 @@ class TableCard extends StatelessWidget {
   final TablesController _tableController = Get.find<TablesController>();
 
   final TableModel table;
-  final double font;
-  TableCard({required this.table, required this.font});
+  TableCard({required this.table});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black26),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Row(
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 200),
-                child: Icon(Icons.arrow_right),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Mesa ${table.number}",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: font,
-                      fontFamily: "Soucer Code Pro",
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Quantidade: ${table.capacity} pessoas",
-                    style: TextStyle(
-                      fontSize: font,
-                      color: Colors.black87,
-                      fontFamily: "Soucer Code Pro",
-                    ),
-                  ),
-                ],
-              ),
-            ],
+    return Container(
+      width: 390,
+      height: 170,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          color: Colors.lightBlue[700],
+          elevation: 15.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-          GestureDetector(
-            onTap: () {
-              _tableController.delete(table.id);
-            },
-            child: Icon(Icons.delete),
-          )
-        ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "Mesa ${table.number}",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(width: 200.0),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: InkWell(
+                        onTap: () {
+                          _tableController.delete(table.id);
+                        },
+                        child: Icon(Icons.delete),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      child: Text("Quantidade: ${table.capacity} pessoas"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

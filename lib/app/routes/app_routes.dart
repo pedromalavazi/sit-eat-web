@@ -9,5 +9,7 @@ abstract class Routes {
   static const RESTAURANT_PROFILE = '/restaurant-profile';
   static const PRODUCTS = '/products';
   static const TABLES = '/tables';
+  static const DASHBOARD = '/dashboard';
+  static const ORDER_TABLE = '/order-table';
   static const LOGS = '/logs';
 }
