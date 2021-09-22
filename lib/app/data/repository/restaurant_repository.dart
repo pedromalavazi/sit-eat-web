@@ -100,7 +100,7 @@ class RestaurantRepository {
         "city": restaurantUpdate.city,
         "closeTime": restaurantUpdate.closeTime,
         "openTime": restaurantUpdate.openTime,
-        // "image": restaurantUpdate.image,
+        "image": restaurantUpdate.image,
         "menu": restaurantUpdate.menu,
         "name": restaurantUpdate.name,
         "number": restaurantUpdate.number,

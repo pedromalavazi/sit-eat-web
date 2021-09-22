@@ -2,11 +2,13 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/product_model.dart';
 import 'package:sit_eat_web/app/data/repository/product_repository.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
+import 'package:sit_eat_web/app/data/services/image_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class ProductService extends GetxService {
   ProductRepository _productRepository = ProductRepository();
   UtilService _utilService = UtilService();
+  final ImageService _imageService = ImageService();
 
   Future<ProductModel> getById(String productId) async {
     if (productId.isEmpty ||
@@ -23,8 +25,18 @@ class ProductService extends GetxService {
   Future<List<ProductModel>> getProducts() async {
     if (!isValidId(AuthService.to.user.value.restaurantId))
       return <ProductModel>[];
-    return await _productRepository
+
+    var products = await _productRepository
         .getProducts(AuthService.to.user.value.restaurantId!);
+
+    for (var i = 0; i < products.length; i++) {
+      if (products[i].image != null) {
+        products[i].image =
+            await _imageService.downloadProductUrl(products[i].image!);
+      }
+    }
+
+    return products;
   }
 
   Future<String?> register(ProductModel product) async {
@@ -35,6 +47,15 @@ class ProductService extends GetxService {
           product, AuthService.to.user.value.restaurantId!);
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<bool> delete(String? tableId) async {
+    try {
+      return await _productRepository.delete(
+          tableId!, AuthService.to.user.value.restaurantId!);
+    } catch (e) {
+      return false;
     }
   }
 

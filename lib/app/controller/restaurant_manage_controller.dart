@@ -2,10 +2,13 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
+import 'package:sit_eat_web/app/data/services/image_service.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 
 class RestaurantManagementController extends GetxController {
   final RestaurantService _restaurantService = RestaurantService();
+  final ImageService _imageService = ImageService();
+
   final TextEditingController restaurantNameTextController =
       TextEditingController();
   Rx<bool?> activeFilter = null.obs;
@@ -20,6 +23,9 @@ class RestaurantManagementController extends GetxController {
 
   void getRestaurants() async {
     _restaurantService.listenerRestaurants().listen((restaurantsFromDB) async {
+      for (var i = 0; i < restaurantsFromDB.length; i++) {
+        await downloadRestaurantImage(restaurantsFromDB[i]);
+      }
       listRestaurants.clear();
       listRestaurants.value = filterRestaurants(restaurantsFromDB);
     });
@@ -85,5 +91,11 @@ class RestaurantManagementController extends GetxController {
               .contains(restaurantNameTextController.text.trim().toLowerCase()),
         )
         .toList();
+  }
+
+  Future<void> downloadRestaurantImage(RestaurantModel restaurantFromDB) async {
+    if (restaurantFromDB.image != null)
+      restaurantFromDB.image =
+          await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
   }
 }

@@ -25,7 +25,7 @@ class LogsPage extends StatelessWidget {
         itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
           return LogCard(
-              Date: date, Type: tipo, User: user, Description: description);
+              date: date, type: tipo, user: user, description: description);
         },
       ),
     );

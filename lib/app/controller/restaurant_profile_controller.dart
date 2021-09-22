@@ -1,15 +1,20 @@
 import 'dart:async';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
+import 'package:sit_eat_web/app/data/services/image_service.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class RestaurantProfileController extends GetxController {
   final RestaurantService _restaurantService = RestaurantService();
+  final ImageService _imageService = ImageService();
   final UserService _userService = UserService();
   final UtilService _util = UtilService();
 
@@ -32,9 +37,12 @@ class RestaurantProfileController extends GetxController {
   final TextEditingController zipCodeTextController = TextEditingController();
   final TextEditingController stateTextController = TextEditingController();
   final TextEditingController cityTextController = TextEditingController();
+  final TextEditingController imageTextController = TextEditingController();
+  final TextEditingController qrCodeTextController = TextEditingController();
 
   RestaurantModel restaurant = RestaurantModel();
   RxBool editInfo = false.obs;
+  late Rx<File> image;
 
   @override
   void onInit() {
@@ -81,6 +89,10 @@ class RestaurantProfileController extends GetxController {
 
     if (!success) return false;
 
+    success = await _imageService.uploadRestaurantImage(image.value);
+
+    if (!success) return false;
+
     return success;
   }
 
@@ -102,6 +114,16 @@ class RestaurantProfileController extends GetxController {
     return success;
   }
 
+  /// Get from gallery
+  Future pickImage() async {
+    var imageFile = await ImagePickerWeb.getImage(outputType: ImageType.file);
+
+    if (imageFile is File) {
+      imageTextController.text = imageFile.name;
+      image = imageFile.obs;
+    }
+  }
+
   RestaurantModel getFields() {
     return RestaurantModel(
       id: restaurant.id,
@@ -111,7 +133,7 @@ class RestaurantProfileController extends GetxController {
           _util.convertStringToTimestamp(openTimeTextController.text.trim()),
       closeTime:
           _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
-      image: "", // necessário desenvolvimento do serviço
+      image: imageTextController.text,
       menu: menuTextController.text.trim(),
       name: nameTextController.text.trim(),
       city: cityTextController.text,
@@ -137,5 +159,7 @@ class RestaurantProfileController extends GetxController {
     zipCodeTextController.text = restaurant.zipCode ?? "";
     stateTextController.text = restaurant.state ?? "";
     cityTextController.text = restaurant.city ?? "";
+    imageTextController.text = restaurant.image ?? "";
+    qrCodeTextController.text = restaurant.qrCode ?? "";
   }
 }

@@ -106,7 +106,6 @@ class LoginPage extends GetView<LoginController> {
                                   controller:
                                       _loginController.loginButtonController,
                                   onPressed: () => _loginController.login(),
-                                  valueColor: Colors.black,
                                   borderRadius: 5,
                                 ),
                               ),

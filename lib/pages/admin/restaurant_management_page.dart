@@ -103,19 +103,24 @@ class RestaurantManagementPage extends GetView<RestaurantManagementController> {
                                               right: 50, left: 50),
                                           width: 180,
                                           height: 150,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            // Logo image restaurante
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                _restaurantManagementController
-                                                        .listRestaurants[index]
-                                                        .image ??
-                                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png',
-                                              ),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
+                                          child: Image.network(
+                                              _restaurantManagementController
+                                                      .listRestaurants[index]
+                                                      .image ??
+                                                  ""),
+                                          // decoration: BoxDecoration(
+                                          //   shape: BoxShape.circle,
+                                          //   // Logo image restaurante
+                                          //   image: DecorationImage(
+                                          //     image: NetworkImage(
+                                          //       _restaurantManagementController
+                                          //               .listRestaurants[index]
+                                          //               .image ??
+                                          //           'gs://sit-eat-84d56.appspot.com/restaurants/madero.png',
+                                          //     ),
+                                          //     fit: BoxFit.fill,
+                                          //   ),
+                                          // ),
                                         ),
                                       ),
                                       Column(

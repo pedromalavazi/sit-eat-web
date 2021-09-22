@@ -1,10 +1,10 @@
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sit_eat_web/app/data/model/product_model.dart';
+import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class ProductRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  UtilService _utilService = UtilService();
 
   Future<ProductModel> getProduct(String productId, String restaurantId) async {
     try {
@@ -13,8 +13,8 @@ class ProductRepository {
       ProductModel restaurant = ProductModel.fromSnapshot(doc);
       return restaurant;
     } catch (e) {
-      Get.defaultDialog(
-          title: "ERROR", content: Text("Produtos não encontrado."));
+      _utilService.showInformationMessage(
+          "Não encontrado", "Produtos não encontrado.");
       return ProductModel();
     }
   }
@@ -34,8 +34,8 @@ class ProductRepository {
 
       return tables;
     } catch (e) {
-      Get.defaultDialog(
-          title: "ERROR", content: Text("Produtos não encontradas."));
+      _utilService.showInformationMessage(
+          "Não encontrado", "Produtos não encontrado.");
       return tables;
     }
   }
@@ -45,7 +45,7 @@ class ProductRepository {
       var reservationId = await _firestore.collection("products").add(
         {
           "name": newProduct.name,
-          "image": " ",
+          "image": newProduct.image,
           "price": newProduct.price,
           "description": newProduct.description,
           "measure": newProduct.measure,
@@ -55,9 +55,19 @@ class ProductRepository {
 
       return reservationId.id;
     } catch (e) {
-      Get.defaultDialog(
-          title: "ERROR", content: Text("Erro ao cadastrar produto."));
+      _utilService.showErrorMessage("Erro", "Erro ao cadastrar produto.");
       return null;
+    }
+  }
+
+  Future<bool> delete(String productId, String restaurantId) async {
+    try {
+      await _firestore.collection("products").doc(productId).delete();
+      return true;
+    } catch (e) {
+      _utilService.showErrorMessage(
+          "Erro", "Não foi possível excluir o produto.");
+      return false;
     }
   }
 }

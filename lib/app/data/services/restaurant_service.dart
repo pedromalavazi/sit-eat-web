@@ -26,8 +26,6 @@ class RestaurantService extends GetxService {
   Future<String?> registerNewRestaurant(RestaurantModel resturant) async {
     if (!isValidRestaurant(resturant)) return null;
 
-    // inserir imagem firestore e salvar o link no banco
-
     var restaurantId =
         await _restaurantRepository.registerNewRestaurant(resturant);
 
