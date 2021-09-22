@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/binding/home_binding.dart';
 import 'package:sit_eat_web/app/binding/dashboard_binding.dart';
 import 'package:sit_eat_web/app/binding/login_binding.dart';
+import 'package:sit_eat_web/app/binding/products_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_register_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_approval_binding.dart';
 import 'package:sit_eat_web/app/binding/restaurant_manage_binding.dart';
@@ -62,7 +63,7 @@ class AppPages {
     GetPage(
       name: Routes.PRODUCTS,
       page: () => ProductsPage(),
-      binding: RestaurantRegisterBinding(),
+      binding: ProductsBinding(),
       middlewares: [GlobalMiddleware()],
     ),
     GetPage(

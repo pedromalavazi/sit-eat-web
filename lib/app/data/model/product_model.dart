@@ -24,7 +24,7 @@ class ProductModel {
         restaurantId = product["restaurantId"],
         image = product["image"],
         name = product["name"],
-        price = double.parse(product["price"]),
+        price = product["price"],
         measure = product["measure"],
         description = product["description"];
 

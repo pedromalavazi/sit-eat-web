@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/products_controller.dart';
 import 'package:sit_eat_web/app/data/model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  //final ProductsController _productsController = Get.find<ProductsController>();
-  //final ProductModel product;
+  // final ProductsController _productController = Get.find<ProductsController>();
+  final ProductModel product;
 
-  final String name;
-  final String description;
-  final double price;
-  final String measure;
-
-  ProductCard({
-    this.name = 'Big Mac',
-    this.description =
-        'Dois hambúrgueres, alface, queijo e molho especial, cebola e picles num pão com gergelim.',
-    this.price = 23.40,
-    this.measure = '250g',
-  });
+  ProductCard({required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +25,20 @@ class ProductCard extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  name,
+                  product.name ?? "",
                   style: TextStyle(fontSize: 20.0),
                 ),
                 subtitle: Text(
-                  description,
+                  product.description ?? "",
                   style: TextStyle(fontSize: 16),
                 ),
-                leading: Icon(
-                  Icons.restaurant_menu,
-                  color: Colors.black,
+                leading: Image.network(product.image ?? ""),
+                trailing: Text(
+                  "R\$" +
+                      (product.price != null
+                          ? product.price!.toStringAsFixed(2)
+                          : "0"),
                 ),
-                trailing: Text("R\$" + price.toStringAsFixed(2)),
               ),
             ],
           ),

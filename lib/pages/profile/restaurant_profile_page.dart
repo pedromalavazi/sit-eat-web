@@ -9,7 +9,6 @@ import 'package:sit_eat_web/utils/menu.dart';
 class ProfilePage extends GetView<RestaurantProfileController> {
   final RestaurantProfileController _restaurantRegisterController =
       Get.find<RestaurantProfileController>();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -415,8 +414,8 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             QrImage(
-                              //TODO: ajustar quando serviço de QR Code estiver pronto
-                              data: "",
+                              data: _restaurantRegisterController
+                                  .qrCodeTextController.text,
                               version: QrVersions.auto,
                               size: 200.0,
                             ),

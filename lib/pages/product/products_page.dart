@@ -8,7 +8,7 @@ import 'package:sit_eat_web/utils/menu.dart';
 
 class ProductsPage extends GetView<ProductsController> {
   final ProductsController _productRegisterController =
-      Get.put(ProductsController());
+      Get.find<ProductsController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -174,12 +174,12 @@ class ProductsPage extends GetView<ProductsController> {
                                           Container(
                                             margin: EdgeInsets.fromLTRB(
                                                 25, 25, 0, 0),
-                                            width: 440.0,
+                                            width: 355.0,
                                             height: 40.0,
                                             child: TextFormField(
                                               controller:
                                                   _productRegisterController
-                                                      .linkImageTextController,
+                                                      .imageTextController,
                                               cursorColor: Colors.black,
                                               obscureText: false,
                                               autofocus: true,
@@ -189,8 +189,29 @@ class ProductsPage extends GetView<ProductsController> {
                                                     color: Colors.black,
                                                   ),
                                                 ),
-                                                prefixIcon: Icon(Icons.link),
-                                                labelText: "Link da imagem",
+                                                prefixIcon: Icon(Icons.image),
+                                                labelText: "Imagem",
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                25, 25, 0, 0),
+                                            width: 60.0,
+                                            height: 40.0,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty
+                                                        .resolveWith((states) =>
+                                                            Colors.red),
+                                              ),
+                                              onPressed: () {
+                                                _productRegisterController
+                                                    .pickImage();
+                                              },
+                                              child: Icon(
+                                                Icons.image_search,
                                               ),
                                             ),
                                           ),
@@ -260,17 +281,27 @@ class ProductsPage extends GetView<ProductsController> {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Wrap(
-                      children: List.generate(
-                    5,
-                    (index) => ProductCard(),
-                  )),
+            Row(
+              children: [
+                Expanded(
+                  child: Obx(
+                    () => Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Wrap(
+                          children: List.generate(
+                            _productRegisterController.listProducts.length,
+                            (index) => ProductCard(
+                              product: _productRegisterController
+                                  .listProducts[index],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

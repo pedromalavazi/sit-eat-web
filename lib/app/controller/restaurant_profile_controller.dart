@@ -1,6 +1,6 @@
 import 'dart:async';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker_web/image_picker_web.dart';
@@ -38,10 +38,11 @@ class RestaurantProfileController extends GetxController {
   final TextEditingController stateTextController = TextEditingController();
   final TextEditingController cityTextController = TextEditingController();
   final TextEditingController imageTextController = TextEditingController();
+  final TextEditingController qrCodeTextController = TextEditingController();
 
   RestaurantModel restaurant = RestaurantModel();
   RxBool editInfo = false.obs;
-  Uint8List? uploadedImage;
+  late Rx<File> image;
 
   @override
   void onInit() {
@@ -88,6 +89,10 @@ class RestaurantProfileController extends GetxController {
 
     if (!success) return false;
 
+    success = await _imageService.uploadRestaurantImage(image.value);
+
+    if (!success) return false;
+
     return success;
   }
 
@@ -114,8 +119,8 @@ class RestaurantProfileController extends GetxController {
     var imageFile = await ImagePickerWeb.getImage(outputType: ImageType.file);
 
     if (imageFile is File) {
-      imageTextController.text =
-          await _imageService.uploadRestaurantImage(imageFile);
+      imageTextController.text = imageFile.name;
+      image = imageFile.obs;
     }
   }
 
@@ -128,7 +133,7 @@ class RestaurantProfileController extends GetxController {
           _util.convertStringToTimestamp(openTimeTextController.text.trim()),
       closeTime:
           _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
-      image: imageTextController.text, // necessário desenvolvimento do serviço
+      image: imageTextController.text,
       menu: menuTextController.text.trim(),
       name: nameTextController.text.trim(),
       city: cityTextController.text,
@@ -155,5 +160,6 @@ class RestaurantProfileController extends GetxController {
     stateTextController.text = restaurant.state ?? "";
     cityTextController.text = restaurant.city ?? "";
     imageTextController.text = restaurant.image ?? "";
+    qrCodeTextController.text = restaurant.qrCode ?? "";
   }
 }
