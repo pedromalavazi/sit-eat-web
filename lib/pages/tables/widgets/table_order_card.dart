@@ -29,143 +29,151 @@ class TableOrderCard extends GetView<DashboardController> {
             borderRadius: BorderRadius.circular(15),
             onTap: () {
               Get.dialog(
-                AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  title: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Pedidos da mesa ${table.number}:",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Source Code Pro"),
-                      ),
-                    ),
-                  ),
-                  content: Container(
-                    width: 600,
-                    height: 550,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      "Produto",
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Quantidade",
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Preço",
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Status",
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                              ],
+                Center(
+                  child: Wrap(
+                    children: [
+                      AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        title: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Pedidos da mesa ${table.number}:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Source Code Pro"),
                             ),
                           ),
                         ),
-                        Container(
+                        content: Container(
                           width: 600,
-                          height: 420,
-                          child: SingleChildScrollView(
-                            child: Wrap(
-                              children: [
-                                Column(
-                                  children: List.generate(
-                                    20,
-                                    (index) => Container(
-                                      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                                      width: 600,
-                                      height: 60,
-                                      child: Card(
-                                        elevation: 5.0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                          height: 500,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            "Produto",
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "Quantidade",
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "Preço",
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "Status",
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 600,
+                                height: 390,
+                                child: SingleChildScrollView(
+                                  child: Wrap(
+                                    children: [
+                                      Column(
+                                        children: List.generate(
+                                          20,
+                                          (index) => Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                0, 15, 0, 0),
+                                            width: 600,
+                                            height: 60,
+                                            child: Card(
+                                              elevation: 5.0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Text(
+                                                    "Produto",
+                                                    style: TextStyle(
+                                                      fontSize: 20.0,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Quantidade",
+                                                    style: TextStyle(
+                                                      fontSize: 20.0,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Preço",
+                                                    style: TextStyle(
+                                                      fontSize: 20.0,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                      fontSize: 20.0,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text(
-                                              "Produto",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Quantidade",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Preço",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                    width: 200,
+                                    height: 40,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        "Finalizar pedido",
+                                        style: TextStyle(fontSize: 20.0),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 35, 0, 0),
-                              width: 200,
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Finalizar pedido",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );
