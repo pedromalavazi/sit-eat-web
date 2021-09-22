@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sit_eat_web/app/data/model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  // final ProductsController _productController = Get.find<ProductsController>();
   final ProductModel product;
 
   ProductCard({required this.product});
@@ -20,20 +20,56 @@ class ProductCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ListTile(
-                title: Text(
-                  product.name ?? "",
-                  style: TextStyle(fontSize: 20.0),
+              Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(product.image ?? ""),
+                  ),
                 ),
-                subtitle: Text(
-                  product.description ?? "",
-                  style: TextStyle(fontSize: 16),
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 220,
+                      child: Text(
+                        product.name ?? "",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          width: 230,
+                          child: Text(
+                            product.description ?? "",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                leading: Image.network(product.image ?? ""),
-                trailing: Text(
+              ),
+              Container(
+                child: Text(
                   "R\$" +
                       (product.price != null
                           ? product.price!.toStringAsFixed(2)
