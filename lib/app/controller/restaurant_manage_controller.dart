@@ -9,23 +9,22 @@ class RestaurantManagementController extends GetxController {
   final RestaurantService _restaurantService = RestaurantService();
   final ImageService _imageService = ImageService();
 
-  final TextEditingController restaurantNameTextController =
-      TextEditingController();
+  final TextEditingController restaurantNameTextController = TextEditingController();
   Rx<bool?> activeFilter = null.obs;
   RxList<RestaurantModel> listRestaurants = <RestaurantModel>[].obs;
 
   @override
   void onInit() {
-    setFilters();
+    // setFilters();
     getRestaurants();
     super.onInit();
   }
 
   void getRestaurants() async {
     _restaurantService.listenerRestaurants().listen((restaurantsFromDB) async {
-      for (var i = 0; i < restaurantsFromDB.length; i++) {
-        await downloadRestaurantImage(restaurantsFromDB[i]);
-      }
+      // for (var i = 0; i < restaurantsFromDB.length; i++) {
+      //   await downloadRestaurantImage(restaurantsFromDB[i]);
+      // }
       listRestaurants.clear();
       listRestaurants.value = filterRestaurants(restaurantsFromDB);
     });
@@ -35,14 +34,10 @@ class RestaurantManagementController extends GetxController {
   List<RestaurantModel> filterRestaurants(List<RestaurantModel> listRest) {
     List<RestaurantModel> restaurants = <RestaurantModel>[];
 
-    if (filterActiveIsFilled())
-      restaurants = listRest
-          .where((element) => element.active != activeFilter.value)
-          .toList();
+    if (filterActiveIsFilled()) restaurants = listRest.where((element) => element.active != activeFilter.value).toList();
 
     if (filterNameRestaurantIsFilled()) {
-      String restaurantFilterName =
-          restaurantNameTextController.text.trim().toLowerCase();
+      String restaurantFilterName = restaurantNameTextController.text.trim().toLowerCase();
       restaurants = listRest
           .where(
             (rest) => rest.name!.toLowerCase().contains(restaurantFilterName),
@@ -50,8 +45,7 @@ class RestaurantManagementController extends GetxController {
           .toList();
     }
 
-    if (!filterActiveIsFilled() && !filterNameRestaurantIsFilled())
-      restaurants = listRest.toList();
+    if (!filterActiveIsFilled() && !filterNameRestaurantIsFilled()) restaurants = listRest.toList();
 
     return restaurants;
   }
@@ -77,8 +71,7 @@ class RestaurantManagementController extends GetxController {
 
   void setFilters() {
     restaurantNameTextController.addListener(() {
-      EasyDebounce.debounce('time-debounce', Duration(milliseconds: 1000),
-          () => getRestaurants());
+      EasyDebounce.debounce('time-debounce', Duration(milliseconds: 1000), () => getRestaurants());
     });
   }
 
@@ -86,16 +79,12 @@ class RestaurantManagementController extends GetxController {
     final List<RestaurantModel> teste = rest;
     listRestaurants.value = teste
         .where(
-          (rest) => rest.name!
-              .toLowerCase()
-              .contains(restaurantNameTextController.text.trim().toLowerCase()),
+          (rest) => rest.name!.toLowerCase().contains(restaurantNameTextController.text.trim().toLowerCase()),
         )
         .toList();
   }
 
   Future<void> downloadRestaurantImage(RestaurantModel restaurantFromDB) async {
-    if (restaurantFromDB.image != null)
-      restaurantFromDB.image =
-          await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
+    if (restaurantFromDB.image != null) restaurantFromDB.image = await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
   }
 }

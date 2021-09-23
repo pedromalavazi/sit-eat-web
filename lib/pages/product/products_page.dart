@@ -7,8 +7,7 @@ import 'package:sit_eat_web/pages/product/widgets/products_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class ProductsPage extends GetView<ProductsController> {
-  final ProductsController _productRegisterController =
-      Get.find<ProductsController>();
+  final ProductsController _productRegisterController = Get.find<ProductsController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -71,45 +70,36 @@ class ProductsPage extends GetView<ProductsController> {
                                       child: ListView(
                                         children: [
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 265.0,
                                                 height: 40.0,
                                                 child: TextFormField(
                                                   validator: (String? value) {
-                                                    if (value == null ||
-                                                        value.isEmpty) {
+                                                    if (value == null || value.isEmpty) {
                                                       return "Preencha este campo";
                                                     }
                                                     return null;
                                                   },
-                                                  controller:
-                                                      _productRegisterController
-                                                          .nameTextController,
+                                                  controller: _productRegisterController.nameTextController,
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
-                                                  decoration:
-                                                      const InputDecoration(
+                                                  decoration: const InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    prefixIcon:
-                                                        Icon(Icons.restaurant),
-                                                    labelText:
-                                                        "Nome do produto",
+                                                    prefixIcon: Icon(Icons.restaurant),
+                                                    labelText: "Nome do produto",
                                                   ),
                                                 ),
                                               ),
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 150.0,
                                                 height: 40.0,
                                                 child: TextFormField(
@@ -121,22 +111,18 @@ class ProductsPage extends GetView<ProductsController> {
                                                       reverse: true,
                                                     ),
                                                   ],
-                                                  controller:
-                                                      _productRegisterController
-                                                          .priceTextController,
+                                                  controller: _productRegisterController.priceTextController,
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
-                                                  keyboardType:
-                                                      TextInputType.number,
+                                                  keyboardType: TextInputType.number,
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    prefixIcon: Icon(
-                                                        Icons.attach_money),
+                                                    prefixIcon: Icon(Icons.attach_money),
                                                     labelText: "Preço",
                                                   ),
                                                 ),
@@ -144,18 +130,14 @@ class ProductsPage extends GetView<ProductsController> {
                                             ],
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 440.0,
                                                 height: 40.0,
                                                 child: TextFormField(
-                                                  controller:
-                                                      _productRegisterController
-                                                          .measureTextController,
+                                                  controller: _productRegisterController.measureTextController,
                                                   cursorColor: Colors.black,
                                                   autofocus: true,
                                                   decoration: InputDecoration(
@@ -164,8 +146,7 @@ class ProductsPage extends GetView<ProductsController> {
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    prefixIcon:
-                                                        Icon(Icons.straighten),
+                                                    prefixIcon: Icon(Icons.straighten),
                                                     labelText: "Medida",
                                                   ),
                                                 ),
@@ -173,18 +154,14 @@ class ProductsPage extends GetView<ProductsController> {
                                             ],
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 355.0,
                                                 height: 40.0,
                                                 child: TextFormField(
-                                                  controller:
-                                                      _productRegisterController
-                                                          .imageTextController,
+                                                  controller: _productRegisterController.imageTextController,
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
@@ -194,28 +171,21 @@ class ProductsPage extends GetView<ProductsController> {
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    prefixIcon:
-                                                        Icon(Icons.image),
+                                                    prefixIcon: Icon(Icons.image),
                                                     labelText: "Imagem",
                                                   ),
                                                 ),
                                               ),
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 60.0,
                                                 height: 40.0,
                                                 child: ElevatedButton(
                                                   style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .resolveWith(
-                                                                (states) =>
-                                                                    Colors.red),
+                                                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.red),
                                                   ),
                                                   onPressed: () {
-                                                    _productRegisterController
-                                                        .pickImage();
+                                                    _productRegisterController.pickImage();
                                                   },
                                                   child: Icon(
                                                     Icons.image_search,
@@ -227,26 +197,20 @@ class ProductsPage extends GetView<ProductsController> {
                                           Row(
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 440.0,
                                                 height: 90.0,
                                                 child: TextFormField(
                                                   maxLines: 150,
                                                   maxLength: 500,
-                                                  controller:
-                                                      _productRegisterController
-                                                          .descriptionTextController,
+                                                  controller: _productRegisterController.descriptionTextController,
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
                                                   decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    prefixIcon:
-                                                        Icon(Icons.description),
-                                                    labelText:
-                                                        "Descrição do produto",
+                                                    border: OutlineInputBorder(),
+                                                    prefixIcon: Icon(Icons.description),
+                                                    labelText: "Descrição do produto",
                                                   ),
                                                 ),
                                               ),
@@ -255,22 +219,18 @@ class ProductsPage extends GetView<ProductsController> {
                                           Row(
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 10, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 10, 0, 0),
                                                 width: 180.0,
                                                 height: 40.0,
                                                 child: ElevatedButton(
                                                   onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      _productRegisterController
-                                                          .register();
+                                                    if (_formKey.currentState!.validate()) {
+                                                      _productRegisterController.register();
                                                     }
                                                   },
                                                   child: Text(
                                                     "Cadastrar produto",
-                                                    style: TextStyle(
-                                                        fontSize: 15.0),
+                                                    style: TextStyle(fontSize: 15.0),
                                                   ),
                                                 ),
                                               ),

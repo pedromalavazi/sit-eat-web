@@ -65,29 +65,24 @@ class TablesPage extends GetView<TablesController> {
                                     height: 210,
                                     child: Card(
                                       elevation: 15.0,
-                                      child: ListView(
+                                      child: Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 300.0,
                                                 height: 40.0,
                                                 child: TextFormField(
-                                                  controller: _tableController
-                                                      .tableNumberController,
+                                                  controller: _tableController.tableNumberController,
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .allow(RegExp('[0-9]')),
+                                                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                                                   ],
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
-                                                  keyboardType:
-                                                      TextInputType.number,
+                                                  keyboardType: TextInputType.number,
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderSide: BorderSide(
@@ -104,76 +99,62 @@ class TablesPage extends GetView<TablesController> {
                                             ],
                                           ),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 25, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 25, 0, 0),
                                                 width: 300.0,
                                                 height: 40.0,
                                                 child: TextFormField(
-                                                  controller: _tableController
-                                                      .capacityController,
+                                                  controller: _tableController.capacityController,
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .allow(RegExp('[0-9]')),
+                                                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                                                   ],
                                                   cursorColor: Colors.black,
                                                   obscureText: false,
                                                   autofocus: true,
-                                                  keyboardType:
-                                                      TextInputType.number,
+                                                  keyboardType: TextInputType.number,
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    prefixIcon:
-                                                        Icon(Icons.group),
-                                                    labelText:
-                                                        "Quantidade de pessoas",
+                                                    prefixIcon: Icon(Icons.group),
+                                                    labelText: "Quantidade de pessoas",
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 20, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 20, 0, 0),
                                                 width: 150.0,
                                                 height: 40.0,
                                                 child: ElevatedButton(
                                                   onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      _tableController
-                                                          .register();
+                                                    if (_formKey.currentState!.validate()) {
+                                                      _tableController.register();
                                                     }
                                                   },
                                                   child: Text(
                                                     "Cadastrar mesa",
-                                                    style: TextStyle(
-                                                        fontSize: 15.0),
+                                                    style: TextStyle(fontSize: 15.0),
                                                   ),
                                                 ),
                                               ),
                                               Container(
-                                                margin: EdgeInsets.fromLTRB(
-                                                    25, 20, 0, 0),
+                                                margin: EdgeInsets.fromLTRB(25, 20, 0, 0),
                                                 width: 125.0,
                                                 height: 40.0,
                                                 child: TextButton(
                                                   onPressed: () => Get.back(),
                                                   child: Text(
                                                     "Cancelar",
-                                                    style: TextStyle(
-                                                        fontSize: 15.0),
+                                                    style: TextStyle(fontSize: 15.0),
                                                   ),
                                                 ),
                                               ),
@@ -196,8 +177,7 @@ class TablesPage extends GetView<TablesController> {
                   () => Wrap(
                     children: List.generate(
                       _tableController.tables.length,
-                      (index) =>
-                          TableCard(table: _tableController.tables[index]),
+                      (index) => TableCard(table: _tableController.tables[index]),
                     ),
                   ),
                 ),

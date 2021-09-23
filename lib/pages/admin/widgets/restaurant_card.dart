@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/products_controller.dart';
-import 'package:sit_eat_web/app/data/model/product_model.dart';
+import 'package:sit_eat_web/app/controller/restaurant_manage_controller.dart';
+import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 
-class ProductCard extends StatelessWidget {
-  final ProductsController _productsController = Get.find<ProductsController>();
-  final ProductModel product;
+class RestaurantCard extends StatelessWidget {
+  // final RestaurantManagementController _restaurantManagementController = Get.find<RestaurantManagementController>();
+  // final RestaurantModel restaurant;
+  final RestaurantModel restaurant;
 
-  ProductCard({required this.product});
+  RestaurantCard({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        width: 450,
+        width: 600,
         height: 150,
         child: Card(
           // color: Colors.lightBlue[300],
@@ -34,7 +35,7 @@ class ProductCard extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(product.image ?? ""),
+                      image: NetworkImage(restaurant.image ?? ""),
                     ),
                   ),
                 ),
@@ -46,7 +47,7 @@ class ProductCard extends StatelessWidget {
                     Container(
                       width: 220,
                       child: Text(
-                        product.name ?? "",
+                        restaurant.name ?? "Olá",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
@@ -61,7 +62,7 @@ class ProductCard extends StatelessWidget {
                         child: Container(
                           width: 230,
                           child: Text(
-                            product.description ?? "",
+                            restaurant.capacity.toString(),
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.black87,
@@ -77,7 +78,7 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   child: Text(
-                    "R\$" + (product.price != null ? product.price!.toStringAsFixed(2) : "0"),
+                    restaurant.city.toString(),
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
@@ -117,7 +118,7 @@ class ProductCard extends StatelessWidget {
                                         height: 35,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            _productsController.delete(product.id);
+                                            // _productsController.delete(product.id);
                                           },
                                           child: Text(
                                             "Excluir",

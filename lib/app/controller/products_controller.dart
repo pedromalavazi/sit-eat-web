@@ -14,8 +14,7 @@ class ProductsController extends GetxController {
   ImageService _imageService = ImageService();
 
   final TextEditingController nameTextController = TextEditingController();
-  final TextEditingController descriptionTextController =
-      TextEditingController();
+  final TextEditingController descriptionTextController = TextEditingController();
   final TextEditingController measureTextController = TextEditingController();
   final TextEditingController priceTextController = TextEditingController();
   final TextEditingController imageTextController = TextEditingController();
@@ -48,8 +47,7 @@ class ProductsController extends GetxController {
 
     if (productId != null && success) {
       Get.back();
-      _utilService.showSuccessMessage(
-          "Sucesso", "Produto cadastrado com sucesso!");
+      _utilService.showSuccessMessage("Sucesso", "Produto cadastrado com sucesso!");
       clearFields();
       getProducts();
     }
