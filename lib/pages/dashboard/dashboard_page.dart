@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/dashboard_controller.dart';
-import 'package:sit_eat_web/pages/tables/widgets/table_order_card.dart';
+import 'package:sit_eat_web/pages/dashboard/table_order_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class DashboardPage extends GetView<DashboardController> {

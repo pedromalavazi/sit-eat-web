@@ -16,7 +16,7 @@ class LoginController extends GetxController {
   @override
   void onInit() async {
     bool isLogged = await AuthService.to.getUser();
-    if (isLogged) Get.offAllNamed(Routes.HOME);
+    if (isLogged) Get.offAllNamed(Routes.DASHBOARD);
     super.onInit();
   }
 
@@ -43,7 +43,7 @@ class LoginController extends GetxController {
     if (success) {
       loginButtonController.success();
       Timer(Duration(seconds: 1), () {
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.DASHBOARD);
       });
     } else {
       loginButtonController.error();

@@ -23,11 +23,11 @@ class UtilService extends GetxService {
       title,
       message,
       maxWidth: 500.0,
-      colorText: Colors.white,
-      backgroundColor: Colors.grey[500],
+      colorText: Colors.black,
+      backgroundColor: Colors.yellow[700],
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 5),
-      icon: Icon(Icons.info, color: Colors.white),
+      icon: Icon(Icons.info, color: Colors.black),
     );
   }
 
