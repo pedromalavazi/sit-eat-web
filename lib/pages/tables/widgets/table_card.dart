@@ -17,14 +17,13 @@ class TableCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Card(
-          color: Colors.lightBlue[700],
           elevation: 15.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView(
+            child: Column(
               children: [
                 Row(
                   children: [
@@ -39,7 +38,63 @@ class TableCard extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
                       child: InkWell(
                         onTap: () {
-                          _tableController.delete(table.id);
+                          Get.dialog(
+                            AlertDialog(
+                              content: Form(
+                                child: Container(
+                                  width: 280,
+                                  height: 80,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Deseja realmente excluir esta mesa?",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 25.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Container(
+                                            width: 100,
+                                            height: 35,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                _tableController.delete(table.id);
+                                              },
+                                              child: Text(
+                                                "Excluir",
+                                                style: TextStyle(fontSize: 18.0),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 100,
+                                            height: 35,
+                                            child: TextButton(
+                                              onPressed: () => Get.back(),
+                                              child: Text(
+                                                "Cancelar",
+                                                style: TextStyle(fontSize: 18.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         child: Icon(Icons.delete),
                       ),

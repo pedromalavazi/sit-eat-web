@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
+import 'package:sit_eat_web/app/data/services/image_service.dart';
 import 'package:sit_eat_web/app/data/services/qr_code_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class RestaurantService extends GetxService {
   RestaurantRepository _restaurantRepository = RestaurantRepository();
   QrCodeService _qrCodeService = QrCodeService();
+  ImageService _imageService = ImageService();
   UtilService _utilService = UtilService();
 
   Future<RestaurantModel> getById(String restaurantId) async {
@@ -16,7 +18,12 @@ class RestaurantService extends GetxService {
       return RestaurantModel();
     }
 
-    return await _restaurantRepository.getRestaurant(restaurantId);
+    var restaurant = await _restaurantRepository.getRestaurant(restaurantId);
+
+    restaurant.image = await _imageService.downloadRestaurantUrl(
+        restaurant.image!, restaurantId);
+
+    return restaurant;
   }
 
   Stream<List<RestaurantModel>> listenerRestaurants() {
