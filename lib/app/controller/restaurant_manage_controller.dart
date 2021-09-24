@@ -15,16 +15,16 @@ class RestaurantManagementController extends GetxController {
 
   @override
   void onInit() {
-    // setFilters();
+    setFilters();
     getRestaurants();
     super.onInit();
   }
 
   void getRestaurants() async {
     _restaurantService.listenerRestaurants().listen((restaurantsFromDB) async {
-      // for (var i = 0; i < restaurantsFromDB.length; i++) {
-      //   await downloadRestaurantImage(restaurantsFromDB[i]);
-      // }
+      for (var i = 0; i < restaurantsFromDB.length; i++) {
+        await downloadRestaurantImage(restaurantsFromDB[i]);
+      }
       listRestaurants.clear();
       listRestaurants.value = filterRestaurants(restaurantsFromDB);
     });
@@ -85,6 +85,10 @@ class RestaurantManagementController extends GetxController {
   }
 
   Future<void> downloadRestaurantImage(RestaurantModel restaurantFromDB) async {
-    if (restaurantFromDB.image != null) restaurantFromDB.image = await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
+    if (restaurantFromDB.image != null)
+      restaurantFromDB.image = await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
+    else {
+      print("Não foi");
+    }
   }
 }

@@ -1,5 +1,7 @@
+import 'dart:html';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -11,13 +13,12 @@ class RestaurantRegisterController extends GetxController {
   final RestaurantService _restaurantService = RestaurantService();
   final UserService _userService = UserService();
 
-  RxBool editInfo = false.obs;
+  RxBool editInfo = true.obs;
 
   // User Controllers
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController =
-      TextEditingController();
+  final TextEditingController confirmPasswordTextController = TextEditingController();
 
   // Restaurant Controllers
   final TextEditingController addressTextController = TextEditingController();
@@ -30,6 +31,9 @@ class RestaurantRegisterController extends GetxController {
   final TextEditingController cityTextController = TextEditingController();
   final TextEditingController zipCodeTextController = TextEditingController();
   final TextEditingController numberTextController = TextEditingController();
+  final TextEditingController imageTextController = TextEditingController();
+
+  late Rx<File> image;
 
   @override
   void onInit() {
@@ -61,11 +65,9 @@ class RestaurantRegisterController extends GetxController {
       RestaurantModel(
         address: addressTextController.text,
         capacity: int.parse(capacityTextController.text.trim()),
-        openTime:
-            _util.convertStringToTimestamp(openTimeTextController.text.trim()),
-        closeTime:
-            _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
-        image: "", // necessário desenvolvimento do serviço
+        openTime: _util.convertStringToTimestamp(openTimeTextController.text.trim()),
+        closeTime: _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
+        image: image.value.name,
         menu: menuTextController.text.trim(),
         name: nameTextController.text.trim(),
         city: cityTextController.text,
@@ -93,5 +95,14 @@ class RestaurantRegisterController extends GetxController {
       emailTextController.text.trim(),
       passwordTextController.text.trim(),
     );
+  }
+
+  Future pickImage() async {
+    var imageFile = await ImagePickerWeb.getImage(outputType: ImageType.file);
+
+    if (imageFile is File) {
+      imageTextController.text = imageFile.name;
+      image = imageFile.obs;
+    }
   }
 }

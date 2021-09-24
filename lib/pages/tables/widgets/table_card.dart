@@ -17,7 +17,6 @@ class TableCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Card(
-          // color: Colors.lightBlue[700],
           elevation: 15.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
