@@ -10,8 +10,8 @@ class ProductService extends GetxService {
   UtilService _utilService = UtilService();
   final ImageService _imageService = ImageService();
 
-  Future<ProductModel> getById(String productId) async {
-    if (productId.isEmpty ||
+  Future<ProductModel> getById(String? productId) async {
+    if (!isValidId(productId) ||
         !isValidId(AuthService.to.user.value.restaurantId)) {
       _utilService.showInformationMessage(
           "Dados inválidos", "Produto não encontrada.");
@@ -19,7 +19,7 @@ class ProductService extends GetxService {
     }
 
     return await _productRepository.getProduct(
-        productId, AuthService.to.user.value.restaurantId!);
+        productId!, AuthService.to.user.value.restaurantId!);
   }
 
   Future<List<ProductModel>> getProducts() async {

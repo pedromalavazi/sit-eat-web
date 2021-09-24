@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/order_card_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
 
 class DashboardController extends GetxController {
   final TableService _tableService = TableService();
+
   final TextEditingController numberTableTextController =
       TextEditingController();
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController amountTableTextController =
       TextEditingController();
-  RxBool occupationTable = false.obs;
+
   RxList<TableModel> tables = <TableModel>[].obs;
+  RxList<OrderCardModel> orders = <OrderCardModel>[].obs;
 
   @override
   void onInit() {

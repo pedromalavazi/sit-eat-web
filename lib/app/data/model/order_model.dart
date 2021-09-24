@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel {
   String? id;
-  DateTime? orderTime;
-  bool? productId;
+  String? userId;
+  Timestamp? orderTime;
+  String? productId;
   int? quantity;
   String? reservationId;
   double? total;
+  bool? delivered;
 
   OrderModel({
     this.id,
@@ -15,6 +17,7 @@ class OrderModel {
     this.quantity,
     this.reservationId,
     this.total,
+    this.delivered,
   });
 
   OrderModel.fromSnapshot(DocumentSnapshot order)
@@ -23,5 +26,5 @@ class OrderModel {
         productId = order["productId"],
         quantity = order["quantity"],
         reservationId = order["reservationId"],
-        total = order["total"];
+        delivered = order["delivered"];
 }

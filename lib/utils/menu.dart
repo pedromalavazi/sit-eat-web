@@ -153,7 +153,7 @@ class Menu extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    "Home",
+                    "Dashboard",
                     style: TextStyle(
                       fontSize: 17,
                     ),
@@ -161,7 +161,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Get.offAllNamed(Routes.HOME);
+                Get.offAllNamed(Routes.DASHBOARD);
               },
             ),
             ListTile(
@@ -219,25 +219,6 @@ class Menu extends StatelessWidget {
               ),
               onTap: () {
                 Get.offAllNamed(Routes.RESTAURANT_PROFILE);
-              },
-            ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(Icons.dashboard),
-                  Container(
-                    width: 10,
-                  ),
-                  Text(
-                    "Dashboard",
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
-                ],
-              ),
-              onTap: () {
-                Get.offAllNamed(Routes.DASHBOARD);
               },
             ),
           ],

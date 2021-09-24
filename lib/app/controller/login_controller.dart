@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/routes/app_pages.dart';
 
@@ -16,7 +17,7 @@ class LoginController extends GetxController {
   @override
   void onInit() async {
     bool isLogged = await AuthService.to.getUser();
-    if (isLogged) Get.offAllNamed(Routes.HOME);
+    if (isLogged) redirect();
     super.onInit();
   }
 
@@ -43,7 +44,7 @@ class LoginController extends GetxController {
     if (success) {
       loginButtonController.success();
       Timer(Duration(seconds: 1), () {
-        Get.offAllNamed(Routes.HOME);
+        redirect();
       });
     } else {
       loginButtonController.error();
@@ -51,5 +52,11 @@ class LoginController extends GetxController {
         loginButtonController.reset();
       });
     }
+  }
+
+  redirect() {
+    AuthService.to.user.value.type == LoginType.RESTAURANT
+        ? Get.offAllNamed(Routes.DASHBOARD)
+        : Get.offAllNamed(Routes.RESTAURANTS_MANAGEMENT);
   }
 }
