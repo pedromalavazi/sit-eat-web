@@ -95,7 +95,10 @@ class RestaurantManagementController extends GetxController {
 
   Future<void> downloadRestaurantImage(RestaurantModel restaurantFromDB) async {
     if (restaurantFromDB.image != null)
-      restaurantFromDB.image =
-          await _imageService.downloadRestaurantUrl(restaurantFromDB.image!);
+      restaurantFromDB.image = await _imageService.downloadRestaurantUrl(
+          restaurantFromDB.image!, restaurantFromDB.id);
+    else {
+      print("Não foi");
+    }
   }
 }

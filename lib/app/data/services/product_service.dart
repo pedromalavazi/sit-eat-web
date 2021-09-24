@@ -23,16 +23,18 @@ class ProductService extends GetxService {
   }
 
   Future<List<ProductModel>> getProducts() async {
-    if (!isValidId(AuthService.to.user.value.restaurantId))
-      return <ProductModel>[];
+    String? restaurantId = AuthService.to.user.value.restaurantId;
+    if (!isValidId(restaurantId)) return <ProductModel>[];
 
     var products = await _productRepository
         .getProducts(AuthService.to.user.value.restaurantId!);
 
     for (var i = 0; i < products.length; i++) {
       if (products[i].image != null) {
-        products[i].image =
-            await _imageService.downloadProductUrl(products[i].image!);
+        products[i].image = await _imageService.downloadProductUrl(
+          products[i].image!,
+          restaurantId,
+        );
       }
     }
 

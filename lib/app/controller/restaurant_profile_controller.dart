@@ -18,15 +18,12 @@ class RestaurantProfileController extends GetxController {
   final UserService _userService = UserService();
   final UtilService _util = UtilService();
 
-  final RoundedLoadingButtonController saveButtonController =
-      RoundedLoadingButtonController();
-  final RoundedLoadingButtonController editButtonController =
-      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController saveButtonController = RoundedLoadingButtonController();
+  final RoundedLoadingButtonController editButtonController = RoundedLoadingButtonController();
 
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController =
-      TextEditingController();
+  final TextEditingController confirmPasswordTextController = TextEditingController();
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController capacityTextController = TextEditingController();
   final TextEditingController openTimeTextController = TextEditingController();
@@ -97,10 +94,8 @@ class RestaurantProfileController extends GetxController {
   }
 
   Future<bool> updateUser() async {
-    if (passwordTextController.text.isBlank != true ||
-        confirmPasswordTextController.text.isBlank != true) {
-      return await _userService.updateUserPassword(
-          passwordTextController.text, confirmPasswordTextController.text);
+    if (passwordTextController.text.isBlank != true || confirmPasswordTextController.text.isBlank != true) {
+      return await _userService.updateUserPassword(passwordTextController.text, confirmPasswordTextController.text);
     }
 
     return true;
@@ -129,10 +124,8 @@ class RestaurantProfileController extends GetxController {
       id: restaurant.id,
       address: addressTextController.text,
       capacity: int.parse(capacityTextController.text.trim()),
-      openTime:
-          _util.convertStringToTimestamp(openTimeTextController.text.trim()),
-      closeTime:
-          _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
+      openTime: _util.convertStringToTimestamp(openTimeTextController.text.trim()),
+      closeTime: _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
       image: imageTextController.text,
       menu: menuTextController.text.trim(),
       name: nameTextController.text.trim(),
@@ -147,12 +140,8 @@ class RestaurantProfileController extends GetxController {
     emailTextController.text = AuthService.to.user.value.email ?? "";
     nameTextController.text = restaurant.name ?? "";
     capacityTextController.text = restaurant.capacity.toString();
-    openTimeTextController.text = restaurant.openTime != null
-        ? _util.convertTimeStampToString(restaurant.openTime!)
-        : "";
-    closeTimeTextController.text = restaurant.closeTime != null
-        ? _util.convertTimeStampToString(restaurant.closeTime!)
-        : "";
+    openTimeTextController.text = restaurant.openTime != null ? _util.convertTimeStampToString(restaurant.openTime!) : "";
+    closeTimeTextController.text = restaurant.closeTime != null ? _util.convertTimeStampToString(restaurant.closeTime!) : "";
     menuTextController.text = restaurant.menu ?? "";
     addressTextController.text = restaurant.address ?? "";
     numberTextController.text = restaurant.number.toString();
