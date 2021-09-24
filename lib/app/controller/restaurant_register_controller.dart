@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ class RestaurantRegisterController extends GetxController {
   // User Controllers
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController = TextEditingController();
+  final TextEditingController confirmPasswordTextController =
+      TextEditingController();
 
   // Restaurant Controllers
   final TextEditingController addressTextController = TextEditingController();
@@ -65,8 +67,10 @@ class RestaurantRegisterController extends GetxController {
       RestaurantModel(
         address: addressTextController.text,
         capacity: int.parse(capacityTextController.text.trim()),
-        openTime: _util.convertStringToTimestamp(openTimeTextController.text.trim()),
-        closeTime: _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
+        openTime:
+            _util.convertStringToTimestamp(openTimeTextController.text.trim()),
+        closeTime:
+            _util.convertStringToTimestamp(closeTimeTextController.text.trim()),
         image: image.value.name,
         menu: menuTextController.text.trim(),
         name: nameTextController.text.trim(),

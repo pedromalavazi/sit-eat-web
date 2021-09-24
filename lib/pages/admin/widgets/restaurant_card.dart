@@ -16,6 +16,7 @@ class RestaurantCard extends StatelessWidget {
         width: 500,
         height: 150,
         child: InkWell(
+          focusColor: Colors.red,
           borderRadius: BorderRadius.circular(15),
           onTap: () {
             Get.toNamed(Routes.RESTAURANT_APPROVAL, arguments: restaurant.id);
