@@ -17,6 +17,7 @@ class GlobalMiddleware extends GetMiddleware {
   @override
   GetPage? onPageCalled(GetPage? page) {
     if (page == null) return null;
+    //if (page.name == Get.currentRoute) return null;
 
     var isAdminPages = page.name == Routes.RESTAURANTS_MANAGEMENT ||
         page.name == Routes.RESTAURANT_APPROVAL;
