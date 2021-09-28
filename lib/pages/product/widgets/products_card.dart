@@ -17,7 +17,6 @@ class ProductCard extends StatelessWidget {
         width: 450,
         height: 150,
         child: Card(
-          // color: Colors.lightBlue[300],
           elevation: 15.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -118,6 +117,7 @@ class ProductCard extends StatelessWidget {
                                         child: ElevatedButton(
                                           onPressed: () {
                                             _productsController.delete(product.id);
+                                            Get.back();
                                           },
                                           child: Text(
                                             "Excluir",

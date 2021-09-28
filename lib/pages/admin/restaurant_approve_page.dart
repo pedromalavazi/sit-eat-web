@@ -203,6 +203,7 @@ class RestaurantApprovePage extends GetView<RestaurantApprovalController> {
                                                                       child: ElevatedButton(
                                                                         onPressed: () {
                                                                           _approvalController.approve();
+                                                                          Get.back();
                                                                         },
                                                                         child: Text(
                                                                           "Aprovar",
@@ -279,10 +280,10 @@ class RestaurantApprovePage extends GetView<RestaurantApprovalController> {
                                                                       width: 100,
                                                                       height: 35,
                                                                       child: ElevatedButton(
-                                                                        onPressed: _approvalController.restaurant.value.active == true ? null : () => _approvalController.disapprove(),
-                                                                        // () {
-                                                                        //   _approvalController.disapprove();
-                                                                        // },
+                                                                        onPressed: () {
+                                                                          _approvalController.disapprove();
+                                                                          Get.back();
+                                                                        },
                                                                         child: Text(
                                                                           "Desativar",
                                                                           style: TextStyle(fontSize: 16.0),

@@ -39,7 +39,7 @@ class RestaurantManagementPage extends GetView<RestaurantManagementController> {
                             padding: const EdgeInsets.only(top: 5.0),
                             child: TextField(
                               style: TextStyle(fontSize: 20.0),
-                              controller: _restaurantManagementController.restaurantNameTextController,
+                              // controller: _restaurantManagementController.restaurantNameTextController,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 prefixIcon: Padding(

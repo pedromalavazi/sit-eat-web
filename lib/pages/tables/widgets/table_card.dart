@@ -69,6 +69,7 @@ class TableCard extends StatelessWidget {
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 _tableController.delete(table.id);
+                                                Get.back();
                                               },
                                               child: Text(
                                                 "Excluir",

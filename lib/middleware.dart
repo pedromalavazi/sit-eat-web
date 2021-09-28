@@ -7,23 +7,21 @@ import 'package:sit_eat_web/app/routes/app_pages.dart';
 class GlobalMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
-    return AuthService.to.userIsAuthenticated.value ||
-            route == Routes.LOGIN ||
-            route == Routes.RESTAURANT_REGISTER
-        ? null
-        : RouteSettings(name: Routes.LOGIN);
+    return (AuthService.to.userIsAuthenticated.value || route == Routes.LOGIN || route == Routes.RESTAURANT_REGISTER) ? null : RouteSettings(name: Routes.LOGIN);
   }
 
   @override
   GetPage? onPageCalled(GetPage? page) {
     if (page == null) return null;
-    //if (page.name == Get.currentRoute) return null;
+    // if (page.name == Get.currentRoute) return null;
 
-    var isAdminPages = page.name == Routes.RESTAURANTS_MANAGEMENT ||
-        page.name == Routes.RESTAURANT_APPROVAL;
+    var isAdminPages = (page.name == Routes.RESTAURANTS_MANAGEMENT || page.name == Routes.RESTAURANT_APPROVAL);
 
-    if (AuthService.to.user.value.type != LoginType.ADMIN && isAdminPages)
-      return null;
+    // print(page.name);
+    // print(isAdminPages);
+    // print(AuthService.to.user.value.type != LoginType.ADMIN);
+
+    if (AuthService.to.user.value.type != LoginType.ADMIN && isAdminPages) return null;
 
     return page;
   }
