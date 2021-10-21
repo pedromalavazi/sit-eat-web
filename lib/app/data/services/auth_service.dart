@@ -44,8 +44,7 @@ class AuthService extends GetxController {
 
   Future<bool> login(String email, String password) async {
     try {
-      var user = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      var user = await _auth.signInWithEmailAndPassword(email: email, password: password);
 
       _user.value = UserWebModel.fromSnapshot(
         await _firestore.collection("usersWeb").doc(user.user?.uid).get(),
@@ -78,8 +77,7 @@ class AuthService extends GetxController {
   ) async {
     try {
       //Cria usuário do Firebase
-      var newUser = await _auth.createUserWithEmailAndPassword(
-          email: user.email!, password: password);
+      var newUser = await _auth.createUserWithEmailAndPassword(email: user.email!, password: password);
       await _firebaseUser.value?.reload();
       //Cria usuário de controle do app
       await _firestore.collection("usersWeb").doc(newUser.user?.uid).set({
@@ -141,11 +139,9 @@ class AuthService extends GetxController {
     if (_user.value.restaurantId.isBlank == true) return false;
 
     var restaurantService = RestaurantService();
-    var userRestaurant =
-        await restaurantService.getById(_user.value.restaurantId!);
+    var userRestaurant = await restaurantService.getById(_user.value.restaurantId!);
 
-    if (userRestaurant.active.isBlank == true || userRestaurant.active == false)
-      return false;
+    if (userRestaurant.active.isBlank == true || userRestaurant.active == false) return false;
 
     return true;
   }
@@ -167,8 +163,7 @@ class AuthService extends GetxController {
         _util.showErrorMessage("Erro", "Login não permitido.");
         break;
       case "invalid-password":
-        _util.showErrorMessage(
-            "Erro", "Senha fraca. É necessário seis caracteres.");
+        _util.showErrorMessage("Erro", "Senha fraca. É necessário seis caracteres.");
         break;
       case "invalid-email":
         _util.showErrorMessage("Erro", "E-mail é inválido.");
@@ -180,8 +175,7 @@ class AuthService extends GetxController {
         _util.showErrorMessage("Erro", "Email inválido.");
         break;
       case "requires-recent-login":
-        _util.showErrorMessage(
-            "Erro", "É necessário relogar para poder atualizar a senha.");
+        _util.showErrorMessage("Erro", "É necessário relogar para poder atualizar a senha.");
         break;
       default:
         _util.showErrorMessage(

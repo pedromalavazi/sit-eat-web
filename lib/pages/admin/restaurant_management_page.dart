@@ -5,8 +5,7 @@ import 'package:sit_eat_web/pages/admin/widgets/restaurant_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class RestaurantManagementPage extends GetView<RestaurantManagementController> {
-  final RestaurantManagementController _restaurantManagementController =
-      Get.find<RestaurantManagementController>();
+  final RestaurantManagementController _restaurantManagementController = Get.find<RestaurantManagementController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +39,11 @@ class RestaurantManagementPage extends GetView<RestaurantManagementController> {
                             padding: const EdgeInsets.only(top: 5.0),
                             child: TextField(
                               style: TextStyle(fontSize: 20.0),
-                              controller: _restaurantManagementController
-                                  .restaurantNameTextController,
+                              controller: _restaurantManagementController.restaurantNameTextController,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 prefixIcon: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 10.0, right: 10.0, bottom: 5.0),
+                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 5.0),
                                   child: CircleAvatar(
                                     radius: 20.0,
                                     backgroundColor: Colors.red,
@@ -69,9 +66,7 @@ class RestaurantManagementPage extends GetView<RestaurantManagementController> {
                   () => Wrap(
                     children: List.generate(
                       _restaurantManagementController.listRestaurants.length,
-                      (index) => RestaurantCard(
-                          restaurant: _restaurantManagementController
-                              .listRestaurants[index]),
+                      (index) => RestaurantCard(restaurant: _restaurantManagementController.listRestaurants[index]),
                     ),
                   ),
                 ),

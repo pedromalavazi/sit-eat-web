@@ -66,7 +66,10 @@ class ProductsController extends GetxController {
   void delete(String? id) async {
     bool success = await _productService.delete(id);
 
-    if (success) getProducts();
+    if (success) {
+      _utilService.showSuccessMessage("Sucesso", "Produto excluído com sucesso!");
+      getProducts();
+    }
   }
 
   clearFields() {

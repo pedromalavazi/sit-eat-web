@@ -30,9 +30,7 @@ class RestaurantApprovalController extends GetxController {
     addressTextController.text = restaurant.value.address ?? "";
     openTimeTextController.text = getHour(restaurant.value.openTime ?? null);
     closeTimeTextController.text = getHour(restaurant.value.closeTime ?? null);
-    capacityTextController.text = restaurant.value.capacity == null
-        ? "0"
-        : restaurant.value.capacity.toString();
+    capacityTextController.text = restaurant.value.capacity == null ? "0" : restaurant.value.capacity.toString();
   }
 
   void approve() async {
@@ -40,9 +38,7 @@ class RestaurantApprovalController extends GetxController {
 
     if (success) {
       Get.back();
-      Get.back();
-      _utilService.showSuccessMessage(
-          "Sucesso", "Restaurante ativado com sucesso!.");
+      _utilService.showSuccessMessage("Sucesso", "Restaurante ativado com sucesso!.");
     }
   }
 
@@ -51,8 +47,7 @@ class RestaurantApprovalController extends GetxController {
 
     if (success) {
       Get.back();
-      _utilService.showSuccessMessage(
-          "Sucesso", "Restaurante desativado com sucesso!.");
+      _utilService.showSuccessMessage("Sucesso", "Restaurante desativado com sucesso!.");
     }
   }
 

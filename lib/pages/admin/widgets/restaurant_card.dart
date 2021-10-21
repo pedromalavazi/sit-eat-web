@@ -74,23 +74,18 @@ class RestaurantCard extends StatelessWidget {
                 ),
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: (restaurant.active ?? false)
-                        ? Text(
-                            "Ativo",
-                            style: TextStyle(
+                      padding: const EdgeInsets.all(8.0),
+                      child: (restaurant.active ?? false)
+                          ? Icon(
+                              Icons.check_circle,
                               color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        : Text(
-                            "Inativo",
-                            style: TextStyle(
+                              size: 50.0,
+                            )
+                          : Icon(
+                              Icons.cancel,
                               color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                  ),
+                              size: 50.0,
+                            )),
                 ),
               ],
             ),
