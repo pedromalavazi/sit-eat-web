@@ -74,43 +74,18 @@ class RestaurantCard extends StatelessWidget {
                 ),
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: (restaurant.active ?? false)
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Ativo",
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                Icons.check_circle,
-                                color: Colors.green,
-                                size: 40.0,
-                              )
-                            ],
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Inativo",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                Icons.cancel,
-                                color: Colors.red,
-                                size: 40.0,
-                              ),
-                            ],
-                          ),
-                  ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: (restaurant.active ?? false)
+                          ? Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                              size: 50.0,
+                            )
+                          : Icon(
+                              Icons.cancel,
+                              color: Colors.red,
+                              size: 50.0,
+                            )),
                 ),
               ],
             ),

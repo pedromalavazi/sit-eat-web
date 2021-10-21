@@ -17,10 +17,6 @@ class GlobalMiddleware extends GetMiddleware {
 
     var isAdminPages = (page.name == Routes.RESTAURANTS_MANAGEMENT || page.name == Routes.RESTAURANT_APPROVAL);
 
-    // print(page.name);
-    // print(isAdminPages);
-    // print(AuthService.to.user.value.type != LoginType.ADMIN);
-
     if (AuthService.to.user.value.type != LoginType.ADMIN && isAdminPages) return null;
 
     return page;
