@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -36,7 +36,8 @@ class TablesController extends GetxController {
     Get.back(result: {capacity, number});
 
     if (id != null) {
-      _utilService.showSuccessMessage("Sucesso", "Mesa cadastrada com sucesso!");
+      _utilService.showSuccessMessage(
+          "Sucesso", "Mesa cadastrada com sucesso!");
       getTables();
     }
   }
