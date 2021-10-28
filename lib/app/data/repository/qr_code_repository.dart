@@ -52,4 +52,15 @@ class QrCodeRepository {
       return false;
     }
   }
+
+  Future<bool> delete(String qrCodeId) async {
+    try {
+      await _firestore.collection("qrCodes").doc(qrCodeId).delete();
+      return true;
+    } catch (e) {
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Não foi possível excluir o QR Code."));
+      return false;
+    }
+  }
 }

@@ -1,13 +1,11 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:sit_eat_web/app/controller/tables_controller.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 
 class TableCard extends StatelessWidget {
   final TablesController _tableController = Get.find<TablesController>();
-  final ScreenshotController screenshotController = ScreenshotController();
 
   final TableModel table;
   TableCard({required this.table});
