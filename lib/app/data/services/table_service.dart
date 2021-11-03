@@ -60,8 +60,16 @@ class TableService extends GetxService {
         return false;
       }
 
-      return await _tableRepository.delete(
+      var isDeleted = await _tableRepository.delete(
           tableId!, AuthService.to.user.value.restaurantId!);
+
+      if (isDeleted) {
+        var table = await getById(tableId);
+        var qrCode = await _qrCodeService.getByQrCode(table.qrCode ?? "");
+        await _qrCodeService.delete(qrCode!.id);
+      }
+
+      return isDeleted;
     } catch (e) {
       return false;
     }

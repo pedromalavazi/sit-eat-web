@@ -49,6 +49,14 @@ class QrCodeService extends GetxService {
     return encriptedQRCode.base16;
   }
 
+  Future<bool> delete(String? qrCodeId) async {
+    if (qrCodeId.isBlank == true) {
+      return false;
+    }
+
+    return await _qrCodeRepository.delete(qrCodeId!);
+  }
+
   Encrypted encrypt(String decriptedText) {
     final Key key = Key.fromLength(32);
     final IV iv = IV.fromLength(16);
