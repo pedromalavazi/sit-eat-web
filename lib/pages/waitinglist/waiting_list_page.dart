@@ -8,7 +8,6 @@ import 'package:sit_eat_web/utils/menu.dart';
 
 class WaitingListPage extends GetView<WaitingListController> {
   final WaitingListController _tableController = Get.find<WaitingListController>();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +27,28 @@ class WaitingListPage extends GetView<WaitingListController> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Lista de espera"),
+                      Column(
+                        children: [
+                          Text("Posição"),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Nome"),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Horário da solicitação"),
+                        ],
+                      ),
+                      // Wrap(
+                      //   children: [
+                      //     Text("Posição Nome Horário da solicitação"),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
