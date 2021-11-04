@@ -35,9 +35,7 @@ class Menu extends StatelessWidget {
           ),
         ],
       ),
-      drawer: AuthService.to.user.value.type == LoginType.ADMIN
-          ? _menuAdmin()
-          : _menuRestaurant(),
+      drawer: AuthService.to.user.value.type == LoginType.ADMIN ? _menuAdmin() : _menuRestaurant(),
       body: body,
     );
   }
@@ -162,6 +160,25 @@ class Menu extends StatelessWidget {
               ),
               onTap: () {
                 Get.offAllNamed(Routes.DASHBOARD);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.list),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "Lista de espera",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.offAllNamed(Routes.WAITING_LIST);
               },
             ),
             ListTile(
