@@ -16,9 +16,9 @@ class DashboardPage extends GetView<DashboardController> {
           padding: const EdgeInsets.all(50.0),
           child: Wrap(
             children: List.generate(
-              _dashboardController.tables.length,
+              _dashboardController.dashboardItens.length,
               (index) =>
-                  TableOrderCard(table: _dashboardController.tables[index]),
+                  TableOrderCard(table: _dashboardController.dashboardItens[index]),
             ),
           ),
         ),

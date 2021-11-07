@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/model/user_model%20copy.dart';
+import 'package:sit_eat_web/app/data/model/user_web_model.dart';
 
 class UserRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -38,6 +39,21 @@ class UserRepository {
       Get.defaultDialog(
           title: "ERROR", content: Text("Usuário não encontrado."));
       return UserWebModel();
+    }
+  }
+
+  Future<UserModel> getAppUserName(String id) async {
+    try {
+      DocumentSnapshot doc = await _firestore.collection("users").doc(id).get();
+      UserModel user = UserModel.fromSnapshot(doc);
+      user.id = id;
+      return user;
+    } catch (e) {
+      print(e);
+      Get.back();
+      Get.defaultDialog(
+          title: "ERROR", content: Text("Usuário não encontrado."));
+      return UserModel();
     }
   }
 

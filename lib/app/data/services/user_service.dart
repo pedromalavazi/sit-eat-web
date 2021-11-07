@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
-import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/model/user_model%20copy.dart';
+import 'package:sit_eat_web/app/data/model/user_web_model.dart';
 import 'package:sit_eat_web/app/data/repository/user_repository.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -11,6 +12,10 @@ class UserService extends GetxService {
 
   Future<UserWebModel> get(String id) {
     return _userRepository.getUser(id);
+  }
+
+  Future<UserModel> getAppUserName(String id) async {
+    return await _userRepository.getAppUserName(id);
   }
 
   Future<bool> createRestaurantUser(
