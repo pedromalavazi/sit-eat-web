@@ -11,5 +11,6 @@ abstract class Routes {
   static const TABLES = '/tables';
   static const DASHBOARD = '/dashboard';
   static const ORDER_TABLE = '/order-table';
+  static const WAITING_LIST = '/waiting-list';
   static const LOGS = '/logs';
 }
