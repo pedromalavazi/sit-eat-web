@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/controller/tables_controller.dart';
 import 'package:sit_eat_web/app/controller/waiting_list_controller.dart';
-import 'package:sit_eat_web/app/data/model/table_model.dart';
-import 'package:sit_eat_web/pages/tables/widgets/table_card.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class WaitingListPage extends GetView<WaitingListController> {
-  // final TablesController _tableController = Get.find<TablesController>();
   final WaitingListController _waitingListController = Get.find<WaitingListController>();
 
   @override
@@ -81,10 +76,19 @@ class WaitingListPage extends GetView<WaitingListController> {
                       rows: List.generate(
                         _waitingListController.reservations.length,
                         (index) => DataRow(
+                          color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                            if (states.contains(MaterialState.selected)) {
+                              return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                            }
+                            if (index.isEven) {
+                              return Colors.grey.withOpacity(0.3);
+                            }
+
+                            return null;
+                          }),
                           cells: [
                             DataCell(
                               Text("${_waitingListController.reservations.elementAt(index).userId}"),
-                              // Text("${_tableController.tables.elementAt(index).capacity}"),
                             ),
                             DataCell(
                               Text("Coluna 2"),
