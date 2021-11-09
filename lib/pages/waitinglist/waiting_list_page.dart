@@ -5,11 +5,11 @@ import 'package:sit_eat_web/app/controller/tables_controller.dart';
 import 'package:sit_eat_web/app/controller/waiting_list_controller.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/pages/tables/widgets/table_card.dart';
-import 'package:sit_eat_web/pages/waitinglist/widgets/list_data.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
-class WaitingListPage extends GetView<TablesController> {
-  final TablesController _tableController = Get.find<TablesController>();
+class WaitingListPage extends GetView<WaitingListController> {
+  // final TablesController _tableController = Get.find<TablesController>();
+  final WaitingListController _waitingListController = Get.find<WaitingListController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,61 +24,87 @@ class WaitingListPage extends GetView<TablesController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Wrap(
-              children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: [
-                //     Text(
-                //       "Posição",
-                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),
-                //     ),
-                //     Text(
-                //       "Nome",
-                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),
-                //     ),
-                //     Text(
-                //       "Horário da solicitação",
-                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),
-                //     ),
-                //     Text(
-                //       "Quantidade de pessoas na mesa",
-                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),
-                //     ),
-                //     Text(
-                //       "Telefone",
-                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),
-                //     ),
-                //   ],
-                // ),
-                Obx(
-                  () => Wrap(
-                    children: List.generate(
-                      _tableController.tables.length,
-                      (index) => ListData(
-                        table: _tableController.tables[index],
+            Padding(
+              padding: const EdgeInsets.all(35.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => DataTable(
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            "Posição",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Nome",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Horário de reserva",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Quantidade de pessoas na mesa",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Telefone",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: List.generate(
+                        _waitingListController.reservations.length,
+                        (index) => DataRow(
+                          cells: [
+                            DataCell(
+                              Text("${_waitingListController.reservations.elementAt(index).userId}"),
+                              // Text("${_tableController.tables.elementAt(index).capacity}"),
+                            ),
+                            DataCell(
+                              Text("Coluna 2"),
+                            ),
+                            DataCell(
+                              Text("Coluna 3"),
+                            ),
+                            DataCell(
+                              Text("Coluna 4"),
+                            ),
+                            DataCell(
+                              Text("Coluna 5"),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // Obx(
-                //   () => Wrap(
-                //     children: List.generate(
-                //       _tableController.tables.length,
-                //       (index) => Padding(
-                //         padding: const EdgeInsets.all(4.0),
-                //         child: Container(
-                //           height: 45.0,
-                //           color: index % 2 == 0 ? Color(0xFFe0e0e0) : Color(0xFFbcbcbc),
-                //           child: ListData(
-                //             table: _tableController.tables[index],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
