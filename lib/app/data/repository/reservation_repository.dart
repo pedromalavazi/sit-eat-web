@@ -23,10 +23,10 @@ class ReservationRepository {
           ])
           .get()
           .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((restaurant) {
-          reservation.add(ReservationModel.fromSnapshot(restaurant));
-        });
-      });
+            querySnapshot.docs.forEach((restaurant) {
+              reservation.add(ReservationModel.fromSnapshot(restaurant));
+            });
+          });
       return reservation;
     } catch (e) {
       print(e);
