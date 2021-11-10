@@ -35,4 +35,15 @@ class ReservationRepository {
       return <ReservationModel>[];
     }
   }
+
+  Future<ReservationModel> getReservationById(String reservationId) async {
+    try {
+      DocumentSnapshot doc =
+          await _firestore.collection("reservations").doc(reservationId).get();
+      ReservationModel reservation = ReservationModel.fromSnapshot(doc);
+      return reservation;
+    } catch (e) {
+      return ReservationModel();
+    }
+  }
 }

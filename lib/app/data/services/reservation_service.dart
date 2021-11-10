@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/repository/reservation_repository.dart';
-import 'package:sit_eat_web/app/data/services/util_service.dart';
+import 'package:sit_eat_web/app/data/services/user_service.dart';
 
 class ReservationService extends GetxService {
   final ReservationRepository _reservationRepository = ReservationRepository();
-  final _util = UtilService();
+  final UserService _userService = UserService();
 
   Future<List<ReservationModel>?> getAll(String restaurantId) async {
     if (restaurantId.isNotEmpty) {
@@ -13,5 +13,23 @@ class ReservationService extends GetxService {
     } else {
       return null;
     }
+  }
+
+  Future<ReservationModel> getReservationById(String? restaurantId) async {
+    if (restaurantId.isBlank == true) {
+      return ReservationModel();
+    }
+
+    var reservation =
+        await _reservationRepository.getReservationById(restaurantId!);
+
+    if (reservation.userId.isBlank == true) {
+      reservation.userName = "";
+      return reservation;
+    }
+
+    reservation.userName = (await _userService.get(reservation.userId!)).name;
+
+    return reservation;
   }
 }

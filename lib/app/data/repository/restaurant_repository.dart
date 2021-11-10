@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sit_eat_web/app/data/model/queue_model.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 
 class RestaurantRepository {
@@ -160,5 +161,23 @@ class RestaurantRepository {
       restaurants.add(RestaurantModel.fromSnapshot(restaurant));
     });
     return restaurants;
+  }
+
+  Future<List<QueueModel>> getQueuesByRestaurantId(String restaurantId) async {
+    List<QueueModel> queues = <QueueModel>[];
+
+    try {
+      var queuesQuery =
+          await _firestore.collection('$TABLE/$restaurantId/queue').get();
+      if (queuesQuery.docs.isEmpty) return queues;
+
+      queuesQuery.docs.forEach((queueDoc) {
+        queues.add(QueueModel.fromSnapshot(queueDoc));
+      });
+
+      return queues;
+    } catch (e) {
+      return queues;
+    }
   }
 }

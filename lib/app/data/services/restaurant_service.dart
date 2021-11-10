@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/queue_model.dart';
+import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
 import 'package:sit_eat_web/app/data/services/image_service.dart';
 import 'package:sit_eat_web/app/data/services/qr_code_service.dart';
+import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class RestaurantService extends GetxService {
   RestaurantRepository _restaurantRepository = RestaurantRepository();
+  ReservationService _reservationService = ReservationService();
   QrCodeService _qrCodeService = QrCodeService();
   ImageService _imageService = ImageService();
   UtilService _utilService = UtilService();
@@ -72,6 +76,28 @@ class RestaurantService extends GetxService {
   Future<void> generateQrCode(RestaurantModel restaurant) async {
     var qrCode = await _qrCodeService.generateRestaurantQR(restaurant);
     await _restaurantRepository.updateQrCode(restaurant.id!, qrCode);
+  }
+
+  Future<List<ReservationModel>> getQueuesByRestaurantId(
+      String restaurantId) async {
+    List<ReservationModel> reservationsQueue = <ReservationModel>[];
+
+    try {
+      if (!isValidId(restaurantId)) return <ReservationModel>[];
+      var queues =
+          await _restaurantRepository.getQueuesByRestaurantId(restaurantId);
+
+      for (var queue in queues) {
+        var reservation =
+            await _reservationService.getReservationById(queue.reservationId);
+
+        reservationsQueue.add(reservation);
+      }
+
+      return reservationsQueue;
+    } catch (e) {
+      return reservationsQueue;
+    }
   }
 
   bool isValidId(String? id) {

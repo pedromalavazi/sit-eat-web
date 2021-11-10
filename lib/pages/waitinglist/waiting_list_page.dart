@@ -4,7 +4,8 @@ import 'package:sit_eat_web/app/controller/waiting_list_controller.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class WaitingListPage extends GetView<WaitingListController> {
-  final WaitingListController _waitingListController = Get.find<WaitingListController>();
+  final WaitingListController _waitingListController =
+      Get.find<WaitingListController>();
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +77,13 @@ class WaitingListPage extends GetView<WaitingListController> {
                       rows: List.generate(
                         _waitingListController.reservations.length,
                         (index) => DataRow(
-                          color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                          color: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
                             if (states.contains(MaterialState.selected)) {
-                              return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                              return Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.08);
                             }
                             if (index.isEven) {
                               return Colors.grey.withOpacity(0.3);
@@ -88,7 +93,8 @@ class WaitingListPage extends GetView<WaitingListController> {
                           }),
                           cells: [
                             DataCell(
-                              Text("${_waitingListController.reservations.elementAt(index).userId}"),
+                              Text(
+                                  "${_waitingListController.reservations[index].userId}"),
                             ),
                             DataCell(
                               Text("Coluna 2"),
