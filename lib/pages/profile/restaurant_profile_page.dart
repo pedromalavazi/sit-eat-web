@@ -377,12 +377,15 @@ class ProfilePage extends GetView<RestaurantProfileController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 QrImage(
-                                  data: _restaurantRegisterController.qrCodeTextController.text,
+                                  data: _restaurantRegisterController.capacityTextController.text.toString(),
                                   version: QrVersions.auto,
                                   size: 200.0,
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _restaurantRegisterController.printingQrCode();
+                                    print("P: " + _restaurantRegisterController.qrCodeTextController.text);
+                                  },
                                   child: Icon(
                                     Icons.print,
                                   ),

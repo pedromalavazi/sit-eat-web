@@ -15,44 +15,47 @@ class TableCard extends StatelessWidget {
     return Container(
       width: 390,
       height: 170,
-      child: GestureDetector(
-        onTap: () {
-          Get.dialog(
-            AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              content: Container(
-                width: 370,
-                height: 380,
-                child: Column(
-                  children: [
-                    Container(
-                      child: QrImage(
-                        data: table.qrCode ?? "",
-                        version: QrVersions.auto,
-                        size: 350.0,
-                      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          elevation: 15.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(15),
+            onTap: () {
+              Get.dialog(
+                AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  content: Container(
+                    width: 370,
+                    height: 380,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: QrImage(
+                            data: table.qrCode ?? "",
+                            version: QrVersions.auto,
+                            size: 350.0,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            _tableController.printingQrCode();
+                          },
+                          child: Icon(
+                            Icons.print,
+                          ),
+                        ),
+                      ],
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.print,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Card(
-            elevation: 15.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -79,8 +82,7 @@ class TableCard extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               "Deseja realmente excluir esta mesa?",
@@ -94,22 +96,19 @@ class TableCard extends StatelessWidget {
                                           height: 25.0,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
                                             Container(
                                               width: 100,
                                               height: 35,
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  _tableController
-                                                      .delete(table.id);
+                                                  _tableController.delete(table.id);
                                                   Get.back();
                                                 },
                                                 child: Text(
                                                   "Excluir",
-                                                  style:
-                                                      TextStyle(fontSize: 18.0),
+                                                  style: TextStyle(fontSize: 18.0),
                                                 ),
                                               ),
                                             ),
@@ -120,8 +119,7 @@ class TableCard extends StatelessWidget {
                                                 onPressed: () => Get.back(),
                                                 child: Text(
                                                   "Cancelar",
-                                                  style:
-                                                      TextStyle(fontSize: 18.0),
+                                                  style: TextStyle(fontSize: 18.0),
                                                 ),
                                               ),
                                             ),
