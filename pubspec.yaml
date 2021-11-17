@@ -34,6 +34,8 @@ dependencies:
   easy_debounce: ^2.0.1
   date_time_picker: ^2.1.0
   easy_mask: ^2.0.1
+  printing: ^5.6.1
+  pdf: ^3.2.0
 
   #QR Code
   qr_flutter: ^4.0.0

@@ -29,7 +29,7 @@ class WaitingListPage extends GetView<WaitingListController> {
                       columns: [
                         DataColumn(
                           label: Text(
-                            "Posição",
+                            "Horário de reserva",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
@@ -39,15 +39,6 @@ class WaitingListPage extends GetView<WaitingListController> {
                         DataColumn(
                           label: Text(
                             "Nome",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            "Horário de reserva",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
@@ -98,9 +89,6 @@ class WaitingListPage extends GetView<WaitingListController> {
                             ),
                             DataCell(
                               Text("Coluna 4"),
-                            ),
-                            DataCell(
-                              Text("Coluna 5"),
                             ),
                           ],
                         ),
