@@ -44,6 +44,7 @@ class RestaurantProfileController extends GetxController {
   RestaurantModel restaurant = RestaurantModel();
   RxBool editInfo = false.obs;
   late Rx<File> image;
+  RxString qrCode = "".obs;
 
   @override
   void onInit() {
@@ -153,7 +154,7 @@ class RestaurantProfileController extends GetxController {
     stateTextController.text = restaurant.state ?? "";
     cityTextController.text = restaurant.city ?? "";
     imageTextController.text = restaurant.image ?? "";
-    qrCodeTextController.text = restaurant.qrCode ?? "";
+    qrCode.value = restaurant.qrCode ?? "";
   }
 
   printingQrCode() async {
@@ -167,8 +168,6 @@ class RestaurantProfileController extends GetxController {
     );
 
     await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => doc.save());
-
-    print("C: " + "${restaurant.qrCode}");
   }
 
   pw.Widget _buildContent(pw.Context context) {

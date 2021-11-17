@@ -44,7 +44,7 @@ class TableCard extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            _tableController.printingQrCode();
+                            _tableController.printingQrCode(table);
                           },
                           child: Icon(
                             Icons.print,

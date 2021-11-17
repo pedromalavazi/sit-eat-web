@@ -15,7 +15,6 @@ class TablesController extends GetxController {
   final TextEditingController tableNumberController = TextEditingController();
   final TextEditingController capacityController = TextEditingController();
   RxList<TableModel> tables = <TableModel>[].obs;
-  TableModel table = TableModel();
 
   @override
   void onInit() {
@@ -65,22 +64,20 @@ class TablesController extends GetxController {
     return tables;
   }
 
-  printingQrCode() async {
+  printingQrCode(TableModel table) async {
     final pw.Document doc = pw.Document();
 
     doc.addPage(
       pw.Page(
         pageTheme: pw.PageTheme(margin: pw.EdgeInsets.all(50.0)),
-        build: (context) => _buildContent(context),
+        build: (context) => _buildContent(context, table),
       ),
     );
 
     await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => doc.save());
-
-    print("C: " + "${table.number}");
   }
 
-  pw.Widget _buildContent(pw.Context context) {
+  pw.Widget _buildContent(pw.Context context, TableModel table) {
     return pw.Center(
       child: pw.Column(
         children: [
