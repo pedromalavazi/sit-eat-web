@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/widgets.dart';
+import 'package:printing/printing.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class TablesController extends GetxController {
   final TableService _tableService = TableService();
@@ -36,8 +40,7 @@ class TablesController extends GetxController {
     Get.back(result: {capacity, number});
 
     if (id != null) {
-      _utilService.showSuccessMessage(
-          "Sucesso", "Mesa cadastrada com sucesso!");
+      _utilService.showSuccessMessage("Sucesso", "Mesa cadastrada com sucesso!");
       getTables();
     }
   }
@@ -59,5 +62,53 @@ class TablesController extends GetxController {
     });
 
     return tables;
+  }
+
+  printingQrCode(TableModel table) async {
+    final pw.Document doc = pw.Document();
+
+    doc.addPage(
+      pw.Page(
+        pageTheme: pw.PageTheme(margin: pw.EdgeInsets.all(50.0)),
+        build: (context) => _buildContent(context, table),
+      ),
+    );
+
+    await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => doc.save());
+  }
+
+  pw.Widget _buildContent(pw.Context context, TableModel table) {
+    return pw.Center(
+      child: pw.Column(
+        children: [
+          pw.Padding(
+            padding: pw.EdgeInsets.all(80.0),
+            child: pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.center,
+              children: [
+                pw.Container(
+                  child: pw.Text(
+                    "Mesa: " + "${table.number}",
+                    style: pw.TextStyle(fontSize: 25.0),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          pw.SizedBox(height: 50.0),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            children: [
+              BarcodeWidget(
+                barcode: Barcode.qrCode(),
+                data: "${table.qrCode}",
+                height: 200.0,
+                width: 200.0,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

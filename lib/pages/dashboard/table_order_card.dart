@@ -33,9 +33,7 @@ class TableOrderCard extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Mesa ${table.number}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Source Code Pro"),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Source Code Pro"),
                       ),
                     ),
                   ),
