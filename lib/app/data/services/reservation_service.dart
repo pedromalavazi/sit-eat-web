@@ -28,7 +28,9 @@ class ReservationService extends GetxService {
       return reservation;
     }
 
-    reservation.userName = (await _userService.get(reservation.userId!)).name;
+    var user = await _userService.getAppUserName(reservation.userId!);
+    reservation.userName = user.name;
+    reservation.userPhone = user.phoneNumber;
 
     return reservation;
   }

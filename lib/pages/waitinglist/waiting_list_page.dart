@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/waiting_list_controller.dart';
+import 'package:sit_eat_web/app/data/services/util_service.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class WaitingListPage extends GetView<WaitingListController> {
   final WaitingListController _waitingListController =
       Get.find<WaitingListController>();
+
+  final UtilService _util = UtilService();
 
   @override
   Widget build(BuildContext context) {
@@ -84,17 +87,22 @@ class WaitingListPage extends GetView<WaitingListController> {
                           }),
                           cells: [
                             DataCell(
+                              Text(_util.convertTimeStampToString(
+                                _waitingListController
+                                    .reservations[index].checkIn!,
+                              )),
+                            ),
+                            DataCell(
                               Text(
-                                  "${_waitingListController.reservations[index].userId}"),
+                                  "${_waitingListController.reservations[index].userName}"),
                             ),
                             DataCell(
-                              Text("Coluna 2"),
+                              Text(
+                                  "${_waitingListController.reservations[index].occupationQty}"),
                             ),
                             DataCell(
-                              Text("Coluna 3"),
-                            ),
-                            DataCell(
-                              Text("Coluna 4"),
+                              Text(
+                                  "${_waitingListController.reservations[index].userPhone}"),
                             ),
                           ],
                         ),

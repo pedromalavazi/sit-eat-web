@@ -9,6 +9,7 @@ class ReservationModel {
   ReservationStatus? status;
   String? userId;
   String? userName;
+  String? userPhone;
 
   ReservationModel({
     this.id,
@@ -18,6 +19,7 @@ class ReservationModel {
     this.status,
     this.userId,
     this.userName,
+    this.userPhone,
   });
 
   ReservationModel.fromSnapshot(DocumentSnapshot reservation)
