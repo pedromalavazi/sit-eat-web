@@ -9,12 +9,12 @@ class WaitingListController extends GetxController {
 
   @override
   void onInit() {
-    getQueues();
+    getQueue();
     super.onInit();
   }
 
-  void getQueues() async {
+  void getQueue() async {
     this.reservations.value = await _restaurantService
-        .getQueuesByRestaurantId(AuthService.to.user.value.restaurantId!);
+        .getQueueByRestaurantId(AuthService.to.user.value.restaurantId!);
   }
 }

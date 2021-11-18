@@ -163,7 +163,7 @@ class RestaurantRepository {
     return restaurants;
   }
 
-  Future<List<QueueModel>> getQueuesByRestaurantId(String restaurantId) async {
+  Future<List<QueueModel>> getQueueByRestaurantId(String restaurantId) async {
     List<QueueModel> queues = <QueueModel>[];
 
     try {

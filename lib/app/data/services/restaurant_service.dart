@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/data/model/queue_model.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
@@ -78,14 +77,14 @@ class RestaurantService extends GetxService {
     await _restaurantRepository.updateQrCode(restaurant.id!, qrCode);
   }
 
-  Future<List<ReservationModel>> getQueuesByRestaurantId(
+  Future<List<ReservationModel>> getQueueByRestaurantId(
       String restaurantId) async {
     List<ReservationModel> reservationsQueue = <ReservationModel>[];
 
     try {
       if (!isValidId(restaurantId)) return <ReservationModel>[];
       var queues =
-          await _restaurantRepository.getQueuesByRestaurantId(restaurantId);
+          await _restaurantRepository.getQueueByRestaurantId(restaurantId);
 
       for (var queue in queues) {
         var reservation =
