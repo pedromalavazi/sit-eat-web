@@ -47,7 +47,7 @@ class TableRepository {
           "number": newTable.number,
           "capacity": newTable.capacity,
           "busy": false,
-          "reservationid": "",
+          "reservationId": "",
         },
       );
 

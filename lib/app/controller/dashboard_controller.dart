@@ -42,7 +42,7 @@ class DashboardController extends GetxController {
 
     for (var table in this.tables.where((t) => t.busy == true)) {
       ReservationModel tempReservation =
-          reservations.firstWhere((reserv) => reserv.id == table.reservationid);
+          reservations.firstWhere((reserv) => reserv.id == table.reservationId);
 
       DashboardModel tempDash = DashboardModel(
         reservationId: tempReservation.id,

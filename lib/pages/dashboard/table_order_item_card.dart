@@ -8,7 +8,8 @@ class TableOrderItemCard extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    final OrderController _orderController = Get.put(OrderController(reservationId));
+    final OrderController _orderController =
+        Get.put(OrderController(reservationId));
     return Container(
       height: 420,
       child: SingleChildScrollView(
@@ -31,33 +32,53 @@ class TableOrderItemCard extends GetView<OrderController> {
                         () => Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              _orderController.orders[index].name ?? "",
-                              style: TextStyle(
-                                fontSize: 20.0,
+                            SizedBox(
+                              width: 270,
+                              child: Text(
+                                _orderController.orders[index].name ?? "",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
-                            Text(
-                              _orderController.orders[index].measure ?? "",
-                              style: TextStyle(
-                                fontSize: 20.0,
+                            SizedBox(
+                              width: 70,
+                              child: Text(
+                                _orderController.orders[index].measure ?? "",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
-                            Text(
-                              _orderController.orders[index].quantity != null ? _orderController.orders[index].quantity!.toString() : "",
-                              style: TextStyle(
-                                fontSize: 20.0,
+                            SizedBox(
+                              width: 10,
+                              child: Text(
+                                _orderController.orders[index].quantity != null
+                                    ? _orderController.orders[index].quantity!
+                                        .toString()
+                                    : "",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
-                            IconButton(
-                              splashRadius: 20,
-                              onPressed: () {
-                                _orderController.changeStatus(
-                                  _orderController.orders[index].id,
-                                  (_orderController.orders[index].delivered != null ? !_orderController.orders[index].delivered! : true),
-                                );
-                              },
-                              icon: _orderController.getStatusIcon(_orderController.orders[index]),
+                            SizedBox(
+                              width: 35,
+                              child: IconButton(
+                                splashRadius: 20,
+                                onPressed: () {
+                                  _orderController.changeStatus(
+                                    _orderController.orders[index].id,
+                                    (_orderController.orders[index].delivered !=
+                                            null
+                                        ? !_orderController
+                                            .orders[index].delivered!
+                                        : true),
+                                  );
+                                },
+                                icon: _orderController.getStatusIcon(
+                                    _orderController.orders[index]),
+                              ),
                             ),
                           ],
                         ),

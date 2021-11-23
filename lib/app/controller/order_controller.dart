@@ -56,6 +56,6 @@ class OrderController extends GetxController {
     if (order.delivered != null && order.delivered!)
       return Icon(Icons.check_box_outlined, color: Colors.green);
     else
-      return Icon(Icons.check_box_outline_blank);
+      return Icon(Icons.check_box_outline_blank, color: Colors.red);
   }
 }
