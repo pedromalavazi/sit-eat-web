@@ -46,4 +46,15 @@ class ReservationRepository {
       return ReservationModel();
     }
   }
+
+  Future updateReservationStatus(
+      String reservationId, ReservationStatus status) async {
+    try {
+      await _firestore.collection('reservations').doc(reservationId).update({
+        'status': status.toUpper,
+      });
+    } catch (e) {
+      return;
+    }
+  }
 }

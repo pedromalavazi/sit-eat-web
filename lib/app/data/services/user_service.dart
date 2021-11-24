@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
 import 'package:sit_eat_web/app/data/model/user_model%20copy.dart';
 import 'package:sit_eat_web/app/data/model/user_web_model.dart';
@@ -66,6 +67,10 @@ class UserService extends GetxService {
   Future<UserFirebaseModel?> updateUserName(String? userName) async {
     if (userName == null) return null;
     return await AuthService.to.updateUserName(userName);
+  }
+
+  void updateUserStatus(String userId, LoginStatus status) async {
+    await _userRepository.updateUserStatus(userId, status);
   }
 
   Future delete(String? id) async {

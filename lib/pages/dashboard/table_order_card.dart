@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/controller/reservation_controller.dart';
 import 'package:sit_eat_web/app/data/model/dashboard_model.dart';
 import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 import 'package:sit_eat_web/pages/dashboard/table_order_item_card.dart';
@@ -10,11 +11,12 @@ class TableOrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ReservationController _reservationController =
+        Get.put(ReservationController());
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         width: 170,
-        //height: 170,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -105,8 +107,9 @@ class TableOrderCard extends StatelessWidget {
                                                   height: 40.0,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      Get.back();
-                                                      Get.back();
+                                                      _reservationController
+                                                          .closeBill(table
+                                                              .reservationId);
                                                     },
                                                     child: Text(
                                                       "Confirmar",

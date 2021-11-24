@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_model%20copy.dart';
 import 'package:sit_eat_web/app/data/model/user_web_model.dart';
 
@@ -71,5 +72,12 @@ class UserRepository {
 
   Future delete(String? id) async {
     await _firestore.collection("usersWeb").doc(id).delete();
+  }
+
+  Future updateUserStatus(String userId, LoginStatus status) async {
+    await _firestore
+        .collection("users")
+        .doc(userId)
+        .update({'status': status.toUpper});
   }
 }
