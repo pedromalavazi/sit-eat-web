@@ -5,7 +5,7 @@ class BillModel {
   bool? asked;
   bool? paid;
   String? paymentType;
-  double? reservationId;
+  String? reservationId;
   double? total;
 
   BillModel({

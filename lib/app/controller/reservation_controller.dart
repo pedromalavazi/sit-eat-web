@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sit_eat_web/app/data/services/bill_servive.dart';
+import 'package:sit_eat_web/app/data/services/bill_service.dart';
 import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 
 class ReservationController extends GetxController {
@@ -13,5 +13,9 @@ class ReservationController extends GetxController {
 
   void closeBill(String? reservationId) {
     _billService.closeBill(reservationId);
+  }
+
+  void freeTable(String? tableId) {
+    _reservationService.freeTable(tableId);
   }
 }

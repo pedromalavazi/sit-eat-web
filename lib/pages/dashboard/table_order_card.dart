@@ -161,6 +161,103 @@ class TableOrderCard extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(width: 15),
+                          Container(
+                            height: 35,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                await Get.dialog(
+                                  AlertDialog(
+                                    backgroundColor: Colors.red,
+                                    content: Container(
+                                      width: 350,
+                                      height: 210,
+                                      child: Card(
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        25, 25, 0, 0),
+                                                    width: 300.0,
+                                                    height: 80.0,
+                                                    child: Text(
+                                                      "Liberar a mesa para o próximo usuário?",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      ),
+                                                    )),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      25, 20, 0, 0),
+                                                  width: 150.0,
+                                                  height: 40.0,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      _reservationController
+                                                          .freeTable(
+                                                              table.tableId);
+                                                    },
+                                                    child: Text(
+                                                      "Confirmar",
+                                                      style: TextStyle(
+                                                          fontSize: 15.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      25, 20, 0, 0),
+                                                  width: 125.0,
+                                                  height: 40.0,
+                                                  child: TextButton(
+                                                    onPressed: () => Get.back(),
+                                                    child: Text(
+                                                      "Cancelar",
+                                                      style: TextStyle(
+                                                          fontSize: 15.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Liberar mesa",
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                  Icon(
+                                    Icons.check_circle_outline_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith(
+                                  (states) => Colors.yellow[700],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -191,7 +288,7 @@ class TableOrderCard extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: Text(
-                          "${table.userName}",
+                          table.userName!.substring(0, 15),
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.white,
@@ -205,16 +302,13 @@ class TableOrderCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            bottom: 16, left: 12, right: 20, top: 10),
-                        child: Icon(
-                          Icons.group,
-                          color: Colors.lightGreen,
-                        ),
+                            bottom: 16, left: 8, right: 10, top: 15),
+                        child: Icon(Icons.group, color: Colors.greenAccent),
                       ),
                       Text(
                         "${table.occupationQty}",
-                        style:
-                            TextStyle(fontSize: 20.0, color: Colors.lightGreen),
+                        style: TextStyle(
+                            fontSize: 20.0, color: Colors.greenAccent),
                       ),
                     ],
                   ),

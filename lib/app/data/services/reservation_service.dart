@@ -2,10 +2,12 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/repository/reservation_repository.dart';
+import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 
 class ReservationService extends GetxService {
   final ReservationRepository _reservationRepository = ReservationRepository();
+  final RestaurantRepository _restaurantRepository = RestaurantRepository();
   final UserService _userService = UserService();
 
   Future<List<ReservationModel>?> getAll(String reservationId) async {
@@ -49,5 +51,12 @@ class ReservationService extends GetxService {
     ReservationStatus status,
   ) async {
     await _reservationRepository.updateReservationStatus(reservationId, status);
+  }
+
+  Future freeTable(String? tableId) async {
+    if (tableId == null) return;
+    await _restaurantRepository.freeTable(tableId);
+    Get.back();
+    Get.back();
   }
 }

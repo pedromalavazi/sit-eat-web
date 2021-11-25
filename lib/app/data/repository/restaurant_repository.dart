@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sit_eat_web/app/data/model/queue_model.dart';
 import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
 
 class RestaurantRepository {
   // ignore: non_constant_identifier_names
@@ -179,5 +180,15 @@ class RestaurantRepository {
     } catch (e) {
       return queues;
     }
+  }
+
+  Future freeTable(String tableId) async {
+    try {
+      String restaurantId = AuthService.to.user.value.restaurantId!;
+      await _firestore
+          .collection('restaurants/$restaurantId/tables')
+          .doc(tableId)
+          .update({"busy": false});
+    } catch (e) {}
   }
 }
