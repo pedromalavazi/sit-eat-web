@@ -3,6 +3,7 @@ import 'package:sit_eat_web/app/data/model/bill_model.dart';
 import 'package:sit_eat_web/app/data/model/enum/login_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 import 'package:sit_eat_web/app/data/repository/bill_repository.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -46,5 +47,15 @@ class BillService extends GetxService {
     Get.back();
     Get.back();
     _util.showSuccessMessage('Sucesso', 'Conta fechada com sucesso!');
+  }
+
+  Stream<List<BillModel>> listenerBills() {
+    try {
+      String restaurantId = AuthService.to.user.value.restaurantId!;
+      
+      return _billRepository.listenerBills(restaurantId);
+    } catch (e) {
+      return Stream.empty();
+    }
   }
 }

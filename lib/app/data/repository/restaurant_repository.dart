@@ -188,7 +188,7 @@ class RestaurantRepository {
       await _firestore
           .collection('restaurants/$restaurantId/tables')
           .doc(tableId)
-          .update({"busy": false});
+          .update({"busy": false, "restaurantId": ""});
     } catch (e) {}
   }
 }

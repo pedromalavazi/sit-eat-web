@@ -14,6 +14,9 @@ class DashboardModel {
   ReservationStatus? status;
   String? userId;
   String? userName;
+  bool? billAsked;
+  bool? newOrders;
+  String? paymentType;
 
   DashboardModel({
     this.tableId,
@@ -28,5 +31,8 @@ class DashboardModel {
     this.status,
     this.userId,
     this.userName,
+    this.billAsked,
+    this.newOrders,
+    this.paymentType,
   });
 }

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 
 class TableRepository {
@@ -17,6 +20,22 @@ class TableRepository {
     } catch (e) {
       Get.defaultDialog(title: "ERROR", content: Text("Mesa não encontrado."));
       return TableModel();
+    }
+  }
+
+  Stream<List<TableModel>> listenerTables(String restaurantId) {
+    try {
+      return _firestore
+          .collection("restaurants/$restaurantId/tables")
+          .snapshots()
+          .map((doc) {
+        if (doc.docs.length == 0) {
+          return <TableModel>[];
+        }
+        return convertTablesFromDB(doc);
+      });
+    } catch (e) {
+      return Stream.empty();
     }
   }
 
@@ -90,5 +109,13 @@ class TableRepository {
           title: "ERROR", content: Text("Não foi possível excluir a mesa."));
       return false;
     }
+  }
+
+  List<TableModel> convertTablesFromDB(QuerySnapshot tablesFromDB) {
+    List<TableModel> tables = <TableModel>[];
+    tablesFromDB.docs.forEach((table) {
+      tables.add(TableModel.fromSnapshot(table));
+    });
+    return tables;
   }
 }

@@ -1,27 +1,129 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/bill_model.dart';
 import 'package:sit_eat_web/app/data/model/dashboard_model.dart';
+import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
+import 'package:sit_eat_web/app/data/services/bill_service.dart';
 import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 
 class DashboardController extends GetxController {
   final TableService _tableService = TableService();
+  final BillService _billsService = BillService();
   final ReservationService _reservationService = ReservationService();
   final UserService _userService = UserService();
 
+  RxBool isLoading = false.obs;
   RxList<TableModel> tables = <TableModel>[].obs;
   RxList<ReservationModel> reservations = <ReservationModel>[].obs;
-  RxList<DashboardModel> dashboardItens = <DashboardModel>[].obs;
+  RxList<DashboardModel> dashboards = <DashboardModel>[].obs;
 
   @override
   void onInit() {
     // TODO: fazer listener das mesas
 
-    getTables();
+    //getTables();
+    listenTables();
     super.onInit();
+  }
+
+  void listenTables() {
+    _tableService.listenerTables().listen((tablesDB) {
+      for (var i = 0; i < tablesDB.length; i++) {
+        var tempTable = tablesDB[i];
+
+        if (tablesDB[i].reservationId.isBlank != true) {
+          addBusyTable(tempTable);
+        } else {
+          addFreeTable(tempTable);
+        }
+      }
+
+      listenBills();
+    });
+  }
+
+  void addBusyTable(TableModel table) {
+    DashboardModel? tableExist = getExistingTable(table.id!);
+    if (tableExist == null) {
+      dashboards.add(DashboardModel(
+        //tables
+        tableId: table.id,
+        number: table.number,
+        busy: table.busy,
+        capacity: table.capacity,
+        qrCode: table.qrCode,
+        reservationId: table.reservationId,
+        //reservation
+        checkIn: null,
+        occupationQty: null,
+        restaurantId: null,
+        status: ReservationStatus.FINALIZADO,
+        userId: "",
+        userName: "",
+        //bills
+        billAsked: false,
+        //orders
+        newOrders: false,
+      ));
+    }
+  }
+
+  void addFreeTable(TableModel table) {
+    DashboardModel? tableExist = getExistingTable(table.id!);
+    if (tableExist == null) {
+      dashboards.add(DashboardModel(
+        //tables
+        tableId: table.id,
+        number: table.number,
+        busy: table.busy,
+        capacity: table.capacity,
+        qrCode: table.qrCode,
+        reservationId: table.reservationId,
+        //reservation
+        checkIn: null,
+        occupationQty: null,
+        restaurantId: null,
+        status: ReservationStatus.FINALIZADO,
+        userId: "",
+        userName: "",
+        //bills
+        billAsked: false,
+        paymentType: "",
+        //orders
+        newOrders: false,
+      ));
+    }
+  }
+
+  DashboardModel? getExistingTable(String id) {
+    if (dashboards.isEmpty) return null;
+    var model = dashboards.where((table) => table.tableId == id);
+    return model.length > 1 ? model.first : null;
+  }
+
+  listenBills() {
+    _billsService.listenerBills().listen((bills) async {
+      for (var i = 0; i < dashboards.length; i++) {
+        if (dashboards[i].reservationId.isBlank == false) {
+          var bill = bills
+              .where((b) => b.reservationId == dashboards[i].reservationId);
+
+          if (bill.isEmpty == false) {
+            await updateDashBills(dashboards[i], bill.first);
+          }
+        }
+      }
+      dashboards.refresh();
+    });
+  }
+
+  Future updateDashBills(DashboardModel dashboardModel, BillModel bill) async {
+    dashboardModel.billAsked = bill.asked;
+    dashboardModel.paymentType = bill.paymentType;
   }
 
   void getTables() async {
@@ -63,12 +165,12 @@ class DashboardController extends GetxController {
       dash.add(tempDash);
     }
 
-    this.dashboardItens.addAll(dash);
+    this.dashboards.addAll(dash);
     //getUserNames();
   }
 
   void getUserNames() async {
-    for (var item in this.dashboardItens) {
+    for (var item in this.dashboards) {
       item.userName = (await _userService.getAppUserName(item.userId!)).name;
     }
   }

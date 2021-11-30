@@ -1,11 +1,8 @@
-import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sit_eat_web/app/data/model/bill_model.dart';
-import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class BillRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final UtilService _util = UtilService();
 
   Future<BillModel?> getByReservationId(String reservationId) async {
     try {
@@ -35,6 +32,23 @@ class BillRepository {
     }
   }
 
+  Stream<List<BillModel>> listenerBills(String restaurantId) {
+    try {
+      return _firestore
+          .collection("bills")
+          .where("restaurantId", isEqualTo: restaurantId)
+          .snapshots()
+          .map((doc) {
+        if (doc.docs.length == 0) {
+          return <BillModel>[];
+        }
+        return convertBillsFromDB(doc);
+      });
+    } catch (e) {
+      return Stream.empty();
+    }
+  }
+
   Future<bool> setBillPaid(String billId) async {
     try {
       await _firestore.collection('bills').doc(billId).update({'paid': true});
@@ -42,5 +56,13 @@ class BillRepository {
     } catch (e) {
       return false;
     }
+  }
+
+  List<BillModel> convertBillsFromDB(QuerySnapshot billsFromDB) {
+    List<BillModel> bills = <BillModel>[];
+    billsFromDB.docs.forEach((bill) {
+      bills.add(BillModel.fromSnapshot(bill));
+    });
+    return bills;
   }
 }

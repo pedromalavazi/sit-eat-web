@@ -17,6 +17,7 @@ class TableOrderCard extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Container(
         width: 170,
+        height: 200,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -24,12 +25,13 @@ class TableOrderCard extends StatelessWidget {
           elevation: 15.0,
           color: table.busy ?? false
               ? (table.status == ReservationStatus.FINALIZADO
-                  ? Colors.yellow
+                  ? Colors.yellow[300]
                   : Colors.red)
               : Colors.green,
           child: InkWell(
             borderRadius: BorderRadius.circular(15),
             onTap: () {
+              //if (table.busy ?? false)
               Get.dialog(
                 AlertDialog(
                   shape: RoundedRectangleBorder(
@@ -269,6 +271,27 @@ class TableOrderCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  table.occupationQty == null
+                      ? Container(
+                          child: Text(""),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 0, left: 8, right: 10, top: 0),
+                              child: Icon(Icons.group,
+                                  color: Colors.lightGreenAccent[700]),
+                            ),
+                            Text(
+                              "${table.occupationQty}",
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.lightGreenAccent[700]),
+                            ),
+                          ],
+                        ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -288,7 +311,9 @@ class TableOrderCard extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: Text(
-                          table.userName!.substring(0, 15),
+                          table.userName!.length > 15
+                              ? table.userName!.substring(0, 15)
+                              : table.userName!,
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.white,
@@ -300,16 +325,30 @@ class TableOrderCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 16, left: 8, right: 10, top: 15),
-                        child: Icon(Icons.group, color: Colors.greenAccent),
-                      ),
-                      Text(
-                        "${table.occupationQty}",
-                        style: TextStyle(
-                            fontSize: 20.0, color: Colors.greenAccent),
-                      ),
+                      table.newOrders ?? false
+                          ? IconButton(
+                              splashRadius: 15,
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.notifications_active,
+                                color: Colors.yellow,
+                              ),
+                            )
+                          : Container(
+                              child: Text(""),
+                            ),
+                      table.billAsked ?? false
+                          ? IconButton(
+                              splashRadius: 15,
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.mobile_friendly_rounded,
+                                color: Colors.lightGreenAccent[700],
+                              ),
+                            )
+                          : Container(
+                              child: Text(""),
+                            ),
                     ],
                   ),
                 ],
