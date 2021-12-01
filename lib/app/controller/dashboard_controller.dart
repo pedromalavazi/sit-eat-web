@@ -32,17 +32,43 @@ class DashboardController extends GetxController {
 
   void listenTables() {
     _tableService.listenerTables().listen((tablesDB) {
-      for (var i = 0; i < tablesDB.length; i++) {
-        var tempTable = tablesDB[i];
-
-        if (tablesDB[i].reservationId.isBlank != true) {
-          addBusyTable(tempTable);
+      for (var table in tablesDB) {
+        if (table.reservationId.isBlank != true) {
+          addBusyTable(table);
         } else {
-          addFreeTable(tempTable);
+          addFreeTable(table);
         }
       }
 
       listenBills();
+    });
+  }
+
+  void listenBills() {
+    _billsService.listenerBills().listen((bills) async {
+      for (var bill in bills) {
+        var dashboardModel =
+            getExistingTableByReservationId(bill.reservationId!);
+
+        if (dashboardModel == null) continue;
+        await updateDashBills(dashboardModel, bill);
+      }
+
+      listenReservations();
+    });
+  }
+
+  void listenReservations() {
+    _reservationService.listenerReservations().listen((reservations) async {
+      for (var reservation in reservations) {
+        var dashboardModel = getExistingTableByReservationId(reservation.id!);
+        if (dashboardModel == null) continue;
+
+        await getUserDetails(reservation);
+        await updateDashReservations(dashboardModel, reservation);
+      }
+
+      dashboards.refresh();
     });
   }
 
@@ -99,31 +125,34 @@ class DashboardController extends GetxController {
     }
   }
 
-  DashboardModel? getExistingTable(String id) {
+  DashboardModel? getExistingTable(String tableId) {
     if (dashboards.isEmpty) return null;
-    var model = dashboards.where((table) => table.tableId == id);
-    return model.length > 1 ? model.first : null;
+    var model = dashboards.where((table) => table.tableId == tableId);
+    return model.length > 0 ? model.first : null;
   }
 
-  listenBills() {
-    _billsService.listenerBills().listen((bills) async {
-      for (var i = 0; i < dashboards.length; i++) {
-        if (dashboards[i].reservationId.isBlank == false) {
-          var bill = bills
-              .where((b) => b.reservationId == dashboards[i].reservationId);
-
-          if (bill.isEmpty == false) {
-            await updateDashBills(dashboards[i], bill.first);
-          }
-        }
-      }
-      dashboards.refresh();
-    });
+  DashboardModel? getExistingTableByReservationId(String reservationId) {
+    if (dashboards.isEmpty) return null;
+    var model =
+        dashboards.where((table) => table.reservationId == reservationId);
+    return model.length > 0 ? model.first : null;
   }
 
   Future updateDashBills(DashboardModel dashboardModel, BillModel bill) async {
     dashboardModel.billAsked = bill.asked;
     dashboardModel.paymentType = bill.paymentType;
+  }
+
+  Future updateDashReservations(
+    DashboardModel dashboardModel,
+    ReservationModel reservation,
+  ) async {
+    dashboardModel.checkIn = reservation.checkIn;
+    dashboardModel.occupationQty = reservation.occupationQty;
+    dashboardModel.restaurantId = reservation.restaurantId;
+    dashboardModel.status = reservation.status;
+    dashboardModel.userId = reservation.userId;
+    dashboardModel.userName = reservation.userName;
   }
 
   void getTables() async {
@@ -183,5 +212,11 @@ class DashboardController extends GetxController {
     });
 
     return tables;
+  }
+
+  Future getUserDetails(ReservationModel reservation) async {
+    var user = await _userService.getAppUserName(reservation.userId!);
+    reservation.userName = user.name;
+    reservation.userPhone = user.phoneNumber;
   }
 }

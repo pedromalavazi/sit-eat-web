@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sit_eat_web/app/data/model/restaurant_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 
 class TableRepository {

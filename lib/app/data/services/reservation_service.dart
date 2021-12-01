@@ -3,6 +3,7 @@ import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/repository/reservation_repository.dart';
 import 'package:sit_eat_web/app/data/repository/restaurant_repository.dart';
+import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
 
 class ReservationService extends GetxService {
@@ -44,6 +45,15 @@ class ReservationService extends GetxService {
     reservation.userPhone = user.phoneNumber;
 
     return reservation;
+  }
+
+  Stream<List<ReservationModel>> listenerReservations() {
+    try {
+      String restaurantId = AuthService.to.user.value.restaurantId!;
+      return _reservationRepository.listenerReservations(restaurantId);
+    } catch (e) {
+      return Stream.empty();
+    }
   }
 
   Future updateReservationStatus(

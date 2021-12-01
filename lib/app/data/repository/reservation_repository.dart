@@ -36,6 +36,38 @@ class ReservationRepository {
     }
   }
 
+  Stream<List<ReservationModel>> listenerReservations(String restaurantId) {
+    try {
+      return _firestore
+          .collection('reservations')
+          .where('restaurantId', isEqualTo: restaurantId)
+          .where('status', whereIn: [
+            ReservationStatus.ATIVO.toUpper,
+            ReservationStatus.AGUARDANDO.toUpper,
+            ReservationStatus.RESERVADO.toUpper,
+            ReservationStatus.FINALIZADO.toUpper,
+          ])
+          .snapshots()
+          .map((doc) {
+            if (doc.docs.length == 0) {
+              return <ReservationModel>[];
+            }
+            return convertReservationsFromDB(doc);
+          });
+    } catch (e) {
+      return Stream.empty();
+    }
+  }
+
+  List<ReservationModel> convertReservationsFromDB(
+      QuerySnapshot reservationsFromDB) {
+    List<ReservationModel> reservations = <ReservationModel>[];
+    reservationsFromDB.docs.forEach((reservation) {
+      reservations.add(ReservationModel.fromSnapshot(reservation));
+    });
+    return reservations;
+  }
+
   Future<ReservationModel> getReservationById(String reservationId) async {
     try {
       DocumentSnapshot doc =
