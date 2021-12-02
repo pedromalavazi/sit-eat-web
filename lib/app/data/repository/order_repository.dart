@@ -54,4 +54,30 @@ class OrderRepository {
       return false;
     }
   }
+
+  Stream<List<OrderModel>> listenerOrders(List<String> reservationId) {
+    try {
+      return _firestore
+          .collection("orders")
+          .where("reservationId", whereIn: reservationId)
+          .snapshots()
+          .map((doc) {
+        if (doc.docs.length == 0) {
+          return <OrderModel>[];
+        }
+        return convertOrdersFromDB(doc);
+      });
+    } catch (e) {
+      return Stream.empty();
+    }
+  }
+
+  List<OrderModel> convertOrdersFromDB(QuerySnapshot orderFromDB) {
+    List<OrderModel> orders = <OrderModel>[];
+    orderFromDB.docs.forEach((order) {
+      orders.add(OrderModel.fromSnapshot(order));
+    });
+
+    return orders;
+  }
 }

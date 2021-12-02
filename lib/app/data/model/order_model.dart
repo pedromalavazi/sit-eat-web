@@ -9,6 +9,7 @@ class OrderModel {
   String? reservationId;
   double? total;
   bool? delivered;
+  bool? viewed;
 
   OrderModel({
     this.id,
@@ -18,6 +19,7 @@ class OrderModel {
     this.reservationId,
     this.total,
     this.delivered,
+    this.viewed,
   });
 
   OrderModel.fromSnapshot(DocumentSnapshot order)
@@ -26,5 +28,6 @@ class OrderModel {
         productId = order["productId"],
         quantity = order["quantity"],
         reservationId = order["reservationId"],
-        delivered = order["delivered"];
+        delivered = order["delivered"],
+        viewed = order["viewed"];
 }

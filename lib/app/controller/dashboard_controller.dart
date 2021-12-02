@@ -2,10 +2,12 @@ import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/bill_model.dart';
 import 'package:sit_eat_web/app/data/model/dashboard_model.dart';
 import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
+import 'package:sit_eat_web/app/data/model/order_model.dart';
 import 'package:sit_eat_web/app/data/model/reservation_model.dart';
 import 'package:sit_eat_web/app/data/model/table_model.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/bill_service.dart';
+import 'package:sit_eat_web/app/data/services/order_service.dart';
 import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 import 'package:sit_eat_web/app/data/services/table_service.dart';
 import 'package:sit_eat_web/app/data/services/user_service.dart';
@@ -14,18 +16,18 @@ class DashboardController extends GetxController {
   final TableService _tableService = TableService();
   final BillService _billsService = BillService();
   final ReservationService _reservationService = ReservationService();
+  final OrderService _orderService = OrderService();
   final UserService _userService = UserService();
 
   RxBool isLoading = false.obs;
   RxList<TableModel> tables = <TableModel>[].obs;
   RxList<ReservationModel> reservations = <ReservationModel>[].obs;
   RxList<DashboardModel> dashboards = <DashboardModel>[].obs;
+  late String restaurantId;
 
   @override
   void onInit() {
-    // TODO: fazer listener das mesas
-
-    //getTables();
+    this.restaurantId = AuthService.to.user.value.restaurantId!;
     listenTables();
     super.onInit();
   }
@@ -68,8 +70,32 @@ class DashboardController extends GetxController {
         await updateDashReservations(dashboardModel, reservation);
       }
 
+      listenOrders();
       dashboards.refresh();
     });
+  }
+
+  void listenOrders() async {
+    var reservationsId = <String>[];
+    var reservations = await _reservationService.getAll(restaurantId);
+
+    if (reservations != null) {
+      reservations.map((reservation) => {reservationsId.add(reservation.id!)});
+
+      _orderService.listenerBills(reservationsId).listen((orders) {
+        for (var order in orders) {
+          bool hasNotViewedOrders = hasAnyNotViewedOrders(order.id!, orders);
+
+          if (hasNotViewedOrders) {
+            var dashboardModel =
+                getExistingTableByReservationId(order.reservationId!);
+            if (dashboardModel != null) {
+              updateDashOrders(dashboardModel, order);
+            }
+          }
+        }
+      });
+    }
   }
 
   void addBusyTable(TableModel table) {
@@ -155,53 +181,8 @@ class DashboardController extends GetxController {
     dashboardModel.userName = reservation.userName;
   }
 
-  void getTables() async {
-    var tables = await _tableService.getTables();
-    this.tables.value = sortTables(tables);
-    getReservations();
-  }
-
-  void getReservations() async {
-    var tempReservations = await _reservationService
-        .getAll(AuthService.to.user.value.restaurantId!);
-    if (tempReservations != null) this.reservations.value = tempReservations;
-    mapDashboard();
-  }
-
-  void mapDashboard() async {
-    List<DashboardModel> dash = <DashboardModel>[];
-
-    for (var table in this.tables.where((t) => t.busy == true)) {
-      ReservationModel tempReservation =
-          reservations.firstWhere((reserv) => reserv.id == table.reservationId);
-
-      DashboardModel tempDash = DashboardModel(
-        reservationId: tempReservation.id,
-        restaurantId: tempReservation.restaurantId,
-        tableId: table.id,
-        busy: table.busy,
-        capacity: table.capacity,
-        checkIn: tempReservation.checkIn,
-        number: table.number,
-        occupationQty: tempReservation.occupationQty,
-        qrCode: table.qrCode,
-        status: tempReservation.status,
-        userId: tempReservation.userId,
-        userName:
-            (await _userService.getAppUserName(tempReservation.userId!)).name,
-      );
-
-      dash.add(tempDash);
-    }
-
-    this.dashboards.addAll(dash);
-    //getUserNames();
-  }
-
-  void getUserNames() async {
-    for (var item in this.dashboards) {
-      item.userName = (await _userService.getAppUserName(item.userId!)).name;
-    }
+  void updateDashOrders(DashboardModel dashboardModel, OrderModel order) {
+    dashboardModel.newOrders = order.viewed;
   }
 
   List<TableModel> sortTables(List<TableModel> tables) {
@@ -219,4 +200,62 @@ class DashboardController extends GetxController {
     reservation.userName = user.name;
     reservation.userPhone = user.phoneNumber;
   }
+
+  bool hasAnyNotViewedOrders(String orderId, List<OrderModel> orders) {
+    var currentOrders = orders.where((order) => order.id == orderId);
+    if (currentOrders.any((order) => !order.viewed!)) {
+      orders.removeWhere((order) => order.id == orderId);
+      return true;
+    }
+    return false;
+  }
+
+  // void getTables() async {
+  //   var tables = await _tableService.getTables();
+  //   this.tables.value = sortTables(tables);
+  //   getReservations();
+  // }
+
+  // void getReservations() async {
+  //   var tempReservations = await _reservationService
+  //       .getAll(AuthService.to.user.value.restaurantId!);
+  //   if (tempReservations != null) this.reservations.value = tempReservations;
+  //   mapDashboard();
+  // }
+
+  // void mapDashboard() async {
+  //   List<DashboardModel> dash = <DashboardModel>[];
+
+  //   for (var table in this.tables.where((t) => t.busy == true)) {
+  //     ReservationModel tempReservation =
+  //         reservations.firstWhere((reserv) => reserv.id == table.reservationId);
+
+  //     DashboardModel tempDash = DashboardModel(
+  //       reservationId: tempReservation.id,
+  //       restaurantId: tempReservation.restaurantId,
+  //       tableId: table.id,
+  //       busy: table.busy,
+  //       capacity: table.capacity,
+  //       checkIn: tempReservation.checkIn,
+  //       number: table.number,
+  //       occupationQty: tempReservation.occupationQty,
+  //       qrCode: table.qrCode,
+  //       status: tempReservation.status,
+  //       userId: tempReservation.userId,
+  //       userName:
+  //           (await _userService.getAppUserName(tempReservation.userId!)).name,
+  //     );
+
+  //     dash.add(tempDash);
+  //   }
+
+  //   this.dashboards.addAll(dash);
+  //   //getUserNames();
+  // }
+
+  // void getUserNames() async {
+  //   for (var item in this.dashboards) {
+  //     item.userName = (await _userService.getAppUserName(item.userId!)).name;
+  //   }
+  // }
 }

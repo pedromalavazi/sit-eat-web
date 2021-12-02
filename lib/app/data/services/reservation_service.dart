@@ -11,9 +11,9 @@ class ReservationService extends GetxService {
   final RestaurantRepository _restaurantRepository = RestaurantRepository();
   final UserService _userService = UserService();
 
-  Future<List<ReservationModel>?> getAll(String reservationId) async {
-    if (reservationId.isNotEmpty) {
-      return await _reservationRepository.getAll(reservationId);
+  Future<List<ReservationModel>?> getAll(String restaurantId) async {
+    if (restaurantId.isNotEmpty) {
+      return await _reservationRepository.getAll(restaurantId);
     } else {
       return null;
     }
