@@ -167,6 +167,7 @@ class DashboardController extends GetxController {
   Future updateDashBills(DashboardModel dashboardModel, BillModel bill) async {
     dashboardModel.billAsked = bill.asked;
     dashboardModel.paymentType = bill.paymentType;
+    dashboardModel.total = bill.total;
   }
 
   Future updateDashReservations(

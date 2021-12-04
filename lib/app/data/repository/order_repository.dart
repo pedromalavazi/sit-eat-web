@@ -80,4 +80,28 @@ class OrderRepository {
 
     return orders;
   }
+
+  Future<bool> setViewed(String reservationId) async {
+    try {
+      _firestore
+          .collection("orders")
+          .where("reservationId", isEqualTo: reservationId)
+          .snapshots()
+          .map((doc) {
+        if (doc.docs.length == 0) {
+          return <OrderModel>[];
+        }
+        doc.docs.forEach((orderFromDB) {
+          var tempOrder = OrderModel.fromSnapshot(orderFromDB);
+          _firestore
+              .collection("orders")
+              .doc(tempOrder.id)
+              .update({"viewed": true});
+        });
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

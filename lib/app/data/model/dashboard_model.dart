@@ -17,6 +17,7 @@ class DashboardModel {
   bool? billAsked;
   bool? newOrders;
   String? paymentType;
+  double? total;
 
   DashboardModel({
     this.tableId,
@@ -34,5 +35,6 @@ class DashboardModel {
     this.billAsked,
     this.newOrders,
     this.paymentType,
+    this.total,
   });
 }

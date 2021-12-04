@@ -42,6 +42,15 @@ class OrderService extends GetxService {
     }
   }
 
+  Future<bool> setViewed(String? reservationId) async {
+    try {
+      if (!isValidId(reservationId)) return false;
+      return await _orderRepository.setViewed(reservationId!);
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool isValidId(String? id) {
     if (id.isBlank == true) {
       _utilService.showInformationMessage("Dados inválidos", "Id inválido.");
