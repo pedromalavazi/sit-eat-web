@@ -21,6 +21,15 @@ class TableService extends GetxService {
         tableId, AuthService.to.user.value.restaurantId!);
   }
 
+  Stream<List<TableModel>> listenerTables() {
+    try {
+      String restaurantId = AuthService.to.user.value.restaurantId!;
+      return _tableRepository.listenerTables(restaurantId);
+    } catch (e) {
+      return Stream.empty();
+    }
+  }
+
   Future<List<TableModel>> getTables() async {
     if (!isValidId(AuthService.to.user.value.restaurantId))
       return <TableModel>[];

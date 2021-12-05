@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/enum/login_type_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
-import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/model/user_web_model.dart';
 import 'package:sit_eat_web/app/data/services/restaurant_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 

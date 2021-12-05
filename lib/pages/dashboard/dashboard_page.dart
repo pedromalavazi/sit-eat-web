@@ -11,14 +11,14 @@ class DashboardPage extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Menu(
       title: "Dashboard",
-      body: Obx(
-        () => Padding(
-          padding: const EdgeInsets.all(50.0),
-          child: Wrap(
+      body: Padding(
+        padding: const EdgeInsets.all(50.0),
+        child: Obx(
+          () => Wrap(
             children: List.generate(
-              _dashboardController.tables.length,
+              _dashboardController.dashboards.length,
               (index) =>
-                  TableOrderCard(table: _dashboardController.tables[index]),
+                  TableOrderCard(table: _dashboardController.dashboards[index]),
             ),
           ),
         ),

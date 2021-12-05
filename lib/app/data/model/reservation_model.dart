@@ -1,24 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sit_eat_web/app/data/model/enum/reservation_status_enum.dart';
 
 class ReservationModel {
-  String? userId;
-  String? status;
-  String? restaurantId;
+  String? id;
+  Timestamp? checkIn;
   int? occupationQty;
-  Timestamp? checkin;
+  String? restaurantId;
+  ReservationStatus? status;
+  String? userId;
+  String? userName;
+  String? userPhone;
 
   ReservationModel({
-    this.userId,
-    this.status,
-    this.restaurantId,
+    this.id,
+    this.checkIn,
     this.occupationQty,
-    this.checkin,
+    this.restaurantId,
+    this.status,
+    this.userId,
+    this.userName,
+    this.userPhone,
   });
 
   ReservationModel.fromSnapshot(DocumentSnapshot reservation)
-      : userId = reservation.id,
-        status = reservation["status"],
-        restaurantId = reservation["restaurantId"],
+      : id = reservation.id,
+        checkIn = reservation["checkin"],
         occupationQty = reservation["occupationQty"],
-        checkin = reservation["checkin"];
+        restaurantId = reservation["restaurantId"],
+        status = ReservationStatus.values
+            .where((status) => status.toUpper == reservation["status"])
+            .first,
+        userId = reservation["userId"];
 }

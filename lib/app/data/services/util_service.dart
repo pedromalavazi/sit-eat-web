@@ -63,6 +63,10 @@ class UtilService extends GetxService {
   }
 
   String convertTimeStampToString(Timestamp timestamp) {
-    return DateFormat.Hm().format(timestamp.toDate());
+    try {
+      return DateFormat.Hm().format(timestamp.toDate());
+    } catch (e) {
+      return "";
+    }
   }
 }

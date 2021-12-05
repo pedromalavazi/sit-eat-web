@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:sit_eat_web/app/data/model/enum/login_status_enum.dart';
 import 'package:sit_eat_web/app/data/model/user_firebase_model.dart';
-import 'package:sit_eat_web/app/data/model/user_model.dart';
+import 'package:sit_eat_web/app/data/model/user_model%20copy.dart';
+import 'package:sit_eat_web/app/data/model/user_web_model.dart';
 import 'package:sit_eat_web/app/data/repository/user_repository.dart';
 import 'package:sit_eat_web/app/data/services/auth_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
@@ -11,6 +13,10 @@ class UserService extends GetxService {
 
   Future<UserWebModel> get(String id) {
     return _userRepository.getUser(id);
+  }
+
+  Future<UserModel> getAppUserName(String id) async {
+    return await _userRepository.getAppUserName(id);
   }
 
   Future<bool> createRestaurantUser(
@@ -61,6 +67,10 @@ class UserService extends GetxService {
   Future<UserFirebaseModel?> updateUserName(String? userName) async {
     if (userName == null) return null;
     return await AuthService.to.updateUserName(userName);
+  }
+
+  void updateUserStatus(String userId, LoginStatus status) async {
+    await _userRepository.updateUserStatus(userId, status);
   }
 
   Future delete(String? id) async {

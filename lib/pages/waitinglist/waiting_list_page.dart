@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/controller/waiting_list_controller.dart';
+import 'package:sit_eat_web/app/data/services/util_service.dart';
 import 'package:sit_eat_web/utils/menu.dart';
 
 class WaitingListPage extends GetView<WaitingListController> {
-  final WaitingListController _waitingListController = Get.find<WaitingListController>();
+  final WaitingListController _waitingListController =
+      Get.find<WaitingListController>();
+
+  final UtilService _util = UtilService();
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +71,13 @@ class WaitingListPage extends GetView<WaitingListController> {
                       rows: List.generate(
                         _waitingListController.reservations.length,
                         (index) => DataRow(
-                          color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                          color: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
                             if (states.contains(MaterialState.selected)) {
-                              return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                              return Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.08);
                             }
                             if (index.isEven) {
                               return Colors.grey.withOpacity(0.3);
@@ -79,16 +87,22 @@ class WaitingListPage extends GetView<WaitingListController> {
                           }),
                           cells: [
                             DataCell(
-                              Text("${_waitingListController.reservations.elementAt(index).userId}"),
+                              Text(_util.convertTimeStampToString(
+                                _waitingListController
+                                    .reservations[index].checkIn!,
+                              )),
                             ),
                             DataCell(
-                              Text("Coluna 2"),
+                              Text(
+                                  "${_waitingListController.reservations[index].userName}"),
                             ),
                             DataCell(
-                              Text("Coluna 3"),
+                              Text(
+                                  "${_waitingListController.reservations[index].occupationQty}"),
                             ),
                             DataCell(
-                              Text("Coluna 4"),
+                              Text(
+                                  "${_waitingListController.reservations[index].userPhone}"),
                             ),
                           ],
                         ),
