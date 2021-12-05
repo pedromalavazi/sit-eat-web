@@ -42,10 +42,11 @@ class OrderService extends GetxService {
     }
   }
 
-  Future<bool> setViewed(String? reservationId) async {
+  Future setViewed(String? reservationId) async {
     try {
       if (!isValidId(reservationId)) return false;
-      return await _orderRepository.setViewed(reservationId!);
+      await _orderRepository.setViewed(reservationId!);
+      Get.back();
     } catch (e) {
       return false;
     }

@@ -83,21 +83,17 @@ class OrderRepository {
 
   Future<bool> setViewed(String reservationId) async {
     try {
-      _firestore
+      var orders = await _firestore
           .collection("orders")
           .where("reservationId", isEqualTo: reservationId)
-          .snapshots()
-          .map((doc) {
-        if (doc.docs.length == 0) {
-          return <OrderModel>[];
-        }
-        doc.docs.forEach((orderFromDB) {
-          var tempOrder = OrderModel.fromSnapshot(orderFromDB);
-          _firestore
-              .collection("orders")
-              .doc(tempOrder.id)
-              .update({"viewed": true});
-        });
+          .get();
+
+      orders.docs.forEach((order) {
+        var tempOrder = OrderModel.fromSnapshot(order);
+        _firestore
+            .collection("orders")
+            .doc(tempOrder.id)
+            .update({"viewed": true});
       });
       return true;
     } catch (e) {

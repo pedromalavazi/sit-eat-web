@@ -69,200 +69,218 @@ class TableOrderCard extends StatelessWidget {
                           children: [
                             Container(
                               height: 35,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  await Get.dialog(
-                                    AlertDialog(
-                                      backgroundColor: Colors.red,
-                                      content: Container(
-                                        width: 350,
-                                        height: 210,
-                                        child: Card(
-                                          elevation: 15.0,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      margin:
-                                                          EdgeInsets.fromLTRB(
-                                                              25, 25, 0, 0),
-                                                      width: 300.0,
-                                                      height: 80.0,
-                                                      child: Text(
-                                                        "Você fez o recebimento da conta do cliente?",
-                                                        style: TextStyle(
-                                                          fontSize: 20,
+                              child: table.billAsked == false
+                                  ? Container()
+                                  : ElevatedButton(
+                                      onPressed: () async {
+                                        await Get.dialog(
+                                          AlertDialog(
+                                            backgroundColor: Colors.red,
+                                            content: Container(
+                                              width: 350,
+                                              height: 210,
+                                              child: Card(
+                                                elevation: 15.0,
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                            margin: EdgeInsets
+                                                                .fromLTRB(25,
+                                                                    25, 0, 0),
+                                                            width: 300.0,
+                                                            height: 80.0,
+                                                            child: Text(
+                                                              "Você fez o recebimento da conta do cliente?",
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                              ),
+                                                            )),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  25, 20, 0, 0),
+                                                          width: 150.0,
+                                                          height: 40.0,
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _reservationController
+                                                                  .closeBill(table
+                                                                      .reservationId);
+                                                            },
+                                                            child: Text(
+                                                              "Confirmar",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      15.0),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      )),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        25, 20, 0, 0),
-                                                    width: 150.0,
-                                                    height: 40.0,
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        _reservationController
-                                                            .closeBill(table
-                                                                .reservationId);
-                                                      },
-                                                      child: Text(
-                                                        "Confirmar",
-                                                        style: TextStyle(
-                                                            fontSize: 15.0),
-                                                      ),
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  25, 20, 0, 0),
+                                                          width: 125.0,
+                                                          height: 40.0,
+                                                          child: TextButton(
+                                                            onPressed: () =>
+                                                                Get.back(),
+                                                            child: Text(
+                                                              "Cancelar",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      15.0),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        25, 20, 0, 0),
-                                                    width: 125.0,
-                                                    height: 40.0,
-                                                    child: TextButton(
-                                                      onPressed: () =>
-                                                          Get.back(),
-                                                      child: Text(
-                                                        "Cancelar",
-                                                        style: TextStyle(
-                                                            fontSize: 15.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ],
+                                            ),
                                           ),
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Pagamento recebido",
+                                            style: TextStyle(fontSize: 16.0),
+                                          ),
+                                          Icon(
+                                            Icons.check_circle_outline_rounded,
+                                            color: Colors.white,
+                                          )
+                                        ],
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                          (states) => Colors.green,
                                         ),
                                       ),
                                     ),
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Pagamento recebido",
-                                      style: TextStyle(fontSize: 16.0),
-                                    ),
-                                    Icon(
-                                      Icons.check_circle_outline_rounded,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                    (states) => Colors.green,
-                                  ),
-                                ),
-                              ),
                             ),
                             SizedBox(width: 15),
                             Container(
                               height: 35,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  await Get.dialog(
-                                    AlertDialog(
-                                      backgroundColor: Colors.red,
-                                      content: Container(
-                                        width: 350,
-                                        height: 210,
-                                        child: Card(
-                                          elevation: 15.0,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      margin:
-                                                          EdgeInsets.fromLTRB(
-                                                              25, 25, 0, 0),
-                                                      width: 300.0,
-                                                      height: 80.0,
-                                                      child: Text(
-                                                        "Liberar a mesa para o próximo usuário?",
-                                                        style: TextStyle(
-                                                          fontSize: 20,
+                              child: (table.busy == true &&
+                                      table.status ==
+                                          ReservationStatus.FINALIZADO)
+                                  ? ElevatedButton(
+                                      onPressed: () async {
+                                        await Get.dialog(
+                                          AlertDialog(
+                                            backgroundColor: Colors.red,
+                                            content: Container(
+                                              width: 350,
+                                              height: 210,
+                                              child: Card(
+                                                elevation: 15.0,
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                            margin: EdgeInsets
+                                                                .fromLTRB(25,
+                                                                    25, 0, 0),
+                                                            width: 300.0,
+                                                            height: 80.0,
+                                                            child: Text(
+                                                              "Liberar a mesa para o próximo usuário?",
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                              ),
+                                                            )),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  25, 20, 0, 0),
+                                                          width: 150.0,
+                                                          height: 40.0,
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _reservationController
+                                                                  .freeTable(table
+                                                                      .tableId);
+                                                            },
+                                                            child: Text(
+                                                              "Confirmar",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      15.0),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      )),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        25, 20, 0, 0),
-                                                    width: 150.0,
-                                                    height: 40.0,
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        _reservationController
-                                                            .freeTable(
-                                                                table.tableId);
-                                                      },
-                                                      child: Text(
-                                                        "Confirmar",
-                                                        style: TextStyle(
-                                                            fontSize: 15.0),
-                                                      ),
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  25, 20, 0, 0),
+                                                          width: 125.0,
+                                                          height: 40.0,
+                                                          child: TextButton(
+                                                            onPressed: () =>
+                                                                Get.back(),
+                                                            child: Text(
+                                                              "Cancelar",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      15.0),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        25, 20, 0, 0),
-                                                    width: 125.0,
-                                                    height: 40.0,
-                                                    child: TextButton(
-                                                      onPressed: () =>
-                                                          Get.back(),
-                                                      child: Text(
-                                                        "Cancelar",
-                                                        style: TextStyle(
-                                                            fontSize: 15.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ],
+                                            ),
                                           ),
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Liberar mesa",
+                                            style: TextStyle(fontSize: 16.0),
+                                          ),
+                                          Icon(
+                                            Icons.check_circle_outline_rounded,
+                                            color: Colors.white,
+                                          )
+                                        ],
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                          (states) => Colors.yellow[700],
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Liberar mesa",
-                                      style: TextStyle(fontSize: 16.0),
-                                    ),
-                                    Icon(
-                                      Icons.check_circle_outline_rounded,
-                                      color: Colors.white,
                                     )
-                                  ],
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                    (states) => Colors.yellow[700],
-                                  ),
-                                ),
-                              ),
+                                  : Container(),
                             ),
                           ],
                         ),
@@ -329,7 +347,7 @@ class TableOrderCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      table.newOrders ?? false
+                      table.newOrders == true
                           ? IconButton(
                               splashRadius: 15,
                               onPressed: () async {
@@ -434,62 +452,56 @@ class TableOrderCard extends StatelessWidget {
                                                 Container(
                                                   margin: EdgeInsets.fromLTRB(
                                                       25, 25, 0, 0),
-                                                  width: 300.0,
-                                                  height: 80.0,
                                                   child: Text(
-                                                    // TO DO: fazer card de pedido de conta
                                                     "Pedido de fechamento de conta",
                                                     style: TextStyle(
                                                       fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
-                                                Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      25, 25, 0, 0),
-                                                  width: 300.0,
-                                                  height: 80.0,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Tipo de pagamento: ",
-                                                        style: TextStyle(
-                                                          fontSize: 15,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        table.paymentType ?? "",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      25, 25, 0, 0),
-                                                  width: 300.0,
-                                                  height: 80.0,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Total: ",
-                                                        style: TextStyle(
-                                                          fontSize: 15,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        table.total.toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.green),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
                                               ],
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  25, 25, 0, 0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Tipo de pagamento: ",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    table.paymentType ?? "",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.blue),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  25, 25, 0, 0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Total: ",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    table.total.toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.green),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                             Row(
                                               mainAxisAlignment:

@@ -80,20 +80,30 @@ class DashboardController extends GetxController {
     var reservations = await _reservationService.getAll(restaurantId);
 
     if (reservations != null) {
-      reservations.map((reservation) => {reservationsId.add(reservation.id!)});
+      reservations.forEach((reservation) {
+        reservationsId.add(reservation.id!);
+      });
 
       _orderService.listenerBills(reservationsId).listen((orders) {
+        var orderReservationIdToIgnore = <String>[];
         for (var order in orders) {
+          if (orderReservationIdToIgnore.contains(order.reservationId))
+            continue;
+
           bool hasNotViewedOrders = hasAnyNotViewedOrders(order.id!, orders);
 
+          var dashboardModel =
+              getExistingTableByReservationId(order.reservationId!);
+          if (dashboardModel != null) {
+            updateDashOrders(dashboardModel, order);
+          }
+
           if (hasNotViewedOrders) {
-            var dashboardModel =
-                getExistingTableByReservationId(order.reservationId!);
-            if (dashboardModel != null) {
-              updateDashOrders(dashboardModel, order);
-            }
+            orderReservationIdToIgnore.add(order.reservationId!);
           }
         }
+
+        dashboards.refresh();
       });
     }
   }
@@ -183,7 +193,7 @@ class DashboardController extends GetxController {
   }
 
   void updateDashOrders(DashboardModel dashboardModel, OrderModel order) {
-    dashboardModel.newOrders = order.viewed;
+    dashboardModel.newOrders = !order.viewed!;
   }
 
   List<TableModel> sortTables(List<TableModel> tables) {
@@ -205,7 +215,6 @@ class DashboardController extends GetxController {
   bool hasAnyNotViewedOrders(String orderId, List<OrderModel> orders) {
     var currentOrders = orders.where((order) => order.id == orderId);
     if (currentOrders.any((order) => !order.viewed!)) {
-      orders.removeWhere((order) => order.id == orderId);
       return true;
     }
     return false;
