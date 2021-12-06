@@ -12,13 +12,15 @@ class DashboardPage extends GetView<DashboardController> {
     return Menu(
       title: "Dashboard",
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: const EdgeInsets.only(left: 50, right: 50),
         child: Obx(
-          () => Wrap(
-            children: List.generate(
-              _dashboardController.dashboards.length,
-              (index) =>
-                  TableOrderCard(table: _dashboardController.dashboards[index]),
+          () => SingleChildScrollView(
+            child: Wrap(
+              children: List.generate(
+                _dashboardController.dashboards.length,
+                (index) => TableOrderCard(
+                    table: _dashboardController.dashboards[index]),
+              ),
             ),
           ),
         ),

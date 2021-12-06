@@ -1,13 +1,10 @@
 import 'package:get/get.dart';
 import 'package:sit_eat_web/app/data/model/order_model.dart';
 import 'package:sit_eat_web/app/data/repository/order_repository.dart';
-import 'package:sit_eat_web/app/data/services/auth_service.dart';
-import 'package:sit_eat_web/app/data/services/reservation_service.dart';
 import 'package:sit_eat_web/app/data/services/util_service.dart';
 
 class OrderService extends GetxService {
   OrderRepository _orderRepository = OrderRepository();
-  ReservationService _reservationService = ReservationService();
   UtilService _utilService = UtilService();
 
   Future<OrderModel> getById(String orderId) async {
