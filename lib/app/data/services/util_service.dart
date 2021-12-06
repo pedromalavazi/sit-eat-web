@@ -45,17 +45,7 @@ class UtilService extends GetxService {
     );
   }
 
-  showLoader() {
-    Get.dialog(
-      Center(
-        child: CircularProgressIndicator(
-          color: Colors.red,
-          strokeWidth: 3.5,
-        ),
-      ),
-      barrierDismissible: false,
-    );
-  }
+  showLoader() {}
 
   Timestamp convertStringToTimestamp(String hour) {
     var date = DateTime.parse("2020-01-15 " + hour + ":00");

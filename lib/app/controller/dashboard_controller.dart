@@ -71,6 +71,7 @@ class DashboardController extends GetxController {
       }
 
       listenOrders();
+      sortTables(dashboards);
       dashboards.refresh();
     });
   }
@@ -103,6 +104,7 @@ class DashboardController extends GetxController {
           }
         }
 
+        sortTables(dashboards);
         dashboards.refresh();
       });
     }
@@ -196,7 +198,7 @@ class DashboardController extends GetxController {
     dashboardModel.newOrders = !order.viewed!;
   }
 
-  List<TableModel> sortTables(List<TableModel> tables) {
+  List<DashboardModel> sortTables(List<DashboardModel> tables) {
     tables.sort((a, b) {
       if (a.number! > b.number!) return 1;
       if (a.number! < b.number!) return -1;
