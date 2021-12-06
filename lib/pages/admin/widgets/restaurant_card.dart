@@ -15,17 +15,17 @@ class RestaurantCard extends StatelessWidget {
       child: Container(
         width: 500,
         height: 150,
-        child: InkWell(
-          focusColor: Colors.red,
-          borderRadius: BorderRadius.circular(15),
-          onTap: () {
-            Get.toNamed(Routes.RESTAURANT_APPROVAL, arguments: restaurant.id);
-          },
-          child: Card(
-            elevation: 15.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
+        child: Card(
+          elevation: 15.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: InkWell(
+            focusColor: Colors.red,
+            borderRadius: BorderRadius.circular(15),
+            onTap: () {
+              Get.toNamed(Routes.RESTAURANT_APPROVAL, arguments: restaurant.id);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

@@ -314,6 +314,9 @@ class RestaurantApprovePage extends GetView<RestaurantApprovalController> {
                                               "Desativar",
                                               style: TextStyle(fontSize: 20.0),
                                             ),
+                                            style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.red),
+                                            ),
                                           ),
                                         ),
                                       ],
