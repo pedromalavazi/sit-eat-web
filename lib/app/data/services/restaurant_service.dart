@@ -16,15 +16,13 @@ class RestaurantService extends GetxService {
 
   Future<RestaurantModel> getById(String restaurantId) async {
     if (restaurantId.isEmpty) {
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Restaurante não encontrado.");
+      _utilService.showInformationMessage("Dados inválidos", "Restaurante não encontrado.");
       return RestaurantModel();
     }
 
     var restaurant = await _restaurantRepository.getRestaurant(restaurantId);
 
-    restaurant.image = await _imageService.downloadRestaurantUrl(
-        restaurant.image!, restaurantId);
+    restaurant.image = await _imageService.downloadRestaurantUrl(restaurant.image!, restaurantId);
 
     return restaurant;
   }
@@ -36,8 +34,7 @@ class RestaurantService extends GetxService {
   Future<String?> registerNewRestaurant(RestaurantModel resturant) async {
     if (!isValidRestaurant(resturant)) return null;
 
-    var restaurantId =
-        await _restaurantRepository.registerNewRestaurant(resturant);
+    var restaurantId = await _restaurantRepository.registerNewRestaurant(resturant);
 
     if (restaurantId != null) {
       resturant.id = restaurantId;
@@ -77,18 +74,15 @@ class RestaurantService extends GetxService {
     await _restaurantRepository.updateQrCode(restaurant.id!, qrCode);
   }
 
-  Future<List<ReservationModel>> getQueueByRestaurantId(
-      String restaurantId) async {
+  Future<List<ReservationModel>> getQueueByRestaurantId(String restaurantId) async {
     List<ReservationModel> reservationsQueue = <ReservationModel>[];
 
     try {
       if (!isValidId(restaurantId)) return <ReservationModel>[];
-      var queues =
-          await _restaurantRepository.getQueueByRestaurantId(restaurantId);
+      var queues = await _restaurantRepository.getQueueByRestaurantId(restaurantId);
 
       for (var queue in queues) {
-        var reservation =
-            await _reservationService.getReservationById(queue.reservationId);
+        var reservation = await _reservationService.getReservationById(queue.reservationId);
 
         reservationsQueue.add(reservation);
       }
@@ -101,8 +95,7 @@ class RestaurantService extends GetxService {
 
   bool isValidId(String? id) {
     if (id.isBlank == true) {
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Id do restaurante inválido.");
+      _utilService.showInformationMessage("Dados inválidos", "Id do restaurante inválido.");
       return false;
     }
     return true;
@@ -113,56 +106,47 @@ class RestaurantService extends GetxService {
 
     if (restaurant.address == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Endereço é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Endereço é obrigatório.");
     }
 
     if (restaurant.number == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Número é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Número é obrigatório.");
     }
 
     if (restaurant.zipCode == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "CEP é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "CEP é obrigatório.");
     }
 
     if (restaurant.state == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Estado é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Estado é obrigatório.");
     }
 
     if (restaurant.city == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Cidade é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Cidade é obrigatório.");
     }
 
     if (restaurant.openTime == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Horário de abertura é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Horário de abertura é obrigatório.");
     }
 
     if (restaurant.closeTime == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Horário de fechamento é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Horário de fechamento é obrigatório.");
     }
 
     if (restaurant.capacity == null) {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "A Capacidade do restaurante é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "A Capacidade do restaurante é obrigatório.");
     }
 
     if (restaurant.name == null || restaurant.name == "") {
       isValid = false;
-      _utilService.showInformationMessage(
-          "Dados inválidos", "Nome do restaurante é obrigatório.");
+      _utilService.showInformationMessage("Dados inválidos", "Nome do restaurante é obrigatório.");
     }
 
     return isValid;
