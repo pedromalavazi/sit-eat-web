@@ -47,7 +47,6 @@ class UserRepository {
     try {
       DocumentSnapshot doc = await _firestore.collection("users").doc(id).get();
       UserModel user = UserModel.fromSnapshot(doc);
-      user.id = id;
       return user;
     } catch (e) {
       print(e);
