@@ -228,7 +228,7 @@ class DashboardController extends GetxController {
     dashboardModel.busy = table.busy;
     dashboardModel.reservationId = table.reservationId;
 
-    if (((!table.busy!) && table.reservationId.isBlank == true && table.number == 4)) {
+    if (((!table.busy!) && table.reservationId.isBlank == true)) {
       clearDashboardFields(dashboardModel);
     }
   }
